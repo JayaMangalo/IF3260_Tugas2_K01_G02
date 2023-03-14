@@ -300,7 +300,7 @@ class HollowSquare{
         ]
     }
 
-    draw(){
+    createFullSquare(){
         this.batang = [
             this.createBatangDepanAtas(),
             this.createBatangKiriatas(),
@@ -315,7 +315,12 @@ class HollowSquare{
             this.createBatangBawahKiri(),
             this.createBatangBawahKanan(),
         ]
-        let j = 0;
+    }
+
+    draw(){
+        if(this.batang == null){
+            this.createFullSquare();
+        }
         for(let batang of this.batang){
             let vertices = [];
             for (let i = 0; i < batang.length; i++) {
@@ -323,7 +328,6 @@ class HollowSquare{
             }
             gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
             gl.drawArrays(gl.TRIANGLE_STRIP, 0, batang.length);
-            j++;
         }
         
     }
