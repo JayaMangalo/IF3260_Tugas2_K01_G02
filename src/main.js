@@ -1,9 +1,9 @@
 function onLoad(){
     //Initialize the WebGL
     init();
-    // loadSquare();
+    loadSquare();
     // loadIcosahedron();
-    loadSSDodecahedron()
+    // loadSSDodecahedron()
 }
 
 function loadSquare() {
@@ -24,7 +24,7 @@ function loadSquare() {
         gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
         gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-        innerSquare.draw();
+        doubleTesseract.draw();
         requestAnimationFrame(loop);
     }
     requestAnimationFrame(loop);
