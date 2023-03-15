@@ -1,7 +1,8 @@
 function onLoad(){
     //Initialize the WebGL
     init();
-    loadSquare();
+    // loadSquare();
+    loadIcosahedron();
 }
 
 function loadSquare() {
@@ -22,7 +23,26 @@ function loadSquare() {
         gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
         gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-        doubleTesseract.draw();
+        innerSquare.draw();
+        requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+}
+
+function loadIcosahedron(){
+    gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    icosahedron = new Icosahedron(radius=1,offset=0.1,color=[1.0,0.0,0.0,1.0]);
+    icosahedron.draw();
+    var id = new Float32Array(16);
+    convertToIdentityMatrix(id);
+    var loop = () => {
+        rotAngle = performance.now() / 10000 * Math.PI;
+        rotate(worldMatrix, id, rotAngle, [0,1,0]);
+        gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
+        gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        icosahedron.draw();
         requestAnimationFrame(loop);
     }
     requestAnimationFrame(loop);

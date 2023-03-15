@@ -304,16 +304,16 @@ class HollowSquare{
         this.batang = [
             this.createBatangDepanAtas(),
             this.createBatangKiriatas(),
-            this.createBatangKananAtas(),
-            this.createBatangBelakangAtas(),
-            this.cretaeBatangDepanKiri(),
-            this.createBatangDepanKanan(),
-            this.createBatangBelakangKiri(),
-            this.createBatangBelakangKanan(),
-            this.createBatangBawahDepan(),
-            this.createBatangBawahBelakang(),
-            this.createBatangBawahKiri(),
-            this.createBatangBawahKanan(),
+            // this.createBatangKananAtas(),
+            // this.createBatangBelakangAtas(),
+            // this.cretaeBatangDepanKiri(),
+            // this.createBatangDepanKanan(),
+            // this.createBatangBelakangKiri(),
+            // this.createBatangBelakangKanan(),
+            // this.createBatangBawahDepan(),
+            // this.createBatangBawahBelakang(),
+            // this.createBatangBawahKiri(),
+            // this.createBatangBawahKanan(),
         ]
     }
 
@@ -321,6 +321,7 @@ class HollowSquare{
         if(this.batang == null){
             this.createFullSquare();
         }
+        console.log(this.batang)
         for(let batang of this.batang){
             let vertices = [];
             for (let i = 0; i < batang.length; i++) {
