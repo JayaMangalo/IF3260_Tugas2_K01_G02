@@ -304,16 +304,16 @@ class HollowSquare{
         this.batang = [
             this.createBatangDepanAtas(),
             this.createBatangKiriatas(),
-            // this.createBatangKananAtas(),
-            // this.createBatangBelakangAtas(),
-            // this.cretaeBatangDepanKiri(),
-            // this.createBatangDepanKanan(),
-            // this.createBatangBelakangKiri(),
-            // this.createBatangBelakangKanan(),
-            // this.createBatangBawahDepan(),
-            // this.createBatangBawahBelakang(),
-            // this.createBatangBawahKiri(),
-            // this.createBatangBawahKanan(),
+            this.createBatangKananAtas(),
+            this.createBatangBelakangAtas(),
+            this.cretaeBatangDepanKiri(),
+            this.createBatangDepanKanan(),
+            this.createBatangBelakangKiri(),
+            this.createBatangBelakangKanan(),
+            this.createBatangBawahDepan(),
+            this.createBatangBawahBelakang(),
+            this.createBatangBawahKiri(),
+            this.createBatangBawahKanan(),
         ]
     }
 
