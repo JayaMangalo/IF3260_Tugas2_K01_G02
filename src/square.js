@@ -375,6 +375,7 @@ class HollowSquare{
         if(this.batang == null){
             this.createFullSquare();
         }
+        console.log(this.batang)
         for(let batang of this.batang){
             let vertices = [];
             for (let i = 0; i < batang.length; i++) {
