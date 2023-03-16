@@ -127,7 +127,7 @@ function init() {
     viewMatrix = new Float32Array(16);
     projMatrix = new Float32Array(16);
     convertToIdentityMatrix(worldMatrix);
-    lookAt(viewMatrix, [10,10,10], [0,0,0], [0,1,0]);
+    lookAt(viewMatrix, [30,30,30], [0,0,0], [0,1,0]);
     perspective(projMatrix, toRadian(45), canvas.width / canvas.height, 0.1,1000.0);
 
     gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
