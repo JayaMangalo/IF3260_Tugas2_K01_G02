@@ -1,39 +1,45 @@
 class HollowSquare{
-    constructor(color=[0.0, 0.0, 0.0, 1.0], offsetX=0, offsetY=0, offsetZ=0, scaleX = 0, scaleY=0, scaleZ=0, xLuar=1, yLuar=1, zLuar=1, xDalam=0.75, yDalam=0.75, zDalam=0.75){
+    constructor(color=[0.0, 0.0, 0.0, 1.0], thickness=0.5, offsetX=0, offsetY=0, offsetZ=0, scaleX = 0, scaleY=0, scaleZ=0, xLuarInput=1, yLuarInput=1, zLuarInput=1){
+        //set thickness
+        this.thickness = thickness
+
         //set Color
         this.color = color
+        this.outerColor = color
+        this.middleColor = [color[0]*0.6, color[1]*0.6, color[2]*0.6, color[3]]
+        this.innerColor = [color[0]*0.5, color[1]*0.5, color[2]*0.5, color[3]]
 
         //set Offset
-        xLuar = xLuar + scaleX
-        yLuar = yLuar + scaleY
-        zLuar = zLuar + scaleZ
-        xDalam = xDalam + scaleX
-        yDalam = yDalam + scaleY
-        zDalam = zDalam + scaleZ
+        let xLuar = xLuarInput + scaleX
+        let yLuar = yLuarInput + scaleY
+        let zLuar = zLuarInput + scaleZ  
+        let xDalam = xLuar - thickness
+        let yDalam = yLuar - thickness
+        let zDalam = zLuar - thickness
 
         //Permukaan Atas Luar
-        this.permukaan_atas_luar_kanan_depan = [-xLuar + offsetX, yLuar + offsetY, zLuar + offsetZ]
-        this.permukaan_atas_luar_kiri_depan = [xLuar + offsetX, yLuar + offsetY, zLuar + offsetZ]
-        this.permukaan_atas_luar_kanan_belakang = [-xLuar + offsetX, yLuar + offsetY, -zLuar + offsetZ]
-        this.permukaan_atas_luar_kiri_belakang = [xLuar + offsetX, yLuar + offsetY, -zLuar + offsetZ]
+        this.permukaan_atas_luar_kanan_depan = [-xLuar + offsetX, yLuar + offsetY, zLuar + offsetZ, this.outerColor[0], this.outerColor[1], this.outerColor[2], this.outerColor[3]]
+        this.permukaan_atas_luar_kiri_depan = [xLuar + offsetX, yLuar + offsetY, zLuar + offsetZ, this.outerColor[0], this.outerColor[1], this.outerColor[2], this.outerColor[3]]
+        this.permukaan_atas_luar_kanan_belakang = [-xLuar + offsetX, yLuar + offsetY, -zLuar + offsetZ, this.outerColor[0], this.outerColor[1], this.outerColor[2], this.outerColor[3]]
+        this.permukaan_atas_luar_kiri_belakang = [xLuar + offsetX, yLuar + offsetY, -zLuar + offsetZ, this.outerColor[0], this.outerColor[1], this.outerColor[2], this.outerColor[3]]
 
         //Permukaan Atas Dalam
-        this.permukaan_atas_dalam_kanan_depan = [-xDalam + offsetX, yLuar + offsetY, zDalam + offsetZ]
-        this.permukaan_atas_dalam_kiri_depan = [xDalam + offsetX, yLuar + offsetY, zDalam + offsetZ]
-        this.permukaan_atas_dalam_kanan_belakang = [-xDalam + offsetX, yLuar + offsetY, -zDalam + offsetZ]
-        this.permukaan_atas_dalam_kiri_belakang = [xDalam + offsetX, yLuar + offsetY, -zDalam + offsetZ]
+        this.permukaan_atas_dalam_kanan_depan = [-xDalam + offsetX, yLuar + offsetY, zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_atas_dalam_kiri_depan = [xDalam + offsetX, yLuar + offsetY, zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_atas_dalam_kanan_belakang = [-xDalam + offsetX, yLuar + offsetY, -zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_atas_dalam_kiri_belakang = [xDalam + offsetX, yLuar + offsetY, -zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
 
         //Permukaan Bawah Luar
-        this.permukaan_bawah_luar_kanan_depan = [-xLuar + offsetX, -yLuar + offsetY, zLuar + offsetZ]
-        this.permukaan_bawah_luar_kiri_depan = [xLuar + offsetX, -yLuar + offsetY, zLuar + offsetZ]
-        this.permukaan_bawah_luar_kanan_belakang = [-xLuar + offsetX, -yLuar + offsetY, -zLuar + offsetZ]
-        this.permukaan_bawah_luar_kiri_belakang = [xLuar + offsetX, -yLuar + offsetY, -zLuar + offsetZ]
+        this.permukaan_bawah_luar_kanan_depan = [-xLuar + offsetX, -yLuar + offsetY, zLuar + offsetZ, this.outerColor[0], this.outerColor[1], this.outerColor[2], this.outerColor[3]]
+        this.permukaan_bawah_luar_kiri_depan = [xLuar + offsetX, -yLuar + offsetY, zLuar + offsetZ, this.outerColor[0], this.outerColor[1], this.outerColor[2], this.outerColor[3]]
+        this.permukaan_bawah_luar_kanan_belakang = [-xLuar + offsetX, -yLuar + offsetY, -zLuar + offsetZ, this.outerColor[0], this.outerColor[1], this.outerColor[2], this.outerColor[3]]
+        this.permukaan_bawah_luar_kiri_belakang = [xLuar + offsetX, -yLuar + offsetY, -zLuar + offsetZ, this.outerColor[0], this.outerColor[1], this.outerColor[2], this.outerColor[3]]
 
         //Permukaan Bawah Dalam
-        this.permukaan_bawah_dalam_kanan_depan = [-xDalam + offsetX, -yLuar + offsetY, zDalam + offsetZ]
-        this.permukaan_bawah_dalam_kiri_depan = [xDalam + offsetX, -yLuar + offsetY, zDalam + offsetZ]
-        this.permukaan_bawah_dalam_kanan_belakang = [-xDalam + offsetX, -yLuar + offsetY, -zDalam + offsetZ]
-        this.permukaan_bawah_dalam_kiri_belakang = [xDalam + offsetX, -yLuar + offsetY, -zDalam + offsetZ]
+        this.permukaan_bawah_dalam_kanan_depan = [-xDalam + offsetX, -yLuar + offsetY, zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_bawah_dalam_kiri_depan = [xDalam + offsetX, -yLuar + offsetY, zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_bawah_dalam_kanan_belakang = [-xDalam + offsetX, -yLuar + offsetY, -zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_bawah_dalam_kiri_belakang = [xDalam + offsetX, -yLuar + offsetY, -zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
 
         //Permukaan Depan Luar
         this.permukaan_depan_luar_kanan_atas = this.permukaan_atas_luar_kanan_depan
@@ -42,10 +48,10 @@ class HollowSquare{
         this.permukaan_depan_luar_kiri_bawah = this.permukaan_bawah_luar_kiri_depan
 
         //Permukaan Depan Dalam
-        this.permukaan_depan_dalam_kanan_atas = [-xDalam + offsetX, yDalam + offsetY, zLuar + offsetZ]
-        this.permukaan_depan_dalam_kiri_atas = [xDalam + offsetX, yDalam + offsetY, zLuar + offsetZ]
-        this.permukaan_depan_dalam_kanan_bawah = [-xDalam + offsetX, -yDalam + offsetY, zLuar + offsetZ]
-        this.permukaan_depan_dalam_kiri_bawah = [xDalam + offsetX, -yDalam + offsetY, zLuar + offsetZ]
+        this.permukaan_depan_dalam_kanan_atas = [-xDalam + offsetX, yDalam + offsetY, zLuar + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_depan_dalam_kiri_atas = [xDalam + offsetX, yDalam + offsetY, zLuar + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_depan_dalam_kanan_bawah = [-xDalam + offsetX, -yDalam + offsetY, zLuar + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_depan_dalam_kiri_bawah = [xDalam + offsetX, -yDalam + offsetY, zLuar + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
 
         //Permukaan Belakang Luar
         this.permukaan_belakang_luar_kanan_atas = this.permukaan_atas_luar_kanan_belakang
@@ -54,10 +60,10 @@ class HollowSquare{
         this.permukaan_belakang_luar_kiri_bawah = this.permukaan_bawah_luar_kiri_belakang
 
         //Permukaan Belakang Dalam
-        this.permukaan_belakang_dalam_kanan_atas = [-xDalam + offsetX, yDalam + offsetY, -zLuar + offsetZ]
-        this.permukaan_belakang_dalam_kiri_atas = [xDalam + offsetX, yDalam + offsetY, -zLuar + offsetZ]
-        this.permukaan_belakang_dalam_kanan_bawah = [-xDalam + offsetX, -yDalam + offsetY, -zLuar + offsetZ]
-        this.permukaan_belakang_dalam_kiri_bawah = [xDalam + offsetX, -yDalam + offsetY, -zLuar + offsetZ]
+        this.permukaan_belakang_dalam_kanan_atas = [-xDalam + offsetX, yDalam + offsetY, -zLuar + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_belakang_dalam_kiri_atas = [xDalam + offsetX, yDalam + offsetY, -zLuar + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_belakang_dalam_kanan_bawah = [-xDalam + offsetX, -yDalam + offsetY, -zLuar + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_belakang_dalam_kiri_bawah = [xDalam + offsetX, -yDalam + offsetY, -zLuar + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
 
         //Permukaan Kanan Luar
         this.permukaan_kanan_luar_atas_depan = this.permukaan_atas_luar_kanan_depan
@@ -66,10 +72,10 @@ class HollowSquare{
         this.permukaan_kanan_luar_bawah_belakang = this.permukaan_bawah_luar_kanan_belakang
 
         //Permukaan Kanan Dalam
-        this.permukaan_kanan_dalam_atas_depan = [-xLuar + offsetX, yDalam + offsetY, zDalam + offsetZ]
-        this.permukaan_kanan_dalam_atas_belakang = [-xLuar + offsetX, yDalam + offsetY, -zDalam + offsetZ]
-        this.permukaan_kanan_dalam_bawah_depan = [-xLuar + offsetX, -yDalam + offsetY, zDalam + offsetZ]
-        this.permukaan_kanan_dalam_bawah_belakang = [-xLuar + offsetX, -yDalam + offsetY, -zDalam + offsetZ]
+        this.permukaan_kanan_dalam_atas_depan = [-xLuar + offsetX, yDalam + offsetY, zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_kanan_dalam_atas_belakang = [-xLuar + offsetX, yDalam + offsetY, -zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_kanan_dalam_bawah_depan = [-xLuar + offsetX, -yDalam + offsetY, zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_kanan_dalam_bawah_belakang = [-xLuar + offsetX, -yDalam + offsetY, -zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
 
         //Permukaan Kiri Luar
         this.permukaan_kiri_luar_atas_depan = this.permukaan_atas_luar_kiri_depan
@@ -78,22 +84,22 @@ class HollowSquare{
         this.permukaan_kiri_luar_bawah_belakang = this.permukaan_bawah_luar_kiri_belakang
 
         //Permukaan Kiri Dalam
-        this.permukaan_kiri_dalam_atas_depan = [xLuar + offsetX, yDalam + offsetY, zDalam + offsetZ]
-        this.permukaan_kiri_dalam_atas_belakang = [xLuar + offsetX, yDalam + offsetY, -zDalam + offsetZ]
-        this.permukaan_kiri_dalam_bawah_depan = [xLuar + offsetX, -yDalam + offsetY, zDalam + offsetZ]
-        this.permukaan_kiri_dalam_bawah_belakang = [xLuar + offsetX, -yDalam + offsetY, -zDalam + offsetZ]
+        this.permukaan_kiri_dalam_atas_depan = [xLuar + offsetX, yDalam + offsetY, zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_kiri_dalam_atas_belakang = [xLuar + offsetX, yDalam + offsetY, -zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_kiri_dalam_bawah_depan = [xLuar + offsetX, -yDalam + offsetY, zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.permukaan_kiri_dalam_bawah_belakang = [xLuar + offsetX, -yDalam + offsetY, -zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
 
         //Inner Atas
-        this.inner_atas_kanan_depan = [-xDalam + offsetX, yLuar + offsetY, zDalam + offsetZ]
-        this.inner_atas_kiri_depan = [xDalam + offsetX, yLuar + offsetY, zDalam + offsetZ]
-        this.inner_atas_kanan_belakang = [-xDalam + offsetX, yLuar + offsetY, -zDalam + offsetZ]
-        this.inner_atas_kiri_belakang = [xDalam + offsetX, yLuar + offsetY, -zDalam + offsetZ]
+        this.inner_atas_kanan_depan = [-xDalam + offsetX, yLuar + offsetY, zDalam + offsetZ, this.innerColor[0], this.innerColor[1], this.innerColor[2], this.innerColor[3]]
+        this.inner_atas_kiri_depan = [xDalam + offsetX, yLuar + offsetY, zDalam + offsetZ, this.innerColor[0], this.innerColor[1], this.innerColor[2], this.innerColor[3]]
+        this.inner_atas_kanan_belakang = [-xDalam + offsetX, yLuar + offsetY, -zDalam + offsetZ, this.innerColor[0], this.innerColor[1], this.innerColor[2], this.innerColor[3]]
+        this.inner_atas_kiri_belakang = [xDalam + offsetX, yLuar + offsetY, -zDalam + offsetZ, this.innerColor[0], this.innerColor[1], this.innerColor[2], this.innerColor[3]]
 
         //Inner Bawah
-        this.inner_bawah_kanan_depan = [-xDalam + offsetX, -yLuar + offsetY, zDalam + offsetZ]
-        this.inner_bawah_kiri_depan = [xDalam + offsetX, -yLuar + offsetY, zDalam + offsetZ]
-        this.inner_bawah_kanan_belakang = [-xDalam + offsetX, -yLuar + offsetY, -zDalam + offsetZ]
-        this.inner_bawah_kiri_belakang = [xDalam + offsetX, -yLuar + offsetY, -zDalam + offsetZ]
+        this.inner_bawah_kanan_depan = [-xDalam + offsetX, -yLuar + offsetY, zDalam + offsetZ, this.innerColor[0], this.innerColor[1], this.innerColor[2], this.innerColor[3]]
+        this.inner_bawah_kiri_depan = [xDalam + offsetX, -yLuar + offsetY, zDalam + offsetZ, this.innerColor[0], this.innerColor[1], this.innerColor[2], this.innerColor[3]]
+        this.inner_bawah_kanan_belakang = [-xDalam + offsetX, -yLuar + offsetY, -zDalam + offsetZ, this.innerColor[0], this.innerColor[1], this.innerColor[2], this.innerColor[3]]
+        this.inner_bawah_kiri_belakang = [xDalam + offsetX, -yLuar + offsetY, -zDalam + offsetZ, this.innerColor[0], this.innerColor[1], this.innerColor[2], this.innerColor[3]]
 
         //Inner Depan
         this.inner_depan_kanan_atas = this.inner_atas_kanan_depan
@@ -118,6 +124,54 @@ class HollowSquare{
         this.inner_kiri_atas_belakang = this.inner_atas_kiri_belakang
         this.inner_kiri_bawah_depan = this.inner_bawah_kiri_depan
         this.inner_kiri_bawah_belakang = this.inner_bawah_kiri_belakang
+    
+        //Miring Kanan Atas Depan
+        this.miring_kanan_atas_depan_bagian_kanan_atas =  [-xLuar + offsetX, yLuar + offsetY, zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.miring_kanan_atas_depan_bagian_kanan_bawah =  this.permukaan_kanan_dalam_atas_depan
+        this.miring_kanan_atas_depan_bagian_kiri_atas =  [-xDalam + offsetX, yLuar + offsetY, zLuar + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.miring_kanan_atas_depan_bagian_kiri_bawah =  this.permukaan_depan_dalam_kanan_atas
+    
+        //Miring Kiri Atas Depan
+        this.miring_kiri_atas_depan_bagian_kanan_atas =  [xDalam + offsetX, yLuar + offsetY, zLuar + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.miring_kiri_atas_depan_bagian_kanan_bawah =  this.permukaan_depan_dalam_kiri_atas
+        this.miring_kiri_atas_depan_bagian_kiri_atas =  [xLuar + offsetX, yLuar + offsetY, zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.miring_kiri_atas_depan_bagian_kiri_bawah =  this.permukaan_kiri_dalam_atas_depan
+        
+        //Miring Kanan Atas Belakang
+        this.miring_kanan_atas_belakang_bagian_kanan_atas =  [-xLuar + offsetX, yLuar + offsetY, -zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.miring_kanan_atas_belakang_bagian_kanan_bawah =  this.permukaan_kanan_dalam_atas_belakang
+        this.miring_kanan_atas_belakang_bagian_kiri_atas =  [-xDalam + offsetX, yLuar + offsetY, -zLuar + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.miring_kanan_atas_belakang_bagian_kiri_bawah =  this.permukaan_belakang_dalam_kanan_atas
+        
+        //Miring Kiri Atas Belakang
+        this.miring_kiri_atas_belakang_bagian_kanan_atas =  [xDalam + offsetX, yLuar + offsetY, -zLuar + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.miring_kiri_atas_belakang_bagian_kanan_bawah =  this.permukaan_belakang_dalam_kiri_atas
+        this.miring_kiri_atas_belakang_bagian_kiri_atas =  [xLuar + offsetX, yLuar + offsetY, -zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.miring_kiri_atas_belakang_bagian_kiri_bawah =  this.permukaan_kiri_dalam_atas_belakang
+    
+        //Miring Kanan Bawah Depan
+        this.miring_kanan_bawah_depan_bagian_kanan_atas =  [-xLuar + offsetX, -yLuar + offsetY, zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.miring_kanan_bawah_depan_bagian_kanan_bawah =  this.permukaan_kanan_dalam_bawah_depan
+        this.miring_kanan_bawah_depan_bagian_kiri_atas =  [-xDalam + offsetX, -yLuar + offsetY, zLuar + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.miring_kanan_bawah_depan_bagian_kiri_bawah =  this.permukaan_depan_dalam_kanan_bawah
+    
+        //Miring Kiri Bawah Depan
+        this.miring_kiri_bawah_depan_bagian_kanan_atas =  [xDalam + offsetX, -yLuar + offsetY, zLuar + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.miring_kiri_bawah_depan_bagian_kanan_bawah =  this.permukaan_depan_dalam_kiri_bawah
+        this.miring_kiri_bawah_depan_bagian_kiri_atas =  [xLuar + offsetX, -yLuar + offsetY, zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.miring_kiri_bawah_depan_bagian_kiri_bawah =  this.permukaan_kiri_dalam_bawah_depan
+
+        //Miring Kanan Bawah Belakang
+        this.miring_kanan_bawah_belakang_bagian_kanan_atas =  [-xLuar + offsetX, -yLuar + offsetY, -zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.miring_kanan_bawah_belakang_bagian_kanan_bawah =  this.permukaan_kanan_dalam_bawah_belakang
+        this.miring_kanan_bawah_belakang_bagian_kiri_atas =  [-xDalam + offsetX, -yLuar + offsetY, -zLuar + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.miring_kanan_bawah_belakang_bagian_kiri_bawah =  this.permukaan_belakang_dalam_kanan_bawah
+
+        //Miring Kiri Bawah Belakang
+        this.miring_kiri_bawah_belakang_bagian_kanan_atas =  [xDalam + offsetX, -yLuar + offsetY, -zLuar + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.miring_kiri_bawah_belakang_bagian_kanan_bawah =  this.permukaan_belakang_dalam_kiri_bawah
+        this.miring_kiri_bawah_belakang_bagian_kiri_atas =  [xLuar + offsetX, -yLuar + offsetY, -zDalam + offsetZ, this.middleColor[0], this.middleColor[1], this.middleColor[2], this.middleColor[3]]
+        this.miring_kiri_bawah_belakang_bagian_kiri_bawah =  this.permukaan_kiri_dalam_bawah_belakang
     }
 
     createBatangDepanAtas() {
@@ -324,7 +378,7 @@ class HollowSquare{
         for(let batang of this.batang){
             let vertices = [];
             for (let i = 0; i < batang.length; i++) {
-                vertices.push(batang[i][0], batang[i][1], batang[i][2], this.color[0], this.color[1], this.color[2], this.color[3]);
+                vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3], batang[i][4], batang[i][5], batang[i][6]);
             }
             gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
             gl.drawArrays(gl.TRIANGLE_STRIP, 0, batang.length);
