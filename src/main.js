@@ -1,3 +1,5 @@
+shapes = []
+
 function onLoad(){
     //Initialize the WebGL
     init();
@@ -19,7 +21,6 @@ async function loadShapes() {
 function loadTesseract(data=null) {
     gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    shapes = [];
     if(data == null) {
         innerSquareCenter = new HollowSquare(color=[1.0,0.0,0.0,1.0], 0.5, 0,0,0);
         innerSquareRight = new HollowSquare(color=[1.0,0.0,0.0,1.0], 0.5, 6,0,0);
@@ -44,7 +45,13 @@ function loadTesseract(data=null) {
         tesseractFront = new NormalTesseract(outerSquareFront, innerSquareFront);
         tesseractBack = new NormalTesseract(outerSquareBack, innerSquareBack);
         outerMostTesseract = new NormalTesseract(outermostSquare, innerSquareCenter);
-        shapes = [tesseractRight, tesseractLeft, tesseractUp, tesseractDown, tesseractFront, tesseractBack, outerMostTesseract];
+        shapes.push(tesseractRight);
+        shapes.push(tesseractLeft);
+        shapes.push(tesseractUp);
+        shapes.push(tesseractDown);
+        shapes.push(tesseractFront);
+        shapes.push(tesseractBack);
+        shapes.push(outerMostTesseract);
     } else {
         let square1;
         let square2;
@@ -96,6 +103,10 @@ function loadTesseract(data=null) {
             }
         }
     }
+    redraw();
+}
+
+function redraw(){
     var id = new Float32Array(16);
     convertToIdentityMatrix(id);
     var loop = () => {
