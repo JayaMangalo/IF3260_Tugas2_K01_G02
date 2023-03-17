@@ -152,4 +152,11 @@ function loadSSDodecahedron(){
     requestAnimationFrame(loop);
 }
 
+function toggleShadder(){
+    let isShadder = document.getElementById("toggleShadder").checked;
+    for(shape of shapes){
+        shape.changeShadder(isShadder);
+    }
+}
+
 onLoad();

@@ -1,11 +1,11 @@
 class Tesseract{
-    constructor(outerSquare, innerSquare, color){
+    constructor(outerSquare, innerSquare){
         this.outerSquare = outerSquare;
         this.innerSquare = innerSquare;
-        this.color = color;
         this.innerSquareUpperColor = innerSquare.outerColor;
         this.innerSquareLowerColor = innerSquare.middleColor;
         this.outerColor = outerSquare.middleColor;
+        this.isUsingShadder = this.outerSquare.isUsingShadder;
     }
 }
 
@@ -159,20 +159,37 @@ class NormalTesseract extends Tesseract{
         }
         for(let batang of this.batang){
             let vertices = [];
-            for (let i = 0; i < batang.length; i++) {
-                if(i%2 == 0){
-                    vertices.push(batang[i][0], batang[i][1], batang[i][2], this.outerColor[0], this.outerColor[1], this.outerColor[2], this.outerColor[3]);
-                }else{
-                    if(i == 3 || i == 5){
-                        vertices.push(batang[i][0], batang[i][1], batang[i][2], this.innerSquareLowerColor[0], this.innerSquareLowerColor[1], this.innerSquareLowerColor[2], this.innerSquareLowerColor[3]);
+            if(this.isUsingShadder){
+                for (let i = 0; i < batang.length; i++) {
+                    if(i%2 == 0){
+                        vertices.push(batang[i][0], batang[i][1], batang[i][2], this.outerColor[0], this.outerColor[1], this.outerColor[2], this.outerColor[3]);
                     }else{
-                        vertices.push(batang[i][0], batang[i][1], batang[i][2], this.innerSquareUpperColor[0], this.innerSquareUpperColor[1], this.innerSquareUpperColor[2], this.innerSquareUpperColor[3]);
+                        if(i == 3 || i == 5){
+                            vertices.push(batang[i][0], batang[i][1], batang[i][2], this.innerSquareLowerColor[0], this.innerSquareLowerColor[1], this.innerSquareLowerColor[2], this.innerSquareLowerColor[3]);
+                        }else{
+                            vertices.push(batang[i][0], batang[i][1], batang[i][2], this.innerSquareUpperColor[0], this.innerSquareUpperColor[1], this.innerSquareUpperColor[2], this.innerSquareUpperColor[3]);
+                        }
+                    }
+                }
+            }else{
+                for (let i = 0; i < batang.length; i++) {
+                    if(i%2 == 0){
+                        vertices.push(batang[i][0], batang[i][1], batang[i][2], this.outerSquare.color[0], this.outerSquare.color[1], this.outerSquare.color[2], this.outerSquare.color[3]);
+                    }else{
+                        vertices.push(batang[i][0], batang[i][1], batang[i][2], this.innerSquare.color[0], this.innerSquare.color[1], this.innerSquare.color[2], this.innerSquare.color[3]);
                     }
                 }
             }
+            
             gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
             gl.drawArrays(gl.TRIANGLE_STRIP, 0, batang.length); 
         }
+    }
+
+    changeShadder(value){
+        this.isUsingShadder = value;
+        this.outerSquare.changeShadder(value);
+        this.innerSquare.changeShadder(value);
     }
 }
 
