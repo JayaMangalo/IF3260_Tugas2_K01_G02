@@ -1,4 +1,6 @@
 shapes = []
+models = []
+var isUsingShadder = true;
 
 function onLoad(){
     //Initialize the WebGL
@@ -13,9 +15,30 @@ async function loadShapes() {
     let file = await loadFile();
     let text = await file.text();
     parseResult = JSON.parse(text);
+    if(parseResult.type == "model") {
+        loadModel(parseResult.data);
+    }
     if(parseResult.type == "tesseract") {
         loadTesseract(parseResult.data);
     }
+}
+
+function saveShapes(){
+    json = {type: "model", data:[]}
+    for(shape of shapes) {
+        json.data.push(shape.toString());
+    }
+    const link = document.createElement('a');
+    const file = new Blob([JSON.stringify(json)], {type: 'text/plain'});
+    link.href = URL.createObjectURL(file);
+    link.download = 'model.json';
+    link.click();
+    link.remove();
+}
+
+function loadModel(data){
+    models.push(data);
+    redraw(usingShape=false)
 }
 
 function loadTesseract(data=null) {
@@ -106,7 +129,7 @@ function loadTesseract(data=null) {
     redraw();
 }
 
-function redraw(){
+function redraw(usingShape = true){
     var id = new Float32Array(16);
     convertToIdentityMatrix(id);
     var loop = () => {
@@ -117,9 +140,21 @@ function redraw(){
         gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
         gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-        shapes.forEach(shape => {
-            shape.draw();
-        });
+        if(usingShape){
+            shapes.forEach(shape => {
+                shape.draw();
+            });
+        }else{
+            for(model of models){
+                for(shape of model){
+                    if(shape.type == "Tesseract"){
+                        drawTesseractFromPoints(shape.vertices, isUsingShadder);
+                        drawCubeFromPoints(shape.outerSquare.vertices);
+                        drawCubeFromPoints(shape.innerSquare.vertices);
+                    }
+                }
+            }
+        }
         requestAnimationFrame(loop);
     }
     requestAnimationFrame(loop);
@@ -168,6 +203,49 @@ function toggleShadder(){
     for(shape of shapes){
         shape.changeShadder(isShadder);
     }
+    isUsingShadder = isShadder;
 }
+
+//Draw From Points=======================================================================================================
+function drawTesseractFromPoints(data, isUsingShadder = true){
+    for(let batang of data){
+        let vertices = [];
+        if(isUsingShadder){
+            for (let i = 0; i < batang.length; i++) {
+                if(i%2 == 0){
+                    vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3][0], batang[i][3][1], batang[i][3][2], batang[i][3][3]);
+                }else{
+                    if(i == 3 || i == 5){
+                        vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3][0], batang[i][3][1], batang[i][3][2], batang[i][3][3]);
+                    }else{
+                        vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3][0], batang[i][3][1], batang[i][3][2], batang[i][3][3]);
+                    }
+                }
+            }
+        }else{
+            for (let i = 0; i < batang.length; i++) {
+                if(i%2 == 0){
+                    vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3][0], batang[i][3][1], batang[i][3][2], batang[i][3][3]);
+                }else{
+                    vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3][0], batang[i][3][1], batang[i][3][2], batang[i][3][3]);
+                }
+            }
+        }
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, batang.length); 
+    }
+}
+
+function drawCubeFromPoints(data){
+    for(let batang of data){
+        let vertices = [];
+        for (let i = 0; i < batang.length; i++) {
+            vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3][0], batang[i][3][1], batang[i][3][2], batang[i][3][3]);
+        }
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, batang.length); 
+    }
+}
+//Draw From Points=======================================================================================================
 
 onLoad();

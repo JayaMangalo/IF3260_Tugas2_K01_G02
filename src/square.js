@@ -470,4 +470,10 @@ class HollowSquare{
         }
     }
 
+    toString(){
+        if(this.batang == null){
+            this.createFullSquare();
+        }
+        return {type: "Cube", vertices: this.batang}
+    }
 }

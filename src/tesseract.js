@@ -191,6 +191,13 @@ class NormalTesseract extends Tesseract{
         this.outerSquare.changeShadder(value);
         this.innerSquare.changeShadder(value);
     }
+
+    toString(){
+        if(this.batang == null){
+            this.createTesseract();
+        }
+        return {type: "Tesseract", outerSquare: this.outerSquare.toString(), innerSquare: this.innerSquare.toString(), vertices: this.batang};
+    }
 }
 
 // class SpinningTesseract extends Tesseract{
