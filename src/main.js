@@ -7,6 +7,7 @@ function onLoad(){
     init();
     loadShapes()
     // loadTesseract();
+    // loadChain();
     // loadIcosahedron();
     // loadSSDodecahedron()
 }
@@ -21,6 +22,12 @@ async function loadShapes() {
     if(parseResult.type == "tesseract") {
         loadTesseract(parseResult.data);
     }
+}
+
+function loadChain() {
+    let chain = new Chain(squareNo=5);
+    shapes.push(chain);
+    redraw();
 }
 
 function saveShapes(){
@@ -136,7 +143,7 @@ function redraw(usingShape = true){
         rotAngle = performance.now() / 10000 * Math.PI;
         // rotAngle = 8000 / 10000 * Math.PI;
 
-        rotate(worldMatrix, id, rotAngle, [0,1,0]);
+        rotate(worldMatrix, id,rotAngle, [0,1,0]);
         gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
         gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
