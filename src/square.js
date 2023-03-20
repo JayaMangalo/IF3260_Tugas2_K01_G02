@@ -98,16 +98,16 @@ class HollowSquare{
         this.permukaan_kiri_dalam_bawah_belakang = [xLuar + offsetX, -yDalam + offsetY, -zDalam + offsetZ, this.middleColor]
 
         //Inner Atas
-        this.inner_atas_kanan_depan = [-xDalam + offsetX, yLuar + offsetY, zDalam + offsetZ, this.innerColor]
-        this.inner_atas_kiri_depan = [xDalam + offsetX, yLuar + offsetY, zDalam + offsetZ, this.innerColor]
-        this.inner_atas_kanan_belakang = [-xDalam + offsetX, yLuar + offsetY, -zDalam + offsetZ, this.innerColor]
-        this.inner_atas_kiri_belakang = [xDalam + offsetX, yLuar + offsetY, -zDalam + offsetZ, this.innerColor]
+        this.inner_atas_kanan_depan = [-xDalam + offsetX, yDalam + offsetY, zDalam + offsetZ, this.innerColor]
+        this.inner_atas_kiri_depan = [xDalam + offsetX, yDalam + offsetY, zDalam + offsetZ, this.innerColor]
+        this.inner_atas_kanan_belakang = [-xDalam + offsetX, yDalam + offsetY, -zDalam + offsetZ, this.innerColor]
+        this.inner_atas_kiri_belakang = [xDalam + offsetX, yDalam + offsetY, -zDalam + offsetZ, this.innerColor]
 
         //Inner Bawah
-        this.inner_bawah_kanan_depan = [-xDalam + offsetX, -yLuar + offsetY, zDalam + offsetZ, this.innerColor]
-        this.inner_bawah_kiri_depan = [xDalam + offsetX, -yLuar + offsetY, zDalam + offsetZ, this.innerColor]
-        this.inner_bawah_kanan_belakang = [-xDalam + offsetX, -yLuar + offsetY, -zDalam + offsetZ, this.innerColor]
-        this.inner_bawah_kiri_belakang = [xDalam + offsetX, -yLuar + offsetY, -zDalam + offsetZ, this.innerColor]
+        this.inner_bawah_kanan_depan = [-xDalam + offsetX, -yDalam + offsetY, zDalam + offsetZ, this.innerColor]
+        this.inner_bawah_kiri_depan = [xDalam + offsetX, -yDalam + offsetY, zDalam + offsetZ, this.innerColor]
+        this.inner_bawah_kanan_belakang = [-xDalam + offsetX, -yDalam + offsetY, -zDalam + offsetZ, this.innerColor]
+        this.inner_bawah_kiri_belakang = [xDalam + offsetX, -yDalam + offsetY, -zDalam + offsetZ, this.innerColor]
 
         //Inner Depan
         this.inner_depan_kanan_atas = this.inner_atas_kanan_depan
@@ -415,6 +415,15 @@ class HollowSquare{
             this.permukaan_kanan_luar_bawah_depan,
             this.permukaan_kanan_luar_bawah_belakang,
         ]
+    }
+
+    createTambalanDepanKananAtas(){
+        return[
+            this.permukaan_atas_luar_kanan_depan,
+            this.permukaan_depan_dalam_kanan_atas,
+            this.permukaan_kanan_dalam_atas_depan,
+            this.inner_atas_kanan_depan
+        ]    
     }
 
     createFullSquare(){
