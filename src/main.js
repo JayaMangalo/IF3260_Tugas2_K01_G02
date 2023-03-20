@@ -35,6 +35,11 @@ function saveShapes(){
     for(shape of shapes) {
         json.data.push(shape.toString());
     }
+    for(model of models) {
+        for(shape of model){
+            json.data.push(shape);
+        }
+    }
     const link = document.createElement('a');
     const file = new Blob([JSON.stringify(json)], {type: 'text/plain'});
     link.href = URL.createObjectURL(file);
@@ -143,7 +148,7 @@ function redraw(usingShape = true){
         rotAngle = performance.now() / 10000 * Math.PI;
         // rotAngle = 8000 / 10000 * Math.PI;
 
-        rotate(worldMatrix, id,rotAngle, [0,1,0]);
+        rotate(worldMatrix, id, rotAngle, [0,1,0]);
         gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
         gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -254,5 +259,121 @@ function drawCubeFromPoints(data){
     }
 }
 //Draw From Points=======================================================================================================
+
+function RotateXAxis(degree=0){
+    for(model of models){
+        for(shape of model){
+            if(shape.type == "Tesseract"){
+                for(batang of shape.outerSquare.vertices){
+                    for(point of batang){
+                        point = RotatePointXAxis(point, degree);
+                    }
+                }
+                for(batang of shape.innerSquare.vertices){
+                    for(point of batang){
+                        point = RotatePointXAxis(point, degree);
+                    }
+                }
+            }
+            for(batang of shape.vertices){
+                for(point of batang){
+                    point = RotatePointXAxis(point, degree);
+                }
+            }
+        }
+    }
+    redraw(usingShape=false);
+}
+
+function RotateYAxis(degree=0){
+    for(model of models){
+        for(shape of model){
+            if(shape.type == "Tesseract"){
+                for(batang of shape.outerSquare.vertices){
+                    for(point of batang){
+                        point = RotatePointYAxis(point, degree);
+                    }
+                }
+                for(batang of shape.innerSquare.vertices){
+                    for(point of batang){
+                        point = RotatePointYAxis(point, degree);
+                    }
+                }
+            }
+            for(batang of shape.vertices){
+                for(point of batang){
+                    // Rotate point on X axis
+                    point = RotatePointYAxis(point, degree);
+                }
+            }
+        }
+    }
+    redraw(usingShape=false);
+}
+
+function RotateZAxis(degree=0){
+    for(model of models){
+        for(shape of model){
+            if(shape.type == "Tesseract"){
+                for(batang of shape.outerSquare.vertices){
+                    for(point of batang){
+                        point = RotatePointZAxis(point, degree);
+                    }
+                }
+                for(batang of shape.innerSquare.vertices){
+                    for(point of batang){
+                        point = RotatePointZAxis(point, degree);
+                    }
+                }
+            }
+            for(batang of shape.vertices){
+                for(point of batang){
+                    // Rotate point on X axis
+                    point = RotatePointZAxis(point, degree);
+                }
+            }
+        }
+    }
+    redraw(usingShape=false);
+}
+
+function RotatePointXAxis(point, degree=0){
+    let y = point[1];
+    let z = point[2];
+    let rad = degree * Math.PI / 180;
+    let cos = Math.cos(rad);
+    let sin = Math.sin(rad);
+    let newY = y * cos - z * sin;
+    let newZ = y * sin + z * cos;
+    point[1] = newY;
+    point[2] = newZ;
+    return point;
+}
+
+function RotatePointYAxis(point, degree=0){
+    let x = point[0];
+    let z = point[2];
+    let rad = degree * Math.PI / 180;
+    let cos = Math.cos(rad);
+    let sin = Math.sin(rad);
+    let newX = x * cos - z * sin;
+    let newZ = x * sin + z * cos;
+    point[0] = newX;
+    point[2] = newZ;
+    return point;
+}
+
+function RotatePointZAxis(point, degree=0){
+    let x = point[0];
+    let y = point[1];
+    let rad = degree * Math.PI / 180;
+    let cos = Math.cos(rad);
+    let sin = Math.sin(rad);
+    let newX = x * cos - y * sin;
+    let newY = x * sin + y * cos;
+    point[0] = newX;
+    point[1] = newY;
+    return point;
+}
 
 onLoad();
