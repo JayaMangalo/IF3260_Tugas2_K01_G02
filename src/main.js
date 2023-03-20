@@ -137,11 +137,19 @@ function loadTesseract(data=null) {
                 tesseract = null;
             }
         }
+        //Convert to points
+        let json = {type: "model", data:[]}
+        for(shape of shapes) {
+            json.data.push(shape.toString());
+        }
+        json = JSON.stringify(json);
+        let parseResult = JSON.parse(json);
+        loadModel(parseResult.data);
     }
     redraw();
 }
 
-function redraw(usingShape = true){
+function redraw(usingShape = false){
     var id = new Float32Array(16);
     convertToIdentityMatrix(id);
     var loop = () => {
