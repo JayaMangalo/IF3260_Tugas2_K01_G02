@@ -5,10 +5,10 @@ var isUsingShadder = true;
 function onLoad(){
     //Initialize the WebGL
     init();
-    loadShapes()
+    // loadShapes()
     // loadTesseract();
     // loadChain();
-    // loadIcosahedron();
+    loadIcosahedron();
     // loadSSDodecahedron()
 }
 
@@ -159,6 +159,16 @@ function redraw(usingShape = true){
                         drawCubeFromPoints(shape.outerSquare.vertices);
                         drawCubeFromPoints(shape.innerSquare.vertices);
                     }
+                    if(shape.type == "Icosahedron"){
+                        drawTesseractFromPoints(shape.vertices, isUsingShadder);
+                        drawCubeFromPoints(shape.outerSquare.vertices);
+                        drawCubeFromPoints(shape.innerSquare.vertices);
+                    }
+                    if(shape.type == "SSDodecahedron"){
+                        drawTesseractFromPoints(shape.vertices, isUsingShadder);
+                        drawCubeFromPoints(shape.outerSquare.vertices);
+                        drawCubeFromPoints(shape.innerSquare.vertices);
+                    }
                 }
             }
         }
@@ -170,7 +180,7 @@ function redraw(usingShape = true){
 function loadIcosahedron(){
     gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    icosahedron = new Icosahedron(radius=1,offset=0.1,color=[1.0,0.0,0.0,1.0]);
+    icosahedron = new Icosahedron(drawFromPoints=false,radius=5,offset=0.5,batang=[]);
     icosahedron.draw();
     var id = new Float32Array(16);
     convertToIdentityMatrix(id);
@@ -189,7 +199,7 @@ function loadIcosahedron(){
 function loadSSDodecahedron(){
     gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    ssdodecahedron = new SmallSelatedDodecahedron(radius=1,offset=0.1,color=[1.0,0.0,0.0,1.0]);
+    ssdodecahedron = new SmallSelatedDodecahedron(drawFromPoints=false,radius=15,offset=3,batang=[]);
     ssdodecahedron.draw();
     var id = new Float32Array(16);
     convertToIdentityMatrix(id);
