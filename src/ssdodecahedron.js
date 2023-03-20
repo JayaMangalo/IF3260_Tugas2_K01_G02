@@ -517,7 +517,7 @@ class SmallSelatedDodecahedron {
 
     toString(){
         if(this.batang == null){
-            this.createFullSquare();
+            this.createFrames();
         }
         return {type: "SSDodecahedron", vertices: this.batang}
     }

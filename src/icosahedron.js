@@ -11,9 +11,11 @@ class Icosahedron{
         let dist_between_two_points =  Math.sqrt((phi_ratio-1)^2 + 1 + phi_ratio^2)*radius
         this.offsetratio = offset/dist_between_two_points
         
+        // let color = [[1,0,0,1],[1,1,0,1],[0,0.5,0.5,1]]
         let color1 = [1,0,0,1]
         let color2 = [1,1,0,1]
         let color3 = [0,0.5,0.5,1]
+        
         //PersegiPanjang 1 Outer (±phi, ±1, 0) 
         this.p1_tr = [prr_outer,one_outer,0].concat(color1)
         this.p1_br = [prr_outer,-one_outer,0].concat(color1)
@@ -466,7 +468,6 @@ class Icosahedron{
         }
         for(let batang of this.batang){
             let vertices = [];
-            console.log(batang)
             for (let i = 0; i < batang.length; i++) {
                 vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3], batang[i][4], batang[i][5],batang[i][6]);
             }
@@ -498,7 +499,7 @@ class Icosahedron{
 
     toString(){
         if(this.batang == null){
-            this.createFullSquare();
+            this.createFrames();
         }
         return {type: "Icosahedron", vertices: this.batang}
     }

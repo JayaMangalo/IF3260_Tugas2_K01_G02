@@ -5,10 +5,10 @@ var isUsingShadder = true;
 function onLoad(){
     //Initialize the WebGL
     init();
-    // loadShapes()
+    loadShapes()
     // loadTesseract();
     // loadChain();
-    loadIcosahedron();
+    // loadIcosahedron();
     // loadSSDodecahedron()
 }
 
@@ -21,7 +21,7 @@ async function loadShapes() {
     }
     if(parseResult.type == "tesseract") {
         loadTesseract(parseResult.data);
-    }
+    }   
 }
 
 function loadChain() {
@@ -164,15 +164,8 @@ function redraw(usingShape = true){
                         drawCubeFromPoints(shape.outerSquare.vertices);
                         drawCubeFromPoints(shape.innerSquare.vertices);
                     }
-                    if(shape.type == "Icosahedron"){
-                        drawTesseractFromPoints(shape.vertices, isUsingShadder);
-                        drawCubeFromPoints(shape.outerSquare.vertices);
-                        drawCubeFromPoints(shape.innerSquare.vertices);
-                    }
-                    if(shape.type == "SSDodecahedron"){
-                        drawTesseractFromPoints(shape.vertices, isUsingShadder);
-                        drawCubeFromPoints(shape.outerSquare.vertices);
-                        drawCubeFromPoints(shape.innerSquare.vertices);
+                    if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
+                        drawIcosahedroOrSSDodecahedronFromPoints(shape.vertices, isUsingShadder);
                     }
                 }
             }
@@ -182,42 +175,27 @@ function redraw(usingShape = true){
     requestAnimationFrame(loop);
 }
 
-function loadIcosahedron(){
+function loadIcosahedron(data=null){
     gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    icosahedron = new Icosahedron(drawFromPoints=false,radius=5,offset=0.5,batang=[]);
-    icosahedron.draw();
-    var id = new Float32Array(16);
-    convertToIdentityMatrix(id);
-    var loop = () => {
-        rotAngle = performance.now() / 10000 * Math.PI;
-        rotate(worldMatrix, id, rotAngle, [0,1,0]);
-        gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
-        gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
-        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-        icosahedron.draw();
-        requestAnimationFrame(loop);
+    if(data==null){
+        icosahedron = new Icosahedron(drawFromPoints=false,radius=5,offset=0.5,batang=[]);
+        shapes.push(icosahedron)
     }
-    requestAnimationFrame(loop);
+    
+    redraw()
 }
 
-function loadSSDodecahedron(){
+function loadSSDodecahedron(data=null){
     gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    if(data==null){
+        ssdodecahedron = new SmallSelatedDodecahedron(drawFromPoints=false,radius=15,offset=3,batang=[]);
+        shapes.push(ssdodecahedron)
+    }
     ssdodecahedron = new SmallSelatedDodecahedron(drawFromPoints=false,radius=15,offset=3,batang=[]);
     ssdodecahedron.draw();
-    var id = new Float32Array(16);
-    convertToIdentityMatrix(id);
-    var loop = () => {
-        rotAngle = performance.now() / 10000 * Math.PI;
-        rotate(worldMatrix, id, rotAngle, [0,1,0]);
-        gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
-        gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
-        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-        ssdodecahedron.draw();
-        requestAnimationFrame(loop);
-    }
-    requestAnimationFrame(loop);
+    redraw()
 }
 
 function toggleShadder(){
@@ -266,6 +244,17 @@ function drawCubeFromPoints(data){
         }
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, batang.length); 
+    }
+}
+
+function drawIcosahedroOrSSDodecahedronFromPoints(data, isUsingShadder = true){
+    for(let batang of data){
+        let vertices = [];
+            for (let i = 0; i < batang.length; i++) {
+                vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3], batang[i][4], batang[i][5],batang[i][6]);
+            }
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, batang.length);
     }
 }
 //Draw From Points=======================================================================================================
