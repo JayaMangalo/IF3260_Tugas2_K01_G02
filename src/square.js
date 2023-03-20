@@ -297,7 +297,7 @@ class HollowSquare{
         ]
     }
 
-    cretaeBatangDepanKiri(){
+    createBatangDepanKiri(){
         return[
             this.permukaan_depan_luar_kiri_atas,
             this.permukaan_depan_luar_kiri_bawah,
@@ -432,7 +432,7 @@ class HollowSquare{
             this.createBatangKiriatas(),
             this.createBatangKananAtas(),
             this.createBatangBelakangAtas(),
-            this.cretaeBatangDepanKiri(),
+            this.createBatangDepanKiri(),
             this.createBatangDepanKanan(),
             this.createBatangBelakangKiri(),
             this.createBatangBelakangKanan(),
