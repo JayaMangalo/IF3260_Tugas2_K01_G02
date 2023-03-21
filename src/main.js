@@ -6,7 +6,7 @@ function onLoad(){
     //Initialize the WebGL
     init();
     loadShapes()
-    // loadTesseract();
+    loadTesseract();
     // loadChain();
     // loadIcosahedron();
     // loadSSDodecahedron()
@@ -155,7 +155,6 @@ function redraw(usingShape = false){
     var loop = () => {
         rotAngle = performance.now() / 10000 * Math.PI;
         // rotAngle = 8000 / 10000 * Math.PI;
-
         rotate(worldMatrix, id, rotAngle, [0,1,0]);
         gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
         gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
@@ -190,7 +189,6 @@ function loadIcosahedron(data=null){
         icosahedron = new Icosahedron(drawFromPoints=false,radius=5,offset=0.5,batang=[]);
         shapes.push(icosahedron)
     }
-    
     redraw()
 }
 
@@ -267,31 +265,59 @@ function drawIcosahedroOrSSDodecahedronFromPoints(data, isUsingShadder = true){
 }
 //Draw From Points=======================================================================================================
 
-function RotateXAxis(degree=0){
+
+function Transform(method,axis,value){
+    //method, axis, value in integer 
+
+    //Method 0 -> Rotate
+    //Method 1 -> Translate
+    //Method 2 -> Scale
+
+    //Axis 0 -> X
+    //Axis 1 -> Y
+    //Axis 2 -> Z
+    var func;
+    if (method == 0){
+        params = value
+        if(axis == 0){
+            func = RotatePointXAxis;
+        }else if(axis==1){
+            func = RotatePointYAxis;
+        }else if(axis==2){
+            func = RotatePointYAxis;
+        }
+    }else if(method == 1){
+        params = [axis,value]
+        func = Translate;
+    }else if(method == 2){
+        params = [axis,value]
+        func = Scale;
+    }
+
     for(model of models){
         for(shape of model){
             if(shape.type == "Tesseract"){
                 for(batang of shape.outerSquare.vertices){
                     for(point of batang){
-                        point = RotatePointXAxis(point, degree);
+                        point = func(point, params);
                     }
                 }
                 for(batang of shape.innerSquare.vertices){
                     for(point of batang){
-                        point = RotatePointXAxis(point, degree);
+                        point = func(point, params);
                     }
                 }
             }
             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
                 for(batang of shape.vertices){
                     for(point of batang){
-                        point = RotatePointXAxis(point, degree);
+                        point = func(point, params);
                     }
                 }
             }
             for(batang of shape.vertices){
                 for(point of batang){
-                    point = RotatePointXAxis(point, degree);
+                    point = func(point, params);
                 }
             }
         }
@@ -299,71 +325,103 @@ function RotateXAxis(degree=0){
     redraw(usingShape=false);
 }
 
-function RotateYAxis(degree=0){
-    for(model of models){
-        for(shape of model){
-            if(shape.type == "Tesseract"){
-                for(batang of shape.outerSquare.vertices){
-                    for(point of batang){
-                        point = RotatePointYAxis(point, degree);
-                    }
-                }
-                for(batang of shape.innerSquare.vertices){
-                    for(point of batang){
-                        point = RotatePointYAxis(point, degree);
-                    }
-                }
-            }
-            if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
-                for(batang of shape.vertices){
-                    for(point of batang){
-                        point = RotatePointYAxis(point, degree);
-                    }
-                }
-            }
-            for(batang of shape.vertices){
-                for(point of batang){
-                    // Rotate point on X axis
-                    point = RotatePointYAxis(point, degree);
-                }
-            }
-        }
-    }
-    redraw(usingShape=false);
-}
+// function RotateXAxis(degree=0){
+//     for(model of models){
+//         for(shape of model){
+//             if(shape.type == "Tesseract"){
+//                 for(batang of shape.outerSquare.vertices){
+//                     for(point of batang){
+//                         point = RotatePointXAxis(point, degree);
+//                     }
+//                 }
+//                 for(batang of shape.innerSquare.vertices){
+//                     for(point of batang){
+//                         point = RotatePointXAxis(point, degree);
+//                     }
+//                 }
+//             }
+//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
+//                 for(batang of shape.vertices){
+//                     for(point of batang){
+//                         point = RotatePointXAxis(point, degree);
+//                     }
+//                 }
+//             }
+//             for(batang of shape.vertices){
+//                 for(point of batang){
+//                     point = RotatePointXAxis(point, degree);
+//                 }
+//             }
+//         }
+//     }
+//     redraw(usingShape=false);
+// }
 
-function RotateZAxis(degree=0){
-    for(model of models){
-        for(shape of model){
-            if(shape.type == "Tesseract"){
-                for(batang of shape.outerSquare.vertices){
-                    for(point of batang){
-                        point = RotatePointZAxis(point, degree);
-                    }
-                }
-                for(batang of shape.innerSquare.vertices){
-                    for(point of batang){
-                        point = RotatePointZAxis(point, degree);
-                    }
-                }
-            }
-            if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
-                for(batang of shape.vertices){
-                    for(point of batang){
-                        point = RotatePointZAxis(point, degree);
-                    }
-                }
-            }
-            for(batang of shape.vertices){
-                for(point of batang){
-                    // Rotate point on X axis
-                    point = RotatePointZAxis(point, degree);
-                }
-            }
-        }
-    }
-    redraw(usingShape=false);
-}
+// function RotateYAxis(degree=0){
+//     for(model of models){
+//         for(shape of model){
+//             if(shape.type == "Tesseract"){
+//                 for(batang of shape.outerSquare.vertices){
+//                     for(point of batang){
+//                         point = RotatePointYAxis(point, degree);
+//                     }
+//                 }
+//                 for(batang of shape.innerSquare.vertices){
+//                     for(point of batang){
+//                         point = RotatePointYAxis(point, degree);
+//                     }
+//                 }
+//             }
+//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
+//                 for(batang of shape.vertices){
+//                     for(point of batang){
+//                         point = RotatePointYAxis(point, degree);
+//                     }
+//                 }
+//             }
+//             for(batang of shape.vertices){
+//                 for(point of batang){
+//                     // Rotate point on X axis
+//                     point = RotatePointYAxis(point, degree);
+//                 }
+//             }
+//         }
+//     }
+//     redraw(usingShape=false);
+// }
+
+// function RotateZAxis(degree=0){
+//     for(model of models){
+//         for(shape of model){
+//             if(shape.type == "Tesseract"){
+//                 for(batang of shape.outerSquare.vertices){
+//                     for(point of batang){
+//                         point = RotatePointZAxis(point, degree);
+//                     }
+//                 }
+//                 for(batang of shape.innerSquare.vertices){
+//                     for(point of batang){
+//                         point = RotatePointZAxis(point, degree);
+//                     }
+//                 }
+//             }
+//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
+//                 for(batang of shape.vertices){
+//                     for(point of batang){
+//                         point = RotatePointZAxis(point, degree);
+//                     }
+//                 }
+//             }
+//             for(batang of shape.vertices){
+//                 for(point of batang){
+//                     // Rotate point on X axis
+//                     point = RotatePointZAxis(point, degree);
+//                 }
+//             }
+//         }
+//     }
+//     redraw(usingShape=false);
+// }
 
 function RotatePointXAxis(point, degree=0){
     let y = point[1];
@@ -403,5 +461,210 @@ function RotatePointZAxis(point, degree=0){
     point[1] = newY;
     return point;
 }
+
+function Translate(point,params){
+    axis = params[0]
+    value = params[1]
+    point[axis] += value
+    return point
+
+}
+function Scale(point,params){
+    axis = params[0]
+    value = params[1]
+    point[axis] *= value
+    return point
+
+}
+
+// function ScaleXAxis(value){
+//     for(model of models){
+//         for(shape of model){
+//             if(shape.type == "Tesseract"){
+//                 for(batang of shape.outerSquare.vertices){
+//                     for(point of batang){
+//                         point[0] = point[0] * value
+//                     }
+//                 }
+//                 for(batang of shape.innerSquare.vertices){
+//                     for(point of batang){
+//                         point[0] = point[0] * value
+//                     }
+//                 }
+//             }
+//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
+//                 for(batang of shape.vertices){
+//                     for(point of batang){
+//                         point[0] = point[0] * value
+//                     }
+//                 }
+//             }
+//             for(batang of shape.vertices){
+//                 for(point of batang){
+//                     point[0] = point[0] * value
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// function ScaleYAxis(value){
+//     for(model of models){
+//         for(shape of model){
+//             if(shape.type == "Tesseract"){
+//                 for(batang of shape.outerSquare.vertices){
+//                     for(point of batang){
+//                         point[1] = point[1] * value
+//                     }
+//                 }
+//                 for(batang of shape.innerSquare.vertices){
+//                     for(point of batang){
+//                         point[1] = point[1] * value
+//                     }
+//                 }
+//             }
+//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
+//                 for(batang of shape.vertices){
+//                     for(point of batang){
+//                         point[1] = point[1] * value
+//                     }
+//                 }
+//             }
+//             for(batang of shape.vertices){
+//                 for(point of batang){
+//                     point[1] = point[1] * value
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// function ScaleZAxis(value){
+//     for(model of models){
+//         for(shape of model){
+//             if(shape.type == "Tesseract"){
+//                 for(batang of shape.outerSquare.vertices){
+//                     for(point of batang){
+//                         point[2] = point[2] * value
+//                     }
+//                 }
+//                 for(batang of shape.innerSquare.vertices){
+//                     for(point of batang){
+//                         point[2] = point[2] * value
+//                     }
+//                 }
+//             }
+//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
+//                 for(batang of shape.vertices){
+//                     for(point of batang){
+//                         point[2] = point[2] * value
+//                     }
+//                 }
+//             }
+//             for(batang of shape.vertices){
+//                 for(point of batang){
+//                     point[2] = point[2] * value
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// function TranslateXAxis(value){
+//     for(model of models){
+//         for(shape of model){
+//             if(shape.type == "Tesseract"){
+//                 for(batang of shape.outerSquare.vertices){
+//                     for(point of batang){
+//                         point[0] += value
+//                     }
+//                 }
+//                 for(batang of shape.innerSquare.vertices){
+//                     for(point of batang){
+//                         point[0] += value
+//                     }
+//                 }
+//             }
+//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
+//                 for(batang of shape.vertices){
+//                     for(point of batang){
+//                         point[0] += value
+//                     }
+//                 }
+//             }
+//             for(batang of shape.vertices){
+//                 for(point of batang){
+//                     point[0] += value
+//                 }
+//             }
+//         }
+//     }
+//     redraw(usingShape=false);
+// }
+
+// function TranslateYAxis(value){
+//     for(model of models){
+//         for(shape of model){
+//             if(shape.type == "Tesseract"){
+//                 for(batang of shape.outerSquare.vertices){
+//                     for(point of batang){
+//                         point[1] += value
+//                     }
+//                 }
+//                 for(batang of shape.innerSquare.vertices){
+//                     for(point of batang){
+//                         point[1] += value
+//                     }
+//                 }
+//             }
+//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
+//                 for(batang of shape.vertices){
+//                     for(point of batang){
+//                         point[1] += value
+//                     }
+//                 }
+//             }
+//             for(batang of shape.vertices){
+//                 for(point of batang){
+//                     point[1] += value
+//                 }
+//             }
+//         }
+//     }
+//     redraw(usingShape=false);
+// }
+
+// function TranslateZAxis(value){
+//     for(model of models){
+//         for(shape of model){
+//             if(shape.type == "Tesseract"){
+//                 for(batang of shape.outerSquare.vertices){
+//                     for(point of batang){
+//                         point[2] += value
+//                     }
+//                 }
+//                 for(batang of shape.innerSquare.vertices){
+//                     for(point of batang){
+//                         point[2] += value
+//                     }
+//                 }
+//             }
+//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
+//                 for(batang of shape.vertices){
+//                     for(point of batang){
+//                         point[2] += value
+//                     }
+//                 }
+//             }
+//             for(batang of shape.vertices){
+//                 for(point of batang){
+//                     point[2] += value
+//                 }
+//             }
+//         }
+//     }
+//     redraw(usingShape=false);
+// }
+
 
 onLoad();

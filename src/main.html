@@ -18,9 +18,18 @@
             <input type="checkbox" name="toggleShadder" id="toggleShadder" onchange="toggleShadder()" checked>
             <label for="toggleShadder">Toggle Shadder</label>
             <button onclick="saveShapes()">Save Shape</button>
-            <button onclick="RotateXAxis(45)">Rotate on X Axis</button>
-            <button onclick="RotateYAxis(45)">Rotate on Y Axis</button>
-            <button onclick="RotateZAxis(45)">Rotate on Z Axis</button>
+
+            <button onclick="Transform(0,0,-45)">Rotate on X Axis</button>
+            <button onclick="Transform(0,1,-45)">Rotate on Y Axis</button>
+            <button onclick="Transform(0,2,-45)">Rotate on Z Axis</button>
+
+            <button onclick="Transform(1,0,-2)">Translate on X Axis</button>
+            <button onclick="Transform(1,1,-2)">Translate on X Axis</button>
+            <button onclick="Transform(1,2,-2)">Translate on X Axis</button>
+
+            <button onclick="Transform(2,0,0.88)">Scale on X Axis</button>
+            <button onclick="Transform(2,1,0.88)">Scale on Y Axis</button>
+            <button onclick="Transform(2,2,0.88)">Scale on Z Axis</button>
         </div>
     </div>
     <script src="init.js"></script>
