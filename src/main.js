@@ -6,7 +6,7 @@ function onLoad(){
     //Initialize the WebGL
     init();
     loadShapes()
-    loadTesseract();
+    // loadTesseract();
     // loadChain();
     // loadIcosahedron();
     // loadSSDodecahedron()
@@ -146,6 +146,11 @@ function loadTesseract(data=null) {
         let parseResult = JSON.parse(json);
         loadModel(parseResult.data);
     }
+    redraw();
+}
+
+function clearShapes(){
+    shapes = [];
     redraw();
 }
 

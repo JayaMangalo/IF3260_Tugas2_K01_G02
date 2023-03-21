@@ -41,6 +41,7 @@ class Chain {
             square0.createBatangBawahBelakang(),
             square0.createBatangBawahKiri(),
             square0.createBatangBawahKanan(),
+            square0.createTambalKiriAtasBelakang()
         ]
         this.squares.push(square0);
         
@@ -104,87 +105,35 @@ class Chain {
         }
     }
 
-    draw(squares=null) {
-        if (squares == null) {
+    draw() {
+        if (this.squares == null) {
             this.createChain();
         }
         for (let i = 0; i < this.squares.length; i++) {
             this.squares[i].draw();
         }
     }
+
+    toString() {
+        if (this.squares == null) {
+            this.createChain();
+        }
+
+        let str = {
+            type: "Chain",
+            squaresNo: this.squaresNo,
+            thickness: this.thickness,
+            scaleX: this.scaleX,
+            scaleY: this.scaleY,
+            scaleZ: this.scaleZ,
+            colors: this.colors,
+            squares: []
+        }
+
+        for (let i = 0; i < this.squares.length; i++) {
+            str.squares.push(this.squares[i].toString());
+        }
+        
+        return str;
+    }
 }
-
-// function loadSquare() {
-//     gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
-//     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-//     var id = new Float32Array(16);
-//     convertToIdentityMatrix(id);
-//     square1 = new HollowSquare(color=[0.0,1.0,0.0,1.0], 1.2, 1.2,4,4, 2,2,2);
-//     square1.batang = [
-//         square1.createBatangDepanAtas(),
-//         square1.createBatangKiriatas(),
-//         // square1.createBatangKananAtas(),
-//         square1.createBatangBelakangAtas(),
-//         square1.cretaeBatangDepanKiri(),
-//         square1.createBatangDepanKanan(),
-//         // square1.createBatangBelakangKiri(),
-//         square1.createBatangBelakangKanan(),
-//         // square1.createBatangBawahDepan(),
-//         square1.createBatangBawahBelakang(),
-//         square1.createBatangBawahKiri(),
-//         square1.createBatangBawahKanan(),
-//     ]
-
-//     square2 = new HollowSquare(color=[1.0,1.0,0.0,1.0], 1.2, 0,0,0, 2,2,2);
-//     square2.batang = [
-//         square2.createBatangDepanAtas(),
-//         square2.createBatangKiriatas(),
-//         square2.createBatangKananAtas(),
-//         // square2.createBatangBelakangAtas(),
-//         square2.cretaeBatangDepanKiri(),
-//         // square2.createBatangDepanKanan(),
-//         square2.createBatangBelakangKiri(),
-//         square2.createBatangBelakangKanan(),
-//         square2.createBatangBawahDepan(),
-//         square2.createBatangBawahBelakang(),
-//         square2.createBatangBawahKiri(),
-//         square2.createBatangBawahKanan(),
-//     ]
-
-//     square3 = new HollowSquare(color=[0.0,0.0,1.0,1.0], 1.2, -1.2,-4,-4, 2,2,2);
-//     square3.batang = [
-//         square3.createBatangDepanAtas(),
-//         square3.createBatangKiriatas(),
-//         // square3.createBatangKananAtas(),
-//         square3.createBatangBelakangAtas(),
-//         square3.cretaeBatangDepanKiri(),
-//         square3.createBatangDepanKanan(),
-//         square3.createBatangBelakangKiri(),
-//         square3.createBatangBelakangKanan(),
-//         // square3.createBatangBawahDepan(),
-//         // square3.createBatangBawahBelakang(),
-//         square3.createBatangBawahKiri(),
-//         square3.createBatangBawahKanan(),
-//     ]
-
-//     console.log(square1)
-
-//     // rotate square 1 -45 degree in x axis
-//     var rotateX = new Float32Array(9);
-//     convertToIdentityMatrix(rotateX);
-//     rotateX[0] = 1;
-//     rotateX[4] = Math.cos(-45 * Math.PI / 180);
-//     rotateX[5] = -Math.sin(-45 * Math.PI / 180);
-//     rotateX[7] = Math.sin(-45 * Math.PI / 180);
-//     rotateX[8] = Math.cos(-45 * Math.PI / 180);
-    
-//     console.log(rotateX)
-//     square1.transform(rotateX);
-//     console.log(square1)
-
-//     shapes.push(square1);
-//     shapes.push(square2);
-//     shapes.push(square3);
-//     redraw();
-// }
-

@@ -417,6 +417,16 @@ class HollowSquare{
         ]
     }
 
+    createTambalKiriAtasBelakang(){
+        return[
+            this.permukaan_atas_luar_kiri_belakang,
+            this.permukaan_atas_dalam_kiri_belakang,
+            this.miring_kiri_atas_belakang_bagian_kanan_atas,
+            this.miring_kiri_atas_belakang_bagian_kanan_bawah,
+            this.permukaan_atas_luar_kiri_belakang,   
+        ]
+    }
+
     createTambalanDepanKananAtas(){
         return[
             this.permukaan_atas_luar_kanan_depan,
