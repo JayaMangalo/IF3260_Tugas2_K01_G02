@@ -282,6 +282,13 @@ function RotateXAxis(degree=0){
                     }
                 }
             }
+            if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
+                for(batang of shape.vertices){
+                    for(point of batang){
+                        point = RotatePointXAxis(point, degree);
+                    }
+                }
+            }
             for(batang of shape.vertices){
                 for(point of batang){
                     point = RotatePointXAxis(point, degree);
@@ -302,6 +309,13 @@ function RotateYAxis(degree=0){
                     }
                 }
                 for(batang of shape.innerSquare.vertices){
+                    for(point of batang){
+                        point = RotatePointYAxis(point, degree);
+                    }
+                }
+            }
+            if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
+                for(batang of shape.vertices){
                     for(point of batang){
                         point = RotatePointYAxis(point, degree);
                     }
@@ -328,6 +342,13 @@ function RotateZAxis(degree=0){
                     }
                 }
                 for(batang of shape.innerSquare.vertices){
+                    for(point of batang){
+                        point = RotatePointZAxis(point, degree);
+                    }
+                }
+            }
+            if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
+                for(batang of shape.vertices){
                     for(point of batang){
                         point = RotatePointZAxis(point, degree);
                     }
