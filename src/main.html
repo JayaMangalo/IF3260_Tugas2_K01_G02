@@ -1,54 +1,61 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css" />
     <title>3D-CAD</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="main-container">
-        <div class="left-side-bar">
-            <div class="left-menu">
-                <h1>3D-CAD</h1>
-                <h2>Save & Load</h2>
-                <div class="save-container">
-                    <button onclick="saveShapes()" id="save-button">Save</button>
-                    <button onclick="loadShapes()" id="load-button">Load</button>
-                </div>
+      <div class="left-side-bar">
+        <div class="left-menu">
+          <h1>3D-CAD</h1>
+          <h2>Save & Load</h2>
+          <div class="save-container">
+            <button onclick="saveShapes()" id="save-button">Save</button>
+            <button onclick="loadShapes()" id="load-button">Load</button>
+          </div>
 
-                <div class="view-config-container">
-                    <input type="checkbox" name="toggleShadder" id="toggleShadder" onchange="toggleShadder()" checked>
-                    <label for="toggleShadder">Toggle Shadder</label>
-                </div>
+          <div class="view-config-container">
+            <input
+              type="checkbox"
+              name="toggleShadder"
+              id="toggleShadder"
+              onchange="toggleShadder()"
+              checked
+            />
+            <label for="toggleShadder">Toggle Shadder</label>
+          </div>
 
-                <button onclick="clearShapes()" id="clear-button">Clear Canvas</button>
-            </div>
+          <button onclick="clearShapes()" id="clear-button">
+            Clear Canvas
+          </button>
         </div>
+      </div>
 
-        <div class="canvas-container">
-            <canvas width="700px" height="700px" id="canvas">
-                Your browser does not support HTML5
-            </canvas>
-        </div>
+      <div class="canvas-container">
+        <canvas width="700px" height="700px" id="canvas">
+          Your browser does not support HTML5
+        </canvas>
+      </div>
 
-        <div class="right-side-bar" id="sidebar">
-            <h2>Transform</h2>
-            <h3>Rotate</h3>
-            <button onclick="Transform(0,0,-45)">Rotate on X Axis</button>
-            <button onclick="Transform(0,1,-45)">Rotate on Y Axis</button>
-            <button onclick="Transform(0,2,-45)">Rotate on Z Axis</button>
-            <h3>Translate</h3>
-            <button onclick="Transform(1,0,-2)">Translate on X Axis</button>
-            <button onclick="Transform(1,1,-2)">Translate on X Axis</button>
-            <button onclick="Transform(1,2,-2)">Translate on X Axis</button>
-            <h3>Scale</h3>
-            <button onclick="Transform(2,0,0.88)">Scale on X Axis</button>
-            <button onclick="Transform(2,1,0.88)">Scale on Y Axis</button>
-            <button onclick="Transform(2,2,0.88)">Scale on Z Axis</button>
-        </div>
+      <div class="right-side-bar" id="sidebar">
+        <h2>Transform</h2>
+        <h3>Rotate</h3>
+        <button onclick="Transform(0,0,-45)">Rotate on X Axis</button>
+        <button onclick="Transform(0,1,-45)">Rotate on Y Axis</button>
+        <button onclick="Transform(0,2,-45)">Rotate on Z Axis</button>
+        <h3>Translate</h3>
+        <button onclick="Transform(1,0,-2)">Translate on X Axis</button>
+        <button onclick="Transform(1,1,-2)">Translate on X Axis</button>
+        <button onclick="Transform(1,2,-2)">Translate on X Axis</button>
+        <h3>Scale</h3>
+        <button onclick="Transform(2,0,0.88)">Scale on X Axis</button>
+        <button onclick="Transform(2,1,0.88)">Scale on Y Axis</button>
+        <button onclick="Transform(2,2,0.88)">Scale on Z Axis</button>
+      </div>
     </div>
 
     <script src="init.js"></script>
@@ -61,6 +68,5 @@
     <script src="chain.js"></script>
     <script src="main.js"></script>
     <!-- <script src="test.js"></script> -->
-</body>
-
+  </body>
 </html>

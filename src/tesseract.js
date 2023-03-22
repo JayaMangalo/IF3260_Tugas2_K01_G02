@@ -1,203 +1,252 @@
-class Tesseract{
-    constructor(outerSquare, innerSquare){
-        this.outerSquare = outerSquare;
-        this.innerSquare = innerSquare;
-        this.innerSquareUpperColor = innerSquare.outerColor;
-        this.innerSquareLowerColor = innerSquare.middleColor;
-        this.outerColor = outerSquare.middleColor;
-        this.isUsingShadder = this.outerSquare.isUsingShadder;
-    }
+class Tesseract {
+  constructor(outerSquare, innerSquare) {
+    this.outerSquare = outerSquare;
+    this.innerSquare = innerSquare;
+    this.innerSquareUpperColor = innerSquare.outerColor;
+    this.innerSquareLowerColor = innerSquare.middleColor;
+    this.outerColor = outerSquare.middleColor;
+    this.isUsingShadder = this.outerSquare.isUsingShadder;
+  }
 }
 
-class NormalTesseract extends Tesseract{
-    constructor(outerSquare, innerSquare){
-        super(outerSquare, innerSquare);
-    }
+class NormalTesseract extends Tesseract {
+  constructor(outerSquare, innerSquare) {
+    super(outerSquare, innerSquare);
+  }
 
-    createBatangMiringKananAtasDepan(){
-        return[
-        this.outerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
-        this.innerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
-        this.outerSquare.miring_kanan_atas_depan_bagian_kanan_bawah,
-        this.innerSquare.miring_kanan_atas_depan_bagian_kanan_bawah,
-        this.outerSquare.miring_kanan_atas_depan_bagian_kiri_bawah,
-        this.innerSquare.miring_kanan_atas_depan_bagian_kiri_bawah,
-        this.outerSquare.miring_kanan_atas_depan_bagian_kiri_atas,
-        this.innerSquare.miring_kanan_atas_depan_bagian_kiri_atas,
-        this.outerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
-        this.innerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
-        ]
-    }
+  createBatangMiringKananAtasDepan() {
+    return [
+      this.outerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
+      this.innerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
+      this.outerSquare.miring_kanan_atas_depan_bagian_kanan_bawah,
+      this.innerSquare.miring_kanan_atas_depan_bagian_kanan_bawah,
+      this.outerSquare.miring_kanan_atas_depan_bagian_kiri_bawah,
+      this.innerSquare.miring_kanan_atas_depan_bagian_kiri_bawah,
+      this.outerSquare.miring_kanan_atas_depan_bagian_kiri_atas,
+      this.innerSquare.miring_kanan_atas_depan_bagian_kiri_atas,
+      this.outerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
+      this.innerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
+    ];
+  }
 
-    createBatangMiringKiriAtasDepan(){
-        return[
-        this.outerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
-        this.innerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
-        this.outerSquare.miring_kiri_atas_depan_bagian_kanan_bawah,
-        this.innerSquare.miring_kiri_atas_depan_bagian_kanan_bawah,
-        this.outerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
-        this.innerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
-        this.outerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
-        this.innerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
-        this.outerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
-        this.innerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
-        ]
-    }
+  createBatangMiringKiriAtasDepan() {
+    return [
+      this.outerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
+      this.innerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
+      this.outerSquare.miring_kiri_atas_depan_bagian_kanan_bawah,
+      this.innerSquare.miring_kiri_atas_depan_bagian_kanan_bawah,
+      this.outerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
+      this.innerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
+      this.outerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
+      this.innerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
+      this.outerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
+      this.innerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
+    ];
+  }
 
-    createBatangMiringKananAtasBelakang(){
-        return[
-        this.outerSquare.miring_kanan_atas_belakang_bagian_kanan_atas,
-        this.innerSquare.miring_kanan_atas_belakang_bagian_kanan_atas,
-        this.outerSquare.miring_kanan_atas_belakang_bagian_kanan_bawah,
-        this.innerSquare.miring_kanan_atas_belakang_bagian_kanan_bawah,
-        this.outerSquare.miring_kanan_atas_belakang_bagian_kiri_bawah,
-        this.innerSquare.miring_kanan_atas_belakang_bagian_kiri_bawah,
-        this.outerSquare.miring_kanan_atas_belakang_bagian_kiri_atas,
-        this.innerSquare.miring_kanan_atas_belakang_bagian_kiri_atas,
-        this.outerSquare.miring_kanan_atas_belakang_bagian_kanan_atas,
-        this.innerSquare.miring_kanan_atas_belakang_bagian_kanan_atas,
-        ]
-    }
+  createBatangMiringKananAtasBelakang() {
+    return [
+      this.outerSquare.miring_kanan_atas_belakang_bagian_kanan_atas,
+      this.innerSquare.miring_kanan_atas_belakang_bagian_kanan_atas,
+      this.outerSquare.miring_kanan_atas_belakang_bagian_kanan_bawah,
+      this.innerSquare.miring_kanan_atas_belakang_bagian_kanan_bawah,
+      this.outerSquare.miring_kanan_atas_belakang_bagian_kiri_bawah,
+      this.innerSquare.miring_kanan_atas_belakang_bagian_kiri_bawah,
+      this.outerSquare.miring_kanan_atas_belakang_bagian_kiri_atas,
+      this.innerSquare.miring_kanan_atas_belakang_bagian_kiri_atas,
+      this.outerSquare.miring_kanan_atas_belakang_bagian_kanan_atas,
+      this.innerSquare.miring_kanan_atas_belakang_bagian_kanan_atas,
+    ];
+  }
 
-    createBatangMiringKiriAtasBelakang(){
-        return[
-        this.outerSquare.miring_kiri_atas_belakang_bagian_kanan_atas,
-        this.innerSquare.miring_kiri_atas_belakang_bagian_kanan_atas,
-        this.outerSquare.miring_kiri_atas_belakang_bagian_kanan_bawah,
-        this.innerSquare.miring_kiri_atas_belakang_bagian_kanan_bawah,
-        this.outerSquare.miring_kiri_atas_belakang_bagian_kiri_bawah,
-        this.innerSquare.miring_kiri_atas_belakang_bagian_kiri_bawah,
-        this.outerSquare.miring_kiri_atas_belakang_bagian_kiri_atas,
-        this.innerSquare.miring_kiri_atas_belakang_bagian_kiri_atas,
-        this.outerSquare.miring_kiri_atas_belakang_bagian_kanan_atas,
-        this.innerSquare.miring_kiri_atas_belakang_bagian_kanan_atas,
-        ]
-    }
+  createBatangMiringKiriAtasBelakang() {
+    return [
+      this.outerSquare.miring_kiri_atas_belakang_bagian_kanan_atas,
+      this.innerSquare.miring_kiri_atas_belakang_bagian_kanan_atas,
+      this.outerSquare.miring_kiri_atas_belakang_bagian_kanan_bawah,
+      this.innerSquare.miring_kiri_atas_belakang_bagian_kanan_bawah,
+      this.outerSquare.miring_kiri_atas_belakang_bagian_kiri_bawah,
+      this.innerSquare.miring_kiri_atas_belakang_bagian_kiri_bawah,
+      this.outerSquare.miring_kiri_atas_belakang_bagian_kiri_atas,
+      this.innerSquare.miring_kiri_atas_belakang_bagian_kiri_atas,
+      this.outerSquare.miring_kiri_atas_belakang_bagian_kanan_atas,
+      this.innerSquare.miring_kiri_atas_belakang_bagian_kanan_atas,
+    ];
+  }
 
-    createBatangMiringKananBawahDepan(){
-        return[
-        this.outerSquare.miring_kanan_bawah_depan_bagian_kanan_atas,
-        this.innerSquare.miring_kanan_bawah_depan_bagian_kanan_atas,
-        this.outerSquare.miring_kanan_bawah_depan_bagian_kanan_bawah,
-        this.innerSquare.miring_kanan_bawah_depan_bagian_kanan_bawah,
-        this.outerSquare.miring_kanan_bawah_depan_bagian_kiri_bawah,
-        this.innerSquare.miring_kanan_bawah_depan_bagian_kiri_bawah,
-        this.outerSquare.miring_kanan_bawah_depan_bagian_kiri_atas,
-        this.innerSquare.miring_kanan_bawah_depan_bagian_kiri_atas, 
-        this.outerSquare.miring_kanan_bawah_depan_bagian_kanan_atas,
-        this.innerSquare.miring_kanan_bawah_depan_bagian_kanan_atas,
-        ]
-    }
+  createBatangMiringKananBawahDepan() {
+    return [
+      this.outerSquare.miring_kanan_bawah_depan_bagian_kanan_atas,
+      this.innerSquare.miring_kanan_bawah_depan_bagian_kanan_atas,
+      this.outerSquare.miring_kanan_bawah_depan_bagian_kanan_bawah,
+      this.innerSquare.miring_kanan_bawah_depan_bagian_kanan_bawah,
+      this.outerSquare.miring_kanan_bawah_depan_bagian_kiri_bawah,
+      this.innerSquare.miring_kanan_bawah_depan_bagian_kiri_bawah,
+      this.outerSquare.miring_kanan_bawah_depan_bagian_kiri_atas,
+      this.innerSquare.miring_kanan_bawah_depan_bagian_kiri_atas,
+      this.outerSquare.miring_kanan_bawah_depan_bagian_kanan_atas,
+      this.innerSquare.miring_kanan_bawah_depan_bagian_kanan_atas,
+    ];
+  }
 
-    createBatangMiringKiriBawahDepan(){
-        return[
-        this.outerSquare.miring_kiri_bawah_depan_bagian_kanan_atas,
-        this.innerSquare.miring_kiri_bawah_depan_bagian_kanan_atas,
-        this.outerSquare.miring_kiri_bawah_depan_bagian_kanan_bawah,
-        this.innerSquare.miring_kiri_bawah_depan_bagian_kanan_bawah,
-        this.outerSquare.miring_kiri_bawah_depan_bagian_kiri_bawah,
-        this.innerSquare.miring_kiri_bawah_depan_bagian_kiri_bawah,
-        this.outerSquare.miring_kiri_bawah_depan_bagian_kiri_atas,
-        this.innerSquare.miring_kiri_bawah_depan_bagian_kiri_atas,
-        this.outerSquare.miring_kiri_bawah_depan_bagian_kanan_atas,
-        this.innerSquare.miring_kiri_bawah_depan_bagian_kanan_atas,
-        ]
-    }
+  createBatangMiringKiriBawahDepan() {
+    return [
+      this.outerSquare.miring_kiri_bawah_depan_bagian_kanan_atas,
+      this.innerSquare.miring_kiri_bawah_depan_bagian_kanan_atas,
+      this.outerSquare.miring_kiri_bawah_depan_bagian_kanan_bawah,
+      this.innerSquare.miring_kiri_bawah_depan_bagian_kanan_bawah,
+      this.outerSquare.miring_kiri_bawah_depan_bagian_kiri_bawah,
+      this.innerSquare.miring_kiri_bawah_depan_bagian_kiri_bawah,
+      this.outerSquare.miring_kiri_bawah_depan_bagian_kiri_atas,
+      this.innerSquare.miring_kiri_bawah_depan_bagian_kiri_atas,
+      this.outerSquare.miring_kiri_bawah_depan_bagian_kanan_atas,
+      this.innerSquare.miring_kiri_bawah_depan_bagian_kanan_atas,
+    ];
+  }
 
-    createBatangMiringKananBawahBelakang(){
-        return[
-        this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
-        this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
-        this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_bawah,
-        this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_bawah,
-        this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah,
-        this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah,
-        this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas,
-        this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas,
-        this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
-        this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
-        ]
-    }
+  createBatangMiringKananBawahBelakang() {
+    return [
+      this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
+      this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
+      this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_bawah,
+      this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_bawah,
+      this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah,
+      this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah,
+      this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas,
+      this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas,
+      this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
+      this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
+    ];
+  }
 
-    createBatangMiringKiriBawahBelakang(){
-        return[
-        this.outerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
-        this.innerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
-        this.outerSquare.miring_kiri_bawah_belakang_bagian_kanan_bawah,
-        this.innerSquare.miring_kiri_bawah_belakang_bagian_kanan_bawah,
-        this.outerSquare.miring_kiri_bawah_belakang_bagian_kiri_bawah,
-        this.innerSquare.miring_kiri_bawah_belakang_bagian_kiri_bawah,
-        this.outerSquare.miring_kiri_bawah_belakang_bagian_kiri_atas,
-        this.innerSquare.miring_kiri_bawah_belakang_bagian_kiri_atas,
-        this.outerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
-        this.innerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
-        ]
-    }
+  createBatangMiringKiriBawahBelakang() {
+    return [
+      this.outerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
+      this.innerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
+      this.outerSquare.miring_kiri_bawah_belakang_bagian_kanan_bawah,
+      this.innerSquare.miring_kiri_bawah_belakang_bagian_kanan_bawah,
+      this.outerSquare.miring_kiri_bawah_belakang_bagian_kiri_bawah,
+      this.innerSquare.miring_kiri_bawah_belakang_bagian_kiri_bawah,
+      this.outerSquare.miring_kiri_bawah_belakang_bagian_kiri_atas,
+      this.innerSquare.miring_kiri_bawah_belakang_bagian_kiri_atas,
+      this.outerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
+      this.innerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
+    ];
+  }
 
-    createTesseract(){
-        this.batang = [
-            this.createBatangMiringKananAtasDepan(),
-            this.createBatangMiringKiriAtasDepan(),
-            this.createBatangMiringKananAtasBelakang(),
-            this.createBatangMiringKiriAtasBelakang(),
-            this.createBatangMiringKananBawahDepan(),
-            this.createBatangMiringKiriBawahDepan(),
-            this.createBatangMiringKananBawahBelakang(),
-            this.createBatangMiringKiriBawahBelakang(),
-        ];
-    }
+  createTesseract() {
+    this.batang = [
+      this.createBatangMiringKananAtasDepan(),
+      this.createBatangMiringKiriAtasDepan(),
+      this.createBatangMiringKananAtasBelakang(),
+      this.createBatangMiringKiriAtasBelakang(),
+      this.createBatangMiringKananBawahDepan(),
+      this.createBatangMiringKiriBawahDepan(),
+      this.createBatangMiringKananBawahBelakang(),
+      this.createBatangMiringKiriBawahBelakang(),
+    ];
+  }
 
-    draw(batang=null, isDrawOuterSquare=true, isDrawInnerSquare=true){
-        if(this.batang == null){
-            this.createTesseract();
-        }
-        if(isDrawOuterSquare){
-            this.outerSquare.draw();
-        }
-        if(isDrawInnerSquare){
-            this.innerSquare.draw();
-        }
-        for(let batang of this.batang){
-            let vertices = [];
-            if(this.isUsingShadder){
-                for (let i = 0; i < batang.length; i++) {
-                    if(i%2 == 0){
-                        vertices.push(batang[i][0], batang[i][1], batang[i][2], this.outerColor[0], this.outerColor[1], this.outerColor[2], this.outerColor[3]);
-                    }else{
-                        if(i == 3 || i == 5){
-                            vertices.push(batang[i][0], batang[i][1], batang[i][2], this.innerSquareLowerColor[0], this.innerSquareLowerColor[1], this.innerSquareLowerColor[2], this.innerSquareLowerColor[3]);
-                        }else{
-                            vertices.push(batang[i][0], batang[i][1], batang[i][2], this.innerSquareUpperColor[0], this.innerSquareUpperColor[1], this.innerSquareUpperColor[2], this.innerSquareUpperColor[3]);
-                        }
-                    }
-                }
-            }else{
-                for (let i = 0; i < batang.length; i++) {
-                    if(i%2 == 0){
-                        vertices.push(batang[i][0], batang[i][1], batang[i][2], this.outerSquare.color[0], this.outerSquare.color[1], this.outerSquare.color[2], this.outerSquare.color[3]);
-                    }else{
-                        vertices.push(batang[i][0], batang[i][1], batang[i][2], this.innerSquare.color[0], this.innerSquare.color[1], this.innerSquare.color[2], this.innerSquare.color[3]);
-                    }
-                }
+  draw(batang = null, isDrawOuterSquare = true, isDrawInnerSquare = true) {
+    if (this.batang == null) {
+      this.createTesseract();
+    }
+    if (isDrawOuterSquare) {
+      this.outerSquare.draw();
+    }
+    if (isDrawInnerSquare) {
+      this.innerSquare.draw();
+    }
+    for (let batang of this.batang) {
+      let vertices = [];
+      if (this.isUsingShadder) {
+        for (let i = 0; i < batang.length; i++) {
+          if (i % 2 == 0) {
+            vertices.push(
+              batang[i][0],
+              batang[i][1],
+              batang[i][2],
+              this.outerColor[0],
+              this.outerColor[1],
+              this.outerColor[2],
+              this.outerColor[3]
+            );
+          } else {
+            if (i == 3 || i == 5) {
+              vertices.push(
+                batang[i][0],
+                batang[i][1],
+                batang[i][2],
+                this.innerSquareLowerColor[0],
+                this.innerSquareLowerColor[1],
+                this.innerSquareLowerColor[2],
+                this.innerSquareLowerColor[3]
+              );
+            } else {
+              vertices.push(
+                batang[i][0],
+                batang[i][1],
+                batang[i][2],
+                this.innerSquareUpperColor[0],
+                this.innerSquareUpperColor[1],
+                this.innerSquareUpperColor[2],
+                this.innerSquareUpperColor[3]
+              );
             }
-            
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-            gl.drawArrays(gl.TRIANGLE_STRIP, 0, batang.length); 
+          }
         }
-    }
-
-    changeShadder(value){
-        this.isUsingShadder = value;
-        this.outerSquare.changeShadder(value);
-        this.innerSquare.changeShadder(value);
-    }
-
-    toString(){
-        if(this.batang == null){
-            this.createTesseract();
+      } else {
+        for (let i = 0; i < batang.length; i++) {
+          if (i % 2 == 0) {
+            vertices.push(
+              batang[i][0],
+              batang[i][1],
+              batang[i][2],
+              this.outerSquare.color[0],
+              this.outerSquare.color[1],
+              this.outerSquare.color[2],
+              this.outerSquare.color[3]
+            );
+          } else {
+            vertices.push(
+              batang[i][0],
+              batang[i][1],
+              batang[i][2],
+              this.innerSquare.color[0],
+              this.innerSquare.color[1],
+              this.innerSquare.color[2],
+              this.innerSquare.color[3]
+            );
+          }
         }
-        return {type: "Tesseract", outerSquare: this.outerSquare.toString(), innerSquare: this.innerSquare.toString(), vertices: this.batang};
+      }
+
+      gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array(vertices),
+        gl.STATIC_DRAW
+      );
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, batang.length);
     }
+  }
+
+  changeShadder(value) {
+    this.isUsingShadder = value;
+    this.outerSquare.changeShadder(value);
+    this.innerSquare.changeShadder(value);
+  }
+
+  toString() {
+    if (this.batang == null) {
+      this.createTesseract();
+    }
+    return {
+      type: "Tesseract",
+      outerSquare: this.outerSquare.toString(),
+      innerSquare: this.innerSquare.toString(),
+      vertices: this.batang,
+    };
+  }
 }
 
 // class SpinningTesseract extends Tesseract{
@@ -352,7 +401,7 @@ class NormalTesseract extends Tesseract{
 //     }
 
 //     draw(){
-//         this.createTesseract();   
+//         this.createTesseract();
 //         this.Tesseract1.draw();
 //         this.Tesseract2.draw();
 //     }

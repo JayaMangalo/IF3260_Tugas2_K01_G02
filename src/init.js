@@ -1,4 +1,4 @@
-//Variable Declaration and Initialization 
+//Variable Declaration and Initialization
 var canvas = document.getElementById("canvas");
 var gl = canvas.getContext("webgl2");
 var vertexShader = gl.createShader(gl.VERTEX_SHADER);
@@ -19,20 +19,19 @@ var projMatrix;
 
 //Initialize the WebGL
 function init() {
+  //Check if webgl is supported
+  if (!gl) {
+    alert("WebGL is not supported");
+    return;
+  }
 
-    //Check if webgl is supported
-    if (!gl) {
-        alert("WebGL is not supported");
-        return;
-    }
+  //Set the Canvas
+  gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
+  gl.clear(gl.COLOR_BUFFER_BIT);
 
-    //Set the Canvas
-    gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
-    gl.clear(gl.COLOR_BUFFER_BIT);
-
-    //Create Shadder
-    const shadderSource = {
-        vertexShaderSource: `#version 300 es
+  //Create Shadder
+  const shadderSource = {
+    vertexShaderSource: `#version 300 es
         in vec3 vertPosition;
         in vec4 vertColor;
         out vec4 fragColor;
@@ -46,91 +45,103 @@ function init() {
             gl_Position = mProj * mView * mWorld * vec4(vertPosition, 1);
         }`,
 
-        fragmentShaderSource: `#version 300 es
+    fragmentShaderSource: `#version 300 es
         precision mediump float;
         in vec4 fragColor;
         out vec4 outColor;
     
         void main() {
             outColor = fragColor;
-        }`
-    }
-    //Create Shadder
-    gl.shaderSource(vertexShader, shadderSource.vertexShaderSource);
-    gl.shaderSource(fragmentShader, shadderSource.fragmentShaderSource);
+        }`,
+  };
+  //Create Shadder
+  gl.shaderSource(vertexShader, shadderSource.vertexShaderSource);
+  gl.shaderSource(fragmentShader, shadderSource.fragmentShaderSource);
 
-    //Compile Shadder
-    gl.compileShader(vertexShader);
-    if(!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)){
-        console.error("ERROR compiling vertex shader!", gl.getShaderInfoLog(vertexShader));
-        return;
-    }
-    gl.compileShader(fragmentShader);
-    if(!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)){
-        console.error("ERROR compiling fragment shader!", gl.getShaderInfoLog(fragmentShader));
-        return;
-    }
-
-    //Attach Shadder
-    gl.attachShader(program, vertexShader);
-    gl.attachShader(program, fragmentShader);
-
-    //Link Shadder
-    gl.linkProgram(program);
-
-    //Bind the buffer
-    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
-
-    // Create Position Attribute
-    
-    positionAttribLocation = gl.getAttribLocation(program, "vertPosition");
-    gl.vertexAttribPointer(
-        positionAttribLocation,
-        3,                                      //3 float per vertex (XYZ)
-        gl.FLOAT,
-        gl.FALSE,
-        7 * Float32Array.BYTES_PER_ELEMENT,     //1 vertex = 7 float (XYZRGBA)
-        0                                       //Position start from the first element
+  //Compile Shadder
+  gl.compileShader(vertexShader);
+  if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
+    console.error(
+      "ERROR compiling vertex shader!",
+      gl.getShaderInfoLog(vertexShader)
     );
-
-    // Create Color Attribute
-    colorAttribLocation = gl.getAttribLocation(program, "vertColor");
-    gl.vertexAttribPointer(
-        colorAttribLocation,
-        4,                                      //4 float per vertex (RGBA)
-        gl.FLOAT,
-        gl.FALSE,
-        7 * Float32Array.BYTES_PER_ELEMENT,     //1 vertex = 7 float (XYZRGBA)
-        3 * Float32Array.BYTES_PER_ELEMENT      //Color start from the fourth element
+    return;
+  }
+  gl.compileShader(fragmentShader);
+  if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
+    console.error(
+      "ERROR compiling fragment shader!",
+      gl.getShaderInfoLog(fragmentShader)
     );
+    return;
+  }
 
-    //Enable the attribute
-    gl.enableVertexAttribArray(positionAttribLocation);
-    gl.enableVertexAttribArray(colorAttribLocation);
+  //Attach Shadder
+  gl.attachShader(program, vertexShader);
+  gl.attachShader(program, fragmentShader);
 
-    //Enable transparency
-    gl.enable(gl.BLEND)
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+  //Link Shadder
+  gl.linkProgram(program);
 
-    //Enable Depth Test
-    gl.enable(gl.DEPTH_TEST);
+  //Bind the buffer
+  gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
 
-    //Start the program
-    gl.useProgram(program);
+  // Create Position Attribute
 
-    matWorldLocation = gl.getUniformLocation(program, 'mWorld');
-    matViewLocation = gl.getUniformLocation(program, 'mView');
-    matProjLocation = gl.getUniformLocation(program, 'mProj');
+  positionAttribLocation = gl.getAttribLocation(program, "vertPosition");
+  gl.vertexAttribPointer(
+    positionAttribLocation,
+    3, //3 float per vertex (XYZ)
+    gl.FLOAT,
+    gl.FALSE,
+    7 * Float32Array.BYTES_PER_ELEMENT, //1 vertex = 7 float (XYZRGBA)
+    0 //Position start from the first element
+  );
 
-    worldMatrix = new Float32Array(16);
-    viewMatrix = new Float32Array(16);
-    projMatrix = new Float32Array(16);
-    convertToIdentityMatrix(worldMatrix);
-    lookAt(viewMatrix, [30,30,30], [0,0,0], [0,1,0]);
-    perspective(projMatrix, toRadian(45), canvas.width / canvas.height, 0.1,1000.0);
+  // Create Color Attribute
+  colorAttribLocation = gl.getAttribLocation(program, "vertColor");
+  gl.vertexAttribPointer(
+    colorAttribLocation,
+    4, //4 float per vertex (RGBA)
+    gl.FLOAT,
+    gl.FALSE,
+    7 * Float32Array.BYTES_PER_ELEMENT, //1 vertex = 7 float (XYZRGBA)
+    3 * Float32Array.BYTES_PER_ELEMENT //Color start from the fourth element
+  );
 
-    gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
-    gl.uniformMatrix4fv(matViewLocation, gl.FALSE, viewMatrix);
-    gl.uniformMatrix4fv(matProjLocation, gl.FALSE, projMatrix);
+  //Enable the attribute
+  gl.enableVertexAttribArray(positionAttribLocation);
+  gl.enableVertexAttribArray(colorAttribLocation);
+
+  //Enable transparency
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+  //Enable Depth Test
+  gl.enable(gl.DEPTH_TEST);
+
+  //Start the program
+  gl.useProgram(program);
+
+  matWorldLocation = gl.getUniformLocation(program, "mWorld");
+  matViewLocation = gl.getUniformLocation(program, "mView");
+  matProjLocation = gl.getUniformLocation(program, "mProj");
+
+  worldMatrix = new Float32Array(16);
+  viewMatrix = new Float32Array(16);
+  projMatrix = new Float32Array(16);
+  convertToIdentityMatrix(worldMatrix);
+  lookAt(viewMatrix, [30, 30, 30], [0, 0, 0], [0, 1, 0]);
+  perspective(
+    projMatrix,
+    toRadian(45),
+    canvas.width / canvas.height,
+    0.1,
+    1000.0
+  );
+
+  gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
+  gl.uniformMatrix4fv(matViewLocation, gl.FALSE, viewMatrix);
+  gl.uniformMatrix4fv(matProjLocation, gl.FALSE, projMatrix);
 }

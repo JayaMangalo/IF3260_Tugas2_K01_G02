@@ -1,14 +1,14 @@
 {
-    "type": "tesseract",
-    "data": [
-        {"id":"innerFront",
-            "color": [1.0,0.0,0.0,1.0],
-            "offsetZ": 6.0},
-        {"id":"outerFront",
-            "color": [0.0,1.0,0.0,1.0],
-            "offsetZ": 6.0,
-            "scaleX": 2.0,
-            "scaleY": 2.0,
-            "scaleZ": 2.0}
-        ]
+  "type": "tesseract",
+  "data": [
+    { "id": "innerFront", "color": [1.0, 0.0, 0.0, 1.0], "offsetZ": 6.0 },
+    {
+      "id": "outerFront",
+      "color": [0.0, 1.0, 0.0, 1.0],
+      "offsetZ": 6.0,
+      "scaleX": 2.0,
+      "scaleY": 2.0,
+      "scaleZ": 2.0
+    }
+  ]
 }

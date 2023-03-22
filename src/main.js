@@ -5,9 +5,9 @@ var isUsingShadder = true;
 function onLoad(){
     //Initialize the WebGL
     init();
-    loadShapes()
+    // loadShapes()
     // loadTesseract();
-    // loadChain();
+    loadChain();
     // loadIcosahedron();
     // loadSSDodecahedron()
 }
@@ -25,7 +25,7 @@ async function loadShapes() {
 }
 
 function loadChain() {
-    let chain = new Chain(squareNo=5);
+    let chain = new Chain(squareNo=7);
     shapes.push(chain);
     redraw(usingShape=true);
 }
