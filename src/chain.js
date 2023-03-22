@@ -41,7 +41,7 @@ class Chain {
             square0.createBatangBawahBelakang(),
             square0.createBatangBawahKiri(),
             square0.createBatangBawahKanan(),
-            square0.createTambalKiriAtasBelakang()
+            // square0.createTambalKiriAtasBelakang()
         ]
         this.squares.push(square0);
         

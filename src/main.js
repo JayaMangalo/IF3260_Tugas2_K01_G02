@@ -21,13 +21,13 @@ async function loadShapes() {
     }
     if(parseResult.type == "tesseract") {
         loadTesseract(parseResult.data);
-    }   
+    }
 }
 
 function loadChain() {
     let chain = new Chain(squareNo=5);
     shapes.push(chain);
-    redraw();
+    redraw(usingShape=true);
 }
 
 function saveShapes(){
@@ -151,6 +151,7 @@ function loadTesseract(data=null) {
 
 function clearShapes(){
     shapes = [];
+    models = [];
     redraw();
 }
 
@@ -164,20 +165,23 @@ function redraw(usingShape = false){
         gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
         gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-        if(usingShape){
+        if (usingShape) {
             shapes.forEach(shape => {
                 shape.draw();
             });
-        }else{
-            for(model of models){
-                for(shape of model){
-                    if(shape.type == "Tesseract"){
+        } else {
+            for (model of models) {
+                for (shape of model) {
+                    if (shape.type == "Tesseract") {
                         drawTesseractFromPoints(shape.vertices, isUsingShadder);
                         drawCubeFromPoints(shape.outerSquare.vertices);
                         drawCubeFromPoints(shape.innerSquare.vertices);
                     }
-                    if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
+                    if (shape.type == "Icosahedron" || shape.type == "SSDodecahedron") {
                         drawIcosahedroOrSSDodecahedronFromPoints(shape.vertices, isUsingShadder);
+                    }
+                    if (shape.type == "Chain") {
+                        drawChainFromPoints(shape.squares);
                     }
                 }
             }
@@ -261,13 +265,20 @@ function drawCubeFromPoints(data){
 function drawIcosahedroOrSSDodecahedronFromPoints(data, isUsingShadder = true){
     for(let batang of data){
         let vertices = [];
-            for (let i = 0; i < batang.length; i++) {
-                vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3], batang[i][4], batang[i][5],batang[i][6]);
-            }
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-            gl.drawArrays(gl.TRIANGLE_STRIP, 0, batang.length);
+        for (let i = 0; i < batang.length; i++) {
+            vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3], batang[i][4], batang[i][5],batang[i][6]);
+        }
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, batang.length);
     }
 }
+
+function drawChainFromPoints(data) {
+    for (let cube of data) {
+        drawCubeFromPoints(cube.vertices);
+    }
+}
+
 //Draw From Points=======================================================================================================
 
 
