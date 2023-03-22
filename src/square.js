@@ -417,23 +417,94 @@ class HollowSquare{
         ]
     }
 
-    createTambalKiriAtasBelakang(){
+    createTambalanBelakangKiriAtasHadapKanan() {
         return[
             this.permukaan_atas_luar_kiri_belakang,
+            this.permukaan_belakang_dalam_kiri_atas,
             this.permukaan_atas_dalam_kiri_belakang,
-            this.miring_kiri_atas_belakang_bagian_kanan_atas,
-            this.miring_kiri_atas_belakang_bagian_kanan_bawah,
-            this.permukaan_atas_luar_kiri_belakang,   
+            this.inner_atas_kiri_belakang,
         ]
     }
 
-    createTambalanDepanKananAtas(){
+    createTambalanBelakangKiriAtasHadapBawah() {
+        return[
+            this.permukaan_atas_luar_kiri_belakang,
+            this.permukaan_belakang_dalam_kiri_atas,
+            this.permukaan_kiri_dalam_atas_belakang,
+            this.inner_atas_kiri_belakang,
+        ]
+    }
+
+    createTambalanBelakangKiriBawahHadapAtas() {
+        return[
+            this.permukaan_bawah_luar_kiri_belakang,
+            this.permukaan_belakang_dalam_kiri_bawah,
+            this.permukaan_kiri_dalam_bawah_belakang,
+            this.inner_bawah_kiri_belakang,
+        ]
+    }
+
+    createTambalanBelakangKananAtasHadapKiri() {
+        return [
+            this.permukaan_atas_luar_kanan_belakang,
+            this.permukaan_belakang_dalam_kanan_atas,
+            this.permukaan_atas_dalam_kanan_belakang,
+            this.inner_atas_kanan_belakang,
+        ]
+    }
+
+    createTambalanBelakangKananAtasHadapDepan() {
+        return [
+            this.permukaan_atas_luar_kanan_belakang,
+            this.permukaan_atas_dalam_kanan_belakang,
+            this.permukaan_kanan_dalam_atas_belakang,
+            this.inner_atas_kanan_belakang,
+        ]
+    }
+
+    createTambalanDepanKananAtasHadapBawah() {
         return[
             this.permukaan_atas_luar_kanan_depan,
             this.permukaan_depan_dalam_kanan_atas,
             this.permukaan_kanan_dalam_atas_depan,
             this.inner_atas_kanan_depan
         ]    
+    }
+
+    createTambalanDepanKananAtasHadapBelakang() {
+        return [
+            this.permukaan_atas_luar_kanan_depan,
+            this.permukaan_atas_dalam_kanan_depan,
+            this.permukaan_kanan_dalam_atas_depan,
+            this.inner_atas_kanan_depan
+        ]
+    }
+
+    createTambalanDepanKananBawahHadapAtas() {
+        return [
+            this.permukaan_bawah_luar_kanan_depan,
+            this.permukaan_depan_dalam_kanan_bawah,
+            this.permukaan_kanan_dalam_bawah_depan,
+            this.inner_bawah_kanan_depan
+        ]
+    }
+
+    createTambalanDepanKananBawahHadapKiri() {
+        return [
+            this.permukaan_bawah_luar_kanan_depan,
+            this.permukaan_depan_dalam_kanan_bawah,
+            this.permukaan_bawah_dalam_kanan_depan,
+            this.inner_bawah_kanan_depan
+        ]
+    }
+
+    createTambalanDepanKiriBawahHadapKiri() {
+        return [
+            this.permukaan_bawah_luar_kiri_depan,
+            this.permukaan_depan_dalam_kiri_bawah,
+            this.permukaan_bawah_dalam_kiri_depan,
+            this.inner_bawah_kiri_depan
+        ]
     }
 
     createFullSquare(){

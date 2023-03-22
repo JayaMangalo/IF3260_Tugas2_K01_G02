@@ -1,10 +1,10 @@
 class Chain {
-    constructor(squaresNo=1, thickness=1.2, scaleX=2, scaleY=2, scaleZ=2, colors=[[1.0, 1.0, 1.0, 1.0]]) {
+    constructor(squaresNo=1, thickness=1.2, scale=2, colors=[[1.0, 1.0, 1.0, 1.0]]) {
         this.squaresNo = squaresNo;
         this.thickness = thickness;
-        this.scaleX = scaleX;
-        this.scaleY = scaleY;
-        this.scaleZ = scaleZ;
+        this.scaleX = scale;
+        this.scaleY = scale;
+        this.scaleZ = scale;
         this.colors = colors;
     }
 
@@ -41,7 +41,10 @@ class Chain {
             square0.createBatangBawahBelakang(),
             square0.createBatangBawahKiri(),
             square0.createBatangBawahKanan(),
-            // square0.createTambalKiriAtasBelakang()
+            square0.createTambalanDepanKananAtasHadapBawah(),
+            square0.createTambalanDepanKananBawahHadapAtas(),
+            square0.createTambalanBelakangKiriAtasHadapKanan(),
+            square0.createTambalanBelakangKananAtasHadapKiri(),
         ]
         this.squares.push(square0);
         
@@ -54,8 +57,8 @@ class Chain {
                 offsetZ *= -1;
                 
                 offsetX += this.thickness;
-                offsetY += 4
-                offsetZ += 4
+                offsetY += this.scaleY*2 - 2*(this.thickness-1);
+                offsetZ += this.scaleZ*2 - 2*(this.thickness-1);;
 
                 // increment j to change the square shape
                 j += 1;
@@ -82,6 +85,12 @@ class Chain {
                     square1.createBatangBawahBelakang(),
                     square1.createBatangBawahKiri(),
                     square1.createBatangBawahKanan(),
+                    square1.createTambalanDepanKananBawahHadapKiri(),
+                    square1.createTambalanDepanKiriBawahHadapKiri(),
+                    square1.createTambalanDepanKananAtasHadapBelakang(),
+                    square1.createTambalanBelakangKananAtasHadapDepan(),
+                    square1.createTambalanBelakangKiriBawahHadapAtas(),
+                    square1.createTambalanBelakangKiriAtasHadapBawah(),
                 ]
                 this.squares.push(square1);
             } else {
@@ -99,6 +108,10 @@ class Chain {
                     square2.createBatangBawahBelakang(),
                     square2.createBatangBawahKiri(),
                     square2.createBatangBawahKanan(),
+                    square2.createTambalanDepanKananAtasHadapBawah(),
+                    square2.createTambalanDepanKananBawahHadapAtas(),
+                    square2.createTambalanBelakangKiriAtasHadapKanan(),
+                    square2.createTambalanBelakangKananAtasHadapKiri(),
                 ]
                 this.squares.push(square2);
             }
