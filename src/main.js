@@ -161,11 +161,13 @@ function clearShapes() {
 
 function changeRadius() {
   cameraRadius = document.getElementById("camera-radius").value;
+  document.getElementById("radius-value").innerHTML = cameraRadius;
   redraw(usingShape = true);
 }
 
 function changeAngle() {
   cameraAngle = toRadian(document.getElementById("camera-angle").value);
+  document.getElementById("angle-value").innerHTML = Math.round(toDegree(cameraAngle));
   redraw(usingShape = true);
 }
 
@@ -174,10 +176,21 @@ function changeProjection() {
   redraw(usingShape = true);
 }
 
+function resetCamera() {
+  cameraRadius = 50;
+  cameraAngle = toRadian(0);
+  document.getElementById("camera-radius").value = cameraRadius;
+  document.getElementById("radius-value").innerHTML = cameraRadius;
+  document.getElementById("camera-angle").value = toDegree(cameraAngle);
+  document.getElementById("angle-value").innerHTML = Math.round(toDegree(cameraAngle));
+  projectionMode = "orthographic";
+  redraw(usingShape = true);
+}
+
 function redraw(usingShape = false) {
-  view();
   var id = new Float32Array(16);
   convertToIdentityMatrix(id);
+  view();
   var loop = () => {
     if (isUsingAnimation) {
       rotAngle = (performance.now() / 10000) * Math.PI;
@@ -245,7 +258,7 @@ function toggleShadder() {
     shape.changeShadder(isShadder);
   }
   isUsingShadder = isShadder;
-  redraw();
+  redraw(usingShape = true);
 }
 
 function toggleAnimation() {

@@ -137,17 +137,17 @@ function init() {
   viewMatrix = new Float32Array(16);
   projMatrix = new Float32Array(16);
   convertToIdentityMatrix(worldMatrix);
-
+  
   cameraAngle = toRadian(0);
   cameraRadius = 50;
   fieldOfView = toRadian(45);
-  projectionMode = "ortographic";
+  projectionMode = "orthographic";
   view();
 }
 
 // Initialize the View
 function view() {
-  if (projectionMode == "ortographic") {
+  if (projectionMode == "orthographic") {
     projMatrix = ortographic(
       -canvas.width/(1000/cameraRadius), //left
       canvas.width/(1000/cameraRadius), //right
@@ -157,8 +157,7 @@ function view() {
       1000.0 //far
     );
   } else if (projectionMode == "perspective") {
-    perspective(
-      projMatrix,
+    projMatrix = perspective(
       fieldOfView,
       canvas.width / canvas.height,
       0.1,

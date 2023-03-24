@@ -89,7 +89,8 @@ function lookAt(out, eye, center, up, epsilon = 0.0001) {
   return out;
 }
 
-function perspective(out, fovy, aspect, near, far) {
+function perspective(fovy, aspect, near, far) {
+  let out = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   let f = 1.0 / Math.tan(fovy / 2),
     nf;
   out[0] = f / aspect;
@@ -119,6 +120,10 @@ function perspective(out, fovy, aspect, near, far) {
 
 function toRadian(degree) {
   return (degree * Math.PI) / 180;
+}
+
+function toDegree(radian) {
+  return (radian * 180) / Math.PI;
 }
 
 function transposeMatrix(matrixInput, matrixOutput) {

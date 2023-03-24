@@ -76,12 +76,13 @@ h4 {
   self-align: bottom;
 }
 
-.view-config-container {
+.slider-label {
+  display: block;
   padding-top: 8px;
 }
 
-.slider-label {
-  display: block;
+.checkboxes-container {
+  padding: 16px 0 32px;
 }
 
 #reset-button {
