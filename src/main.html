@@ -103,17 +103,116 @@
       <div class="right-side-bar" id="sidebar">
         <h2>Transform</h2>
         <h3>Rotate</h3>
-        <button onclick="Transform(0,0,-45)">Rotate on X Axis</button>
-        <button onclick="Transform(0,1,-45)">Rotate on Y Axis</button>
-        <button onclick="Transform(0,2,-45)">Rotate on Z Axis</button>
+        <div>
+          <label for="x-rotate" class="slider-label">X: <span id="x-angle">0</span></label>
+          <input
+            type="range"
+            id="x-rotate"
+            name="x-rotate"
+            min="-360"
+            max="360"
+            value="0"
+            oninput="Transform(0,0)"
+          />
+        </div>
+        <div>
+          <label for="y-rotate" class="slider-label">Y: <span id="y-angle">0</span></label>
+          <input
+            type="range"
+            id="y-rotate"
+            name="y-rotate"
+            min="-360"
+            max="360"
+            value="0"
+            oninput="Transform(0,1)"
+          />
+        </div>
+        <div>
+          <label for="z-rotate" class="slider-label">Z: <span id="z-angle">0</span></label>
+          <input
+            type="range"
+            id="z-rotate"
+            name="z-rotate"
+            min="-360"
+            max="360"
+            value="0"
+            oninput="Transform(0,2)"
+          />
+        </div>
         <h3>Translate</h3>
-        <button onclick="Transform(1,0,-2)">Translate on X Axis</button>
-        <button onclick="Transform(1,1,-2)">Translate on X Axis</button>
-        <button onclick="Transform(1,2,-2)">Translate on X Axis</button>
+        <div>
+          <label for="x-translate" class="slider-label">X: <span id="x-distance">0</span></label>
+          <input
+            type="range"
+            id="x-translate"
+            name="x-translate"
+            min="-100"
+            max="100"
+            value="0"
+            oninput="Transform(1,0)"
+          />
+        </div>
+        <div>
+          <label for="y-translate" class="slider-label">Y: <span id="y-distance">0</span></label>
+          <input
+            type="range"
+            id="y-translate"
+            name="y-translate"
+            min="-100"
+            max="100"
+            value="0"
+            oninput="Transform(1,1)"
+          />
+        </div>
+        <div>
+          <label for="z-translate" class="slider-label">Z: <span id="z-distance">0</span></label>
+          <input
+            type="range"
+            id="z-translate"
+            name="z-translate"
+            min="-100"
+            max="100"
+            value="0"
+            oninput="Transform(1,2)"
+          />
+        </div>
         <h3>Scale</h3>
-        <button onclick="Transform(2,0,0.88)">Scale on X Axis</button>
-        <button onclick="Transform(2,1,0.88)">Scale on Y Axis</button>
-        <button onclick="Transform(2,2,0.88)">Scale on Z Axis</button>
+        <div>
+          <label for="x-scale" class="slider-label">X: <span id="x-ratio">1</span></label>
+          <input
+            type="range"
+            id="x-scale"
+            name="x-scale"
+            min="0.01"
+            max="20"
+            value="1"
+            oninput="Transform(2,0)"
+          />
+        </div>
+        <div>
+          <label for="y-scale" class="slider-label">Y: <span id="y-ratio">1</span></label>
+          <input
+            type="range"
+            id="y-scale"
+            name="y-scale"
+            min="0.01"
+            max="20"
+            value="1"
+            oninput="Transform(2,1)"
+          />
+        </div>
+        <div>
+          <label for="z-scale" class="slider-label">Z: <span id="z-ratio">1</span></label>
+          <input
+            type="range"
+            id="z-scale"
+            name="z-scale"
+            min="-0.01"
+            max="20"
+            value="1"
+            oninput="Transform(2,2)"
+          />
+        </div>
       </div>
     </div>
 
