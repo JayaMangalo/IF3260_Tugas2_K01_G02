@@ -17,6 +17,12 @@ var matProjLocation;
 var worldMatrix;
 var viewMatrix;
 var projMatrix;
+var cameraMatrix;
+var eyeX, eyeY, eyeZ;
+var cameraAngle;
+var cameraRadius;
+var fieldOfView;
+var projectionMode;
 
 //Initialize the WebGL
 function init() {
@@ -149,7 +155,6 @@ function init() {
 
   //Start the program
   gl.useProgram(program);
-
   matWorldLocation = gl.getUniformLocation(program, "mWorld");
   matViewLocation = gl.getUniformLocation(program, "mView");
   matProjLocation = gl.getUniformLocation(program, "mProj");
@@ -158,14 +163,39 @@ function init() {
   viewMatrix = new Float32Array(16);
   projMatrix = new Float32Array(16);
   convertToIdentityMatrix(worldMatrix);
-  lookAt(viewMatrix, [30, 30, 30], [0, 0, 0], [0, 1, 0]);
-  perspective(
-    projMatrix,
-    toRadian(45),
-    canvas.width / canvas.height,
-    0.1,
-    1000.0
-  );
+
+  cameraAngle = toRadian(0);
+  cameraRadius = 50;
+  fieldOfView = toRadian(45);
+  projectionMode = "orthographic";
+  view();
+}
+
+// Initialize the View
+function view() {
+  let left = -canvas.width / (1000 / cameraRadius);
+  let right = canvas.width / (1000 / cameraRadius);
+  let bottom = -canvas.height / (1000 / cameraRadius);
+  let top = canvas.height / (1000 / cameraRadius);
+  let near = 0.1;
+  let far = 1000.0;
+  if (projectionMode == "orthographic") {
+    projMatrix = ortographic(left, right, bottom, top, near, far);
+  } else if (projectionMode == "oblique") {
+    projMatrix = oblique(left, right, bottom, top, near, far);
+  } else if (projectionMode == "perspective") {
+    projMatrix = perspective(
+      fieldOfView,
+      canvas.width / canvas.height,
+      near,
+      far
+    );
+  }
+
+  console.log(projMatrix);
+  cameraMatrix = yRotation(cameraAngle);
+  cameraMatrix = translate(cameraMatrix, 0, 0, cameraRadius * 1.5);
+  viewMatrix = inverse(cameraMatrix);
 
   gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
   gl.uniformMatrix4fv(matViewLocation, gl.FALSE, viewMatrix);

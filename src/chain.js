@@ -180,4 +180,11 @@ class Chain {
 
     return str;
   }
+
+  changeShadder(value) {
+    this.isUsingShadder = value;
+    for (let i = 0; i < this.squares.length; i++) {
+      this.squares[i].changeShadder(value);
+    }
+  }
 }

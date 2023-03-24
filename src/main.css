@@ -76,6 +76,21 @@ h4 {
   self-align: bottom;
 }
 
-.view-config-container {
-  padding-top: 36px;
+.slider-label {
+  display: block;
+  padding-top: 8px;
+}
+
+.checkboxes-container {
+  padding: 16px 0 32px;
+}
+
+#reset-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #0c8ce9;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
