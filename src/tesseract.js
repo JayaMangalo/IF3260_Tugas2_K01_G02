@@ -15,122 +15,369 @@ class NormalTesseract extends Tesseract {
   }
 
   createBatangMiringKananAtasDepan() {
-    return [
-      this.outerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
+    return this.createSisi(
       this.innerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
-      this.outerSquare.miring_kanan_atas_depan_bagian_kanan_bawah,
+      this.outerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
       this.innerSquare.miring_kanan_atas_depan_bagian_kanan_bawah,
-      this.outerSquare.miring_kanan_atas_depan_bagian_kiri_bawah,
-      this.innerSquare.miring_kanan_atas_depan_bagian_kiri_bawah,
-      this.outerSquare.miring_kanan_atas_depan_bagian_kiri_atas,
-      this.innerSquare.miring_kanan_atas_depan_bagian_kiri_atas,
-      this.outerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
-      this.innerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
-    ];
+      this.outerSquare.miring_kanan_atas_depan_bagian_kanan_bawah
+    )
+      .concat(
+        this.createSisi(
+          this.innerSquare.miring_kanan_atas_depan_bagian_kanan_bawah,
+          this.outerSquare.miring_kanan_atas_depan_bagian_kanan_bawah,
+          this.innerSquare.miring_kanan_atas_depan_bagian_kiri_bawah,
+          this.outerSquare.miring_kanan_atas_depan_bagian_kiri_bawah
+        )
+      )
+      .concat(
+        this.createSisi(
+          this.innerSquare.miring_kanan_atas_depan_bagian_kiri_bawah,
+          this.outerSquare.miring_kanan_atas_depan_bagian_kiri_bawah,
+          this.innerSquare.miring_kanan_atas_depan_bagian_kiri_atas,
+          this.outerSquare.miring_kanan_atas_depan_bagian_kiri_atas
+        )
+      )
+      .concat(
+        this.createSisi(
+          this.innerSquare.miring_kanan_atas_depan_bagian_kiri_atas,
+          this.outerSquare.miring_kanan_atas_depan_bagian_kiri_atas,
+          this.innerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
+          this.outerSquare.miring_kanan_atas_depan_bagian_kanan_atas
+        )
+      );
+    // [
+    //   this.outerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
+    //   this.innerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
+    //   this.outerSquare.miring_kanan_atas_depan_bagian_kanan_bawah,
+    //   this.innerSquare.miring_kanan_atas_depan_bagian_kanan_bawah,
+    //   this.outerSquare.miring_kanan_atas_depan_bagian_kiri_bawah,
+    //   this.innerSquare.miring_kanan_atas_depan_bagian_kiri_bawah,
+    //   this.outerSquare.miring_kanan_atas_depan_bagian_kiri_atas,
+    //   this.innerSquare.miring_kanan_atas_depan_bagian_kiri_atas,
+    //   this.outerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
+    //   this.innerSquare.miring_kanan_atas_depan_bagian_kanan_atas,
+    // ];
   }
 
   createBatangMiringKiriAtasDepan() {
-    return [
+    return this.createSisi(
       this.outerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
       this.innerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
       this.outerSquare.miring_kiri_atas_depan_bagian_kanan_bawah,
       this.innerSquare.miring_kiri_atas_depan_bagian_kanan_bawah,
-      this.outerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
-      this.innerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
-      this.outerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
-      this.innerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
-      this.outerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
-      this.innerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
-    ];
+    )
+      .concat(
+        this.createSisi(
+          this.outerSquare.miring_kiri_atas_depan_bagian_kanan_bawah,
+          this.innerSquare.miring_kiri_atas_depan_bagian_kanan_bawah,
+          this.outerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
+          this.innerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
+        )
+      )
+      .concat(
+        this.createSisi(
+          this.outerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
+          this.innerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
+          this.outerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
+          this.innerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
+        )
+      )
+      .concat(
+        this.createSisi(
+          this.outerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
+          this.innerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
+          this.outerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
+          this.innerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
+        )
+      );
+    // [
+    //   this.outerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
+    //   this.innerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
+    //   this.outerSquare.miring_kiri_atas_depan_bagian_kanan_bawah,
+    //   this.innerSquare.miring_kiri_atas_depan_bagian_kanan_bawah,
+    //   this.outerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
+    //   this.innerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
+    //   this.outerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
+    //   this.innerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
+    //   this.outerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
+    //   this.innerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
+    // ];
   }
 
   createBatangMiringKananAtasBelakang() {
-    return [
+    return this.createSisi(
       this.outerSquare.miring_kanan_atas_belakang_bagian_kanan_atas,
       this.innerSquare.miring_kanan_atas_belakang_bagian_kanan_atas,
       this.outerSquare.miring_kanan_atas_belakang_bagian_kanan_bawah,
-      this.innerSquare.miring_kanan_atas_belakang_bagian_kanan_bawah,
-      this.outerSquare.miring_kanan_atas_belakang_bagian_kiri_bawah,
-      this.innerSquare.miring_kanan_atas_belakang_bagian_kiri_bawah,
-      this.outerSquare.miring_kanan_atas_belakang_bagian_kiri_atas,
-      this.innerSquare.miring_kanan_atas_belakang_bagian_kiri_atas,
-      this.outerSquare.miring_kanan_atas_belakang_bagian_kanan_atas,
-      this.innerSquare.miring_kanan_atas_belakang_bagian_kanan_atas,
-    ];
+      this.innerSquare.miring_kanan_atas_belakang_bagian_kanan_bawah
+    )
+      .concat(
+        this.createSisi(
+          this.outerSquare.miring_kanan_atas_belakang_bagian_kanan_bawah,
+          this.innerSquare.miring_kanan_atas_belakang_bagian_kanan_bawah,
+          this.outerSquare.miring_kanan_atas_belakang_bagian_kiri_bawah,
+          this.innerSquare.miring_kanan_atas_belakang_bagian_kiri_bawah
+        )
+      )
+      .concat(
+        this.createSisi(
+          this.outerSquare.miring_kanan_atas_belakang_bagian_kiri_bawah,
+          this.innerSquare.miring_kanan_atas_belakang_bagian_kiri_bawah,
+          this.outerSquare.miring_kanan_atas_belakang_bagian_kiri_atas,
+          this.innerSquare.miring_kanan_atas_belakang_bagian_kiri_atas
+        )
+      )
+      .concat(
+        this.createSisi(
+          this.outerSquare.miring_kanan_atas_belakang_bagian_kiri_atas,
+          this.innerSquare.miring_kanan_atas_belakang_bagian_kiri_atas,
+          this.outerSquare.miring_kanan_atas_belakang_bagian_kanan_atas,
+          this.innerSquare.miring_kanan_atas_belakang_bagian_kanan_atas
+        )
+      );
+    // [
+    //   this.outerSquare.miring_kanan_atas_belakang_bagian_kanan_atas,
+    //   this.innerSquare.miring_kanan_atas_belakang_bagian_kanan_atas,
+    //   this.outerSquare.miring_kanan_atas_belakang_bagian_kanan_bawah,
+    //   this.innerSquare.miring_kanan_atas_belakang_bagian_kanan_bawah,
+    //   this.outerSquare.miring_kanan_atas_belakang_bagian_kiri_bawah,
+    //   this.innerSquare.miring_kanan_atas_belakang_bagian_kiri_bawah,
+    //   this.outerSquare.miring_kanan_atas_belakang_bagian_kiri_atas,
+    //   this.innerSquare.miring_kanan_atas_belakang_bagian_kiri_atas,
+    //   this.outerSquare.miring_kanan_atas_belakang_bagian_kanan_atas,
+    //   this.innerSquare.miring_kanan_atas_belakang_bagian_kanan_atas,
+    // ];
   }
 
   createBatangMiringKiriAtasBelakang() {
-    return [
+    return this.createSisi(
       this.outerSquare.miring_kiri_atas_belakang_bagian_kanan_atas,
       this.innerSquare.miring_kiri_atas_belakang_bagian_kanan_atas,
       this.outerSquare.miring_kiri_atas_belakang_bagian_kanan_bawah,
-      this.innerSquare.miring_kiri_atas_belakang_bagian_kanan_bawah,
-      this.outerSquare.miring_kiri_atas_belakang_bagian_kiri_bawah,
-      this.innerSquare.miring_kiri_atas_belakang_bagian_kiri_bawah,
-      this.outerSquare.miring_kiri_atas_belakang_bagian_kiri_atas,
-      this.innerSquare.miring_kiri_atas_belakang_bagian_kiri_atas,
-      this.outerSquare.miring_kiri_atas_belakang_bagian_kanan_atas,
-      this.innerSquare.miring_kiri_atas_belakang_bagian_kanan_atas,
-    ];
+      this.innerSquare.miring_kiri_atas_belakang_bagian_kanan_bawah
+    )
+      .concat(
+        this.createSisi(
+          this.outerSquare.miring_kiri_atas_belakang_bagian_kanan_bawah,
+          this.innerSquare.miring_kiri_atas_belakang_bagian_kanan_bawah,
+          this.outerSquare.miring_kiri_atas_belakang_bagian_kiri_bawah,
+          this.innerSquare.miring_kiri_atas_belakang_bagian_kiri_bawah
+        )
+      )
+      .concat(
+        this.createSisi(
+          this.outerSquare.miring_kiri_atas_belakang_bagian_kiri_bawah,
+          this.innerSquare.miring_kiri_atas_belakang_bagian_kiri_bawah,
+          this.outerSquare.miring_kiri_atas_belakang_bagian_kiri_atas,
+          this.innerSquare.miring_kiri_atas_belakang_bagian_kiri_atas
+        )
+      )
+      .concat(
+        this.createSisi(
+          this.outerSquare.miring_kiri_atas_belakang_bagian_kiri_atas,
+          this.innerSquare.miring_kiri_atas_belakang_bagian_kiri_atas,
+          this.outerSquare.miring_kiri_atas_belakang_bagian_kanan_atas,
+          this.innerSquare.miring_kiri_atas_belakang_bagian_kanan_atas
+        )
+      );
+    // [
+    //   this.outerSquare.miring_kiri_atas_belakang_bagian_kanan_atas,
+    //   this.innerSquare.miring_kiri_atas_belakang_bagian_kanan_atas,
+    //   this.outerSquare.miring_kiri_atas_belakang_bagian_kanan_bawah,
+    //   this.innerSquare.miring_kiri_atas_belakang_bagian_kanan_bawah,
+    //   this.outerSquare.miring_kiri_atas_belakang_bagian_kiri_bawah,
+    //   this.innerSquare.miring_kiri_atas_belakang_bagian_kiri_bawah,
+    //   this.outerSquare.miring_kiri_atas_belakang_bagian_kiri_atas,
+    //   this.innerSquare.miring_kiri_atas_belakang_bagian_kiri_atas,
+    //   this.outerSquare.miring_kiri_atas_belakang_bagian_kanan_atas,
+    //   this.innerSquare.miring_kiri_atas_belakang_bagian_kanan_atas,
+    // ];
   }
 
   createBatangMiringKananBawahDepan() {
-    return [
+    return this.createSisi(
       this.outerSquare.miring_kanan_bawah_depan_bagian_kanan_atas,
       this.innerSquare.miring_kanan_bawah_depan_bagian_kanan_atas,
       this.outerSquare.miring_kanan_bawah_depan_bagian_kanan_bawah,
-      this.innerSquare.miring_kanan_bawah_depan_bagian_kanan_bawah,
-      this.outerSquare.miring_kanan_bawah_depan_bagian_kiri_bawah,
-      this.innerSquare.miring_kanan_bawah_depan_bagian_kiri_bawah,
-      this.outerSquare.miring_kanan_bawah_depan_bagian_kiri_atas,
-      this.innerSquare.miring_kanan_bawah_depan_bagian_kiri_atas,
-      this.outerSquare.miring_kanan_bawah_depan_bagian_kanan_atas,
-      this.innerSquare.miring_kanan_bawah_depan_bagian_kanan_atas,
-    ];
+      this.innerSquare.miring_kanan_bawah_depan_bagian_kanan_bawah
+    )
+      .concat(
+        this.createSisi(
+          this.outerSquare.miring_kanan_bawah_depan_bagian_kanan_bawah,
+          this.innerSquare.miring_kanan_bawah_depan_bagian_kanan_bawah,
+          this.outerSquare.miring_kanan_bawah_depan_bagian_kiri_bawah,
+          this.innerSquare.miring_kanan_bawah_depan_bagian_kiri_bawah
+        )
+      )
+      .concat(
+        this.createSisi(
+          this.outerSquare.miring_kanan_bawah_depan_bagian_kiri_bawah,
+          this.innerSquare.miring_kanan_bawah_depan_bagian_kiri_bawah,
+          this.outerSquare.miring_kanan_bawah_depan_bagian_kiri_atas,
+          this.innerSquare.miring_kanan_bawah_depan_bagian_kiri_atas
+        )
+      )
+      .concat(
+        this.createSisi(
+          this.outerSquare.miring_kanan_bawah_depan_bagian_kiri_atas,
+          this.innerSquare.miring_kanan_bawah_depan_bagian_kiri_atas,
+          this.outerSquare.miring_kanan_bawah_depan_bagian_kanan_atas,
+          this.innerSquare.miring_kanan_bawah_depan_bagian_kanan_atas
+        )
+      );
+    // [
+    //   this.outerSquare.miring_kanan_bawah_depan_bagian_kanan_atas,
+    //   this.innerSquare.miring_kanan_bawah_depan_bagian_kanan_atas,
+    //   this.outerSquare.miring_kanan_bawah_depan_bagian_kanan_bawah,
+    //   this.innerSquare.miring_kanan_bawah_depan_bagian_kanan_bawah,
+    //   this.outerSquare.miring_kanan_bawah_depan_bagian_kiri_bawah,
+    //   this.innerSquare.miring_kanan_bawah_depan_bagian_kiri_bawah,
+    //   this.outerSquare.miring_kanan_bawah_depan_bagian_kiri_atas,
+    //   this.innerSquare.miring_kanan_bawah_depan_bagian_kiri_atas,
+    //   this.outerSquare.miring_kanan_bawah_depan_bagian_kanan_atas,
+    //   this.innerSquare.miring_kanan_bawah_depan_bagian_kanan_atas,
+    // ];
   }
 
   createBatangMiringKiriBawahDepan() {
-    return [
+    return this.createSisi(
       this.outerSquare.miring_kiri_bawah_depan_bagian_kanan_atas,
       this.innerSquare.miring_kiri_bawah_depan_bagian_kanan_atas,
       this.outerSquare.miring_kiri_bawah_depan_bagian_kanan_bawah,
-      this.innerSquare.miring_kiri_bawah_depan_bagian_kanan_bawah,
-      this.outerSquare.miring_kiri_bawah_depan_bagian_kiri_bawah,
-      this.innerSquare.miring_kiri_bawah_depan_bagian_kiri_bawah,
-      this.outerSquare.miring_kiri_bawah_depan_bagian_kiri_atas,
-      this.innerSquare.miring_kiri_bawah_depan_bagian_kiri_atas,
-      this.outerSquare.miring_kiri_bawah_depan_bagian_kanan_atas,
-      this.innerSquare.miring_kiri_bawah_depan_bagian_kanan_atas,
-    ];
+      this.innerSquare.miring_kiri_bawah_depan_bagian_kanan_bawah
+    )
+      .concat(
+        this.createSisi(
+          this.outerSquare.miring_kiri_bawah_depan_bagian_kanan_bawah,
+          this.innerSquare.miring_kiri_bawah_depan_bagian_kanan_bawah,
+          this.outerSquare.miring_kiri_bawah_depan_bagian_kiri_bawah,
+          this.innerSquare.miring_kiri_bawah_depan_bagian_kiri_bawah
+        )
+      )
+      .concat(
+        this.createSisi(
+          this.outerSquare.miring_kiri_bawah_depan_bagian_kiri_bawah,
+          this.innerSquare.miring_kiri_bawah_depan_bagian_kiri_bawah,
+          this.outerSquare.miring_kiri_bawah_depan_bagian_kiri_atas,
+          this.innerSquare.miring_kiri_bawah_depan_bagian_kiri_atas
+        )
+      )
+      .concat(
+        this.createSisi(
+          this.outerSquare.miring_kiri_bawah_depan_bagian_kiri_atas,
+          this.innerSquare.miring_kiri_bawah_depan_bagian_kiri_atas,
+          this.outerSquare.miring_kiri_bawah_depan_bagian_kanan_atas,
+          this.innerSquare.miring_kiri_bawah_depan_bagian_kanan_atas
+        )
+      ); 
+    // [
+    //   this.outerSquare.miring_kiri_bawah_depan_bagian_kanan_atas,
+    //   this.innerSquare.miring_kiri_bawah_depan_bagian_kanan_atas,
+    //   this.outerSquare.miring_kiri_bawah_depan_bagian_kanan_bawah,
+    //   this.innerSquare.miring_kiri_bawah_depan_bagian_kanan_bawah,
+    //   this.outerSquare.miring_kiri_bawah_depan_bagian_kiri_bawah,
+    //   this.innerSquare.miring_kiri_bawah_depan_bagian_kiri_bawah,
+    //   this.outerSquare.miring_kiri_bawah_depan_bagian_kiri_atas,
+    //   this.innerSquare.miring_kiri_bawah_depan_bagian_kiri_atas,
+    //   this.outerSquare.miring_kiri_bawah_depan_bagian_kanan_atas,
+    //   this.innerSquare.miring_kiri_bawah_depan_bagian_kanan_atas,
+    // ];
   }
 
   createBatangMiringKananBawahBelakang() {
-    return [
+    return this.createSisi(
       this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
       this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
       this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_bawah,
-      this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_bawah,
-      this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah,
-      this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah,
-      this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas,
-      this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas,
-      this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
-      this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
-    ];
+      this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_bawah
+    ).concat(
+      this.createSisi(
+        this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_bawah,
+        this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_bawah,
+        this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah,
+        this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah
+      )
+    ).concat(
+      this.createSisi(
+        this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah,
+        this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah,
+        this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas,
+        this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas
+      )
+    ).concat(
+      this.createSisi(
+        this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas,
+        this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas,
+        this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
+        this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas
+      )
+    );
+
+    // [
+    //   this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
+    //   this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
+    //   this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_bawah,
+    //   this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_bawah,
+    //   this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah,
+    //   this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah,
+    //   this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas,
+    //   this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas,
+    //   this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
+    //   this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
+    // ];
   }
 
   createBatangMiringKiriBawahBelakang() {
-    return [
-      this.outerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
+    return this.createSisi(
       this.innerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
-      this.outerSquare.miring_kiri_bawah_belakang_bagian_kanan_bawah,
+      this.outerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
       this.innerSquare.miring_kiri_bawah_belakang_bagian_kanan_bawah,
-      this.outerSquare.miring_kiri_bawah_belakang_bagian_kiri_bawah,
-      this.innerSquare.miring_kiri_bawah_belakang_bagian_kiri_bawah,
-      this.outerSquare.miring_kiri_bawah_belakang_bagian_kiri_atas,
-      this.innerSquare.miring_kiri_bawah_belakang_bagian_kiri_atas,
-      this.outerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
-      this.innerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
+      this.outerSquare.miring_kiri_bawah_belakang_bagian_kanan_bawah,
+    ).concat(
+      this.createSisi(
+        this.innerSquare.miring_kiri_bawah_belakang_bagian_kanan_bawah,
+        this.outerSquare.miring_kiri_bawah_belakang_bagian_kanan_bawah,
+        this.innerSquare.miring_kiri_bawah_belakang_bagian_kiri_bawah,
+        this.outerSquare.miring_kiri_bawah_belakang_bagian_kiri_bawah,
+      )
+    ).concat(
+      this.createSisi(
+        this.innerSquare.miring_kiri_bawah_belakang_bagian_kiri_bawah,
+        this.outerSquare.miring_kiri_bawah_belakang_bagian_kiri_bawah,
+        this.innerSquare.miring_kiri_bawah_belakang_bagian_kiri_atas,
+        this.outerSquare.miring_kiri_bawah_belakang_bagian_kiri_atas,
+      )
+    ).concat(
+      this.createSisi(
+        this.innerSquare.miring_kiri_bawah_belakang_bagian_kiri_atas,
+        this.outerSquare.miring_kiri_bawah_belakang_bagian_kiri_atas,
+        this.innerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
+        this.outerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
+      )
+    );
+    // [
+    //   this.outerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
+    //   this.innerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
+    //   this.outerSquare.miring_kiri_bawah_belakang_bagian_kanan_bawah,
+    //   this.innerSquare.miring_kiri_bawah_belakang_bagian_kanan_bawah,
+    //   this.outerSquare.miring_kiri_bawah_belakang_bagian_kiri_bawah,
+    //   this.innerSquare.miring_kiri_bawah_belakang_bagian_kiri_bawah,
+    //   this.outerSquare.miring_kiri_bawah_belakang_bagian_kiri_atas,
+    //   this.innerSquare.miring_kiri_bawah_belakang_bagian_kiri_atas,
+    //   this.outerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
+    //   this.innerSquare.miring_kiri_bawah_belakang_bagian_kanan_atas,
+    // ];
+  }
+
+  createSisi(p1, p2, p3, p4) {
+    return [
+      p1.concat(calcNormalVector(p1, p2, p3)),
+      p2.concat(calcNormalVector(p1, p2, p3)),
+      p3.concat(calcNormalVector(p1, p2, p3)),
+
+      p3.concat(calcNormalVector(p3, p2, p4)),
+      p2.concat(calcNormalVector(p3, p2, p4)),
+      p4.concat(calcNormalVector(p3, p2, p4)),
     ];
   }
 
