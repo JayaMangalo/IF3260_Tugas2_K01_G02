@@ -23,26 +23,53 @@
               <h2>Camera Settings</h2>
 
               <div class="sliders-container">
-                <label for="camera-radius" class="slider-label">Camera Radius</label>
-                <input type="range" id="camera-radius" name="camera-radius" min="0" max="100" value="50" oninput="changeRadius()">
+                <label for="camera-radius" class="slider-label"
+                  >Camera Radius</label
+                >
+                <input
+                  type="range"
+                  id="camera-radius"
+                  name="camera-radius"
+                  min="0"
+                  max="100"
+                  value="50"
+                  oninput="changeRadius()"
+                />
                 <span id="radius-value">50</span>
-                <label for="camera-angle" class="slider-label">Camera Angle</label>
-                <input type="range" id="camera-angle" name="camera-angle" min="-360" max="360" value="0" oninput="changeAngle()">
+                <label for="camera-angle" class="slider-label"
+                  >Camera Angle</label
+                >
+                <input
+                  type="range"
+                  id="camera-angle"
+                  name="camera-angle"
+                  min="-360"
+                  max="360"
+                  value="0"
+                  oninput="changeAngle()"
+                />
                 <span id="angle-value">0</span>
               </div>
 
-              <label for="projection-mode" class="slider-label">Projection Mode</label>
-              <select name="projection-mode" id="projection-mode" onchange="changeProjection()">
+              <label for="projection-mode" class="slider-label"
+                >Projection Mode</label
+              >
+              <select
+                name="projection-mode"
+                id="projection-mode"
+                onchange="changeProjection()"
+              >
                 <option value="orthographic">Orthographic</option>
+                <option value="oblique">Oblique</option>
                 <option value="perspective">Perspective</option>
               </select>
-              
+
               <div class="checkboxes-container">
                 <input
-                type="checkbox"
-                name="animate"
-                id="toggleAnimation"
-                onchange="toggleAnimation()"
+                  type="checkbox"
+                  name="animate"
+                  id="toggleAnimation"
+                  onchange="toggleAnimation()"
                 />
                 <label for="animate">Animate</label>
                 <input
@@ -55,7 +82,9 @@
                 <label for="toggleShadder">Toggle Shadder</label>
               </div>
 
-              <button id="reset-button" onclick="resetCamera()">Reset Camera Settings</button>
+              <button id="reset-button" onclick="resetCamera()">
+                Reset Camera Settings
+              </button>
             </div>
           </div>
 

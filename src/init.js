@@ -132,39 +132,41 @@ function init() {
   matWorldLocation = gl.getUniformLocation(program, "mWorld");
   matViewLocation = gl.getUniformLocation(program, "mView");
   matProjLocation = gl.getUniformLocation(program, "mProj");
-  
+
   worldMatrix = new Float32Array(16);
   viewMatrix = new Float32Array(16);
   projMatrix = new Float32Array(16);
   convertToIdentityMatrix(worldMatrix);
-  
+
   cameraAngle = toRadian(0);
   cameraRadius = 50;
   fieldOfView = toRadian(45);
-  projectionMode = "orthographic";
+  projectionMode = "oblique";
   view();
 }
 
 // Initialize the View
 function view() {
+  let left = -canvas.width / (1000 / cameraRadius);
+  let right = canvas.width / (1000 / cameraRadius);
+  let bottom = -canvas.height / (1000 / cameraRadius);
+  let top = canvas.height / (1000 / cameraRadius);
+  let near = 0.1;
+  let far = 1000.0;
   if (projectionMode == "orthographic") {
-    projMatrix = ortographic(
-      -canvas.width/(1000/cameraRadius), //left
-      canvas.width/(1000/cameraRadius), //right
-      -canvas.height/(1000/cameraRadius), //bottom
-      canvas.height/(1000/cameraRadius), //top
-      0.1, //near
-      1000.0 //far
-    );
+    projMatrix = ortographic(left, right, bottom, top, near, far);
+  } else if (projectionMode == "oblique") {
+    projMatrix = oblique(left, right, bottom, top, near, far);
   } else if (projectionMode == "perspective") {
     projMatrix = perspective(
       fieldOfView,
       canvas.width / canvas.height,
-      0.1,
-      1000.0
+      near,
+      far
     );
   }
 
+  console.log(projMatrix);
   cameraMatrix = yRotation(cameraAngle);
   cameraMatrix = translate(cameraMatrix, 0, 0, cameraRadius * 1.5);
   viewMatrix = inverse(cameraMatrix);
