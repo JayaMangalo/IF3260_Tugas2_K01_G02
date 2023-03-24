@@ -375,7 +375,15 @@ function redraw(usingShape = false) {
   view();
   var loop = () => {
     if (isUsingAnimation) {
-      rotAngle = (performance.now() / 10000) * Math.PI;
+      // create rotAngle based on time in range of [-360, 360]
+      rotAngle += (performance.now() / 10000) * 360;
+      if (rotAngle > 360) {
+        rotAngle = -360 + (rotAngle % 360);
+      }
+      
+      document.getElementById("camera-angle").value = Math.round(rotAngle);
+      document.getElementById("angle-value").innerHTML = Math.round(rotAngle);
+      rotAngle = toRadian(rotAngle);
       rotate(worldMatrix, id, rotAngle, [0, 1, 0]);
     }
     gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
@@ -530,7 +538,7 @@ function drawChainFromPoints(data) {
 
 //Draw From Points=======================================================================================================
 
-function Transform(method, axis, value) {
+function Transform(method, axis) {
   //method, axis, value in integer
 
   //Method 0 -> Rotate
@@ -541,6 +549,43 @@ function Transform(method, axis, value) {
   //Axis 1 -> Y
   //Axis 2 -> Z
   var func;
+  let value;
+
+  if (method == 0) {
+    if (axis == 0) {
+      value = document.getElementById("x-rotate").value;
+      document.getElementById("x-angle").innerHTML = value;
+    } else if (axis == 1) {
+      value = document.getElementById("y-rotate").value;
+      document.getElementById("y-angle").innerHTML = value;
+    } else if (axis == 2) {
+      value = document.getElementById("z-rotate").value;
+      document.getElementById("z-angle").innerHTML = value;
+    }
+  } else if (method == 1) {
+    if (axis == 0) {
+      value = document.getElementById("x-translate").value;
+      document.getElementById("x-distance").innerHTML = value;
+    } else if (axis == 1) {
+      value = document.getElementById("y-translate").value;
+      document.getElementById("y-distance").innerHTML = value;
+    } else if (axis == 2) {
+      value = document.getElementById("z-translate").value;
+      document.getElementById("z-distance").innerHTML = value;
+    }
+  } else if (method == 2) {
+    if (axis == 0) {
+      value = document.getElementById("x-scale").value;
+      document.getElementById("x-ratio").innerHTML = value;
+    } else if (axis == 1) {
+      value = document.getElementById("y-scale").value;
+      document.getElementById("y-ratio").innerHTML = value;
+    } else if (axis == 2) {
+      value = document.getElementById("z-scale").value;
+      document.getElementById("z-ratio").innerHTML = value;
+    }
+  }
+
   if (method == 0) {
     params = [value, 0];
     if (axis == 0) {
