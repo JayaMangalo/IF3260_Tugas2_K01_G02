@@ -13,8 +13,10 @@ class SmallSelatedDodecahedron {
       this.offsetratio = offset / dist_between_two_points;
 
       let color1 = [1, 0, 0, 1];
-      let color2 = [1, 1, 0, 1];
-      let color3 = [0, 0.5, 0.5, 1];
+      let color2 = [1, 0, 0, 1];
+      let color3 = [1, 0, 0, 1];
+      // let color2 = [1, 1, 0, 1];
+      // let color3 = [0, 0.5, 0.5, 1];
       //PersegiPanjang 1 Outer (±phi, ±1, 0)
       this.p1_top_right = [prr_outer, one_outer, 0].concat(color1);
       this.p1_bot_right = [prr_outer, -one_outer, 0].concat(color1);
@@ -317,19 +319,75 @@ class SmallSelatedDodecahedron {
     return newpoint;
   }
 
-  pushTrianglePrism(vertex_arr) {
+  pushTrianglePrism(v_arr) {
     this.batang.push([
-      vertex_arr[0],
-      vertex_arr[1],
-      vertex_arr[2],
-      vertex_arr[5],
-      vertex_arr[0],
-      vertex_arr[3],
-      vertex_arr[1],
-      vertex_arr[4],
-      vertex_arr[5],
-      vertex_arr[3],
+      v_arr[0].concat(this.calcNormalVector(v_arr[0],v_arr[2],v_arr[1])), 
+      v_arr[1].concat(this.calcNormalVector(v_arr[0],v_arr[2],v_arr[1])),
+      v_arr[2].concat(this.calcNormalVector(v_arr[0],v_arr[2],v_arr[1])),
+
+      v_arr[1].concat(this.calcNormalVector(v_arr[1],v_arr[2],v_arr[5])),
+      v_arr[2].concat(this.calcNormalVector(v_arr[1],v_arr[2],v_arr[5])),
+      v_arr[5].concat(this.calcNormalVector(v_arr[1],v_arr[2],v_arr[5])),
+
+      v_arr[2].concat(this.calcNormalVector(v_arr[2],v_arr[0],v_arr[5])),
+      v_arr[5].concat(this.calcNormalVector(v_arr[2],v_arr[0],v_arr[5])),
+      v_arr[0].concat(this.calcNormalVector(v_arr[2],v_arr[0],v_arr[5])),
+
+      v_arr[5].concat(this.calcNormalVector(v_arr[5],v_arr[0],v_arr[3])),
+      v_arr[0].concat(this.calcNormalVector(v_arr[5],v_arr[0],v_arr[3])),
+      v_arr[3].concat(this.calcNormalVector(v_arr[5],v_arr[0],v_arr[3])),
+
+      v_arr[0].concat(this.calcNormalVector(v_arr[0],v_arr[1],v_arr[3])),
+      v_arr[3].concat(this.calcNormalVector(v_arr[0],v_arr[1],v_arr[3])),
+      v_arr[1].concat(this.calcNormalVector(v_arr[0],v_arr[1],v_arr[3])),//reverse hits
+
+      v_arr[3].concat(this.calcNormalVector(v_arr[3],v_arr[1],v_arr[4])),
+      v_arr[1].concat(this.calcNormalVector(v_arr[3],v_arr[1],v_arr[4])),
+      v_arr[4].concat(this.calcNormalVector(v_arr[3],v_arr[1],v_arr[4])),//reverse this
+
+      v_arr[1].concat(this.calcNormalVector(v_arr[1],v_arr[5],v_arr[4])),
+      v_arr[4].concat(this.calcNormalVector(v_arr[1],v_arr[5],v_arr[4])),
+      v_arr[5].concat(this.calcNormalVector(v_arr[1],v_arr[5],v_arr[4])),
+
+      v_arr[4].concat(this.calcNormalVector(v_arr[4],v_arr[5],v_arr[3])),
+      v_arr[5].concat(this.calcNormalVector(v_arr[4],v_arr[5],v_arr[3])),
+      v_arr[3].concat(this.calcNormalVector(v_arr[4],v_arr[5],v_arr[3])),
     ]);
+  }
+  crossProduct(vector1, vector2) {
+    // Ensure both vectors have 3 components
+    if (vector1.length !== 3 || vector2.length !== 3) {
+      return [0,0,0]
+    }
+  
+    const x1 = vector1[0];
+    const y1 = vector1[1];
+    const z1 = vector1[2];
+    const x2 = vector2[0];
+    const y2 = vector2[1];
+    const z2 = vector2[2];
+  
+    const x3 = y1 * z2 - y2 * z1;
+    const y3 = z1 * x2 - z2 * x1;
+    const z3 = x1 * y2 - x2 * y1;
+  
+    return [x3, y3, z3];
+  }
+  normalize(vector) {
+    // Ensure the vector has 3 components
+    if (vector.length !== 3) {
+      return [0,0,0]
+    }
+  
+    const [x, y, z] = vector;
+    const magnitude = Math.sqrt(x * x + y * y + z * z);
+  
+    return [x / magnitude, y / magnitude, z / magnitude];
+  }
+  calcNormalVector(v1,v2,v3){
+    let v2_minus_v1 = [v2[0]-v1[0],v2[1]-v1[1],v2[2]-v1[2]];
+    let v3_minus_v1 = [v3[0]-v1[0],v3[1]-v1[1],v3[2]-v1[2]];
+    return this.normalize(this.crossProduct(v2_minus_v1,v3_minus_v1))
   }
 
   createP1TopRightDiagonals() {
@@ -366,46 +424,46 @@ class SmallSelatedDodecahedron {
       this.p1_top_right_to_p3_bot_right, //4
 
       this.p2_bot_left,
-      this.p2_bot_left_to_p3_bot_right,
       this.p2_bot_left_to_p2_top_left,
+      this.p2_bot_left_to_p3_bot_right,
     ]);
   }
   createP1BotRightDiagonals() {
     this.pushTrianglePrism([
       this.p1_bot_right,
-      this.p1_bot_right_to_p3_top_left, //3
       this.p1_bot_right_to_p2_top_right, //2
+      this.p1_bot_right_to_p3_top_left, //3
 
       this.p2_bot_right,
-      this.p2_bot_right_to_p3_top_left,
       this.p2_bot_right_to_p2_top_right,
+      this.p2_bot_right_to_p3_top_left,
     ]);
     this.pushTrianglePrism([
       this.p1_bot_right,
-      this.p1_bot_right_to_p2_top_right, //2
       this.p1_bot_right_to_p1_top_right, //1
+      this.p1_bot_right_to_p2_top_right, //2
 
       this.p3_top_right,
-      this.p3_top_right_to_p2_top_right,
       this.p3_top_right_to_p1_top_right,
+      this.p3_top_right_to_p2_top_right,
     ]);
     this.pushTrianglePrism([
       this.p1_bot_right,
-      this.p1_bot_right_to_p1_top_right, //1
       this.p1_bot_right_to_p2_top_left, //5
+      this.p1_bot_right_to_p1_top_right, //1
 
       this.p3_bot_right,
-      this.p3_bot_right_to_p1_top_right,
       this.p3_bot_right_to_p2_top_left,
+      this.p3_bot_right_to_p1_top_right,
     ]);
     this.pushTrianglePrism([
       this.p1_bot_right,
-      this.p1_bot_right_to_p2_top_left, //5
       this.p1_bot_right_to_p3_bot_left, //4
+      this.p1_bot_right_to_p2_top_left, //5
 
       this.p2_bot_left,
-      this.p2_bot_left_to_p2_top_left,
       this.p2_bot_left_to_p3_bot_left,
+      this.p2_bot_left_to_p2_top_left,
     ]);
   }
   createP1BotLeftDiagonals() {
@@ -449,59 +507,59 @@ class SmallSelatedDodecahedron {
   createP1TopLeftDiagonals() {
     this.pushTrianglePrism([
       this.p1_top_left,
-      this.p1_top_left_to_p3_top_right, //3
       this.p1_top_left_to_p2_bot_right, //2
+      this.p1_top_left_to_p3_top_right, //3
 
       this.p2_top_right,
-      this.p2_top_right_to_p3_top_right,
       this.p2_top_right_to_p2_bot_right,
+      this.p2_top_right_to_p3_top_right,
     ]);
     this.pushTrianglePrism([
       this.p1_top_left,
-      this.p1_top_left_to_p2_bot_right, //2
       this.p1_top_left_to_p1_bot_left, //1
+      this.p1_top_left_to_p2_bot_right, //2
 
       this.p3_top_left,
-      this.p3_top_left_to_p2_bot_right,
       this.p3_top_left_to_p1_bot_left,
+      this.p3_top_left_to_p2_bot_right,
     ]);
     this.pushTrianglePrism([
       this.p1_top_left,
-      this.p1_top_left_to_p1_bot_left, //1
       this.p1_top_left_to_p2_bot_left, //5
+      this.p1_top_left_to_p1_bot_left, //1
 
       this.p3_bot_left,
-      this.p3_bot_left_to_p1_bot_left,
       this.p3_bot_left_to_p2_bot_left,
+      this.p3_bot_left_to_p1_bot_left,
     ]);
     this.pushTrianglePrism([
       this.p1_top_left,
-      this.p1_top_left_to_p2_bot_left, //5
       this.p1_top_left_to_p3_bot_right, //4
+      this.p1_top_left_to_p2_bot_left, //5
 
       this.p2_top_left,
-      this.p2_top_left_to_p2_bot_left,
       this.p2_top_left_to_p3_bot_right,
+      this.p2_top_left_to_p2_bot_left,
     ]);
   }
   createP2TopRightDiagonals() {
     this.pushTrianglePrism([
       this.p2_top_right,
-      this.p2_top_right_to_p3_top_right, //2
       this.p2_top_right_to_p1_top_right, //3
+      this.p2_top_right_to_p3_top_right, //2
 
       this.p3_bot_right,
-      this.p3_bot_right_to_p3_top_right,
       this.p3_bot_right_to_p1_top_right,
+      this.p3_bot_right_to_p3_top_right,
     ]);
     this.pushTrianglePrism([
       this.p2_top_right,
-      this.p2_top_right_to_p1_bot_right, //4
       this.p2_top_right_to_p3_top_left, //5
+      this.p2_top_right_to_p1_bot_right, //4
 
       this.p3_bot_left,
-      this.p3_bot_left_to_p1_bot_right,
       this.p3_bot_left_to_p3_top_left,
+      this.p3_bot_left_to_p1_bot_right,
     ]);
   }
   createP2BotRightDiagonals() {
@@ -527,21 +585,21 @@ class SmallSelatedDodecahedron {
   createP2BotLefttDiagonals() {
     this.pushTrianglePrism([
       this.p2_bot_left,
-      this.p2_bot_left_to_p3_bot_right, //2
       this.p2_bot_left_to_p1_top_left, //3
+      this.p2_bot_left_to_p3_bot_right, //2
 
       this.p3_top_right,
-      this.p3_top_right_to_p3_bot_right,
       this.p3_top_right_to_p1_top_left,
+      this.p3_top_right_to_p3_bot_right,
     ]);
     this.pushTrianglePrism([
       this.p2_bot_left,
-      this.p2_bot_left_to_p1_bot_left, //4
       this.p2_bot_left_to_p3_bot_left, //5
+      this.p2_bot_left_to_p1_bot_left, //4
 
       this.p3_top_left,
-      this.p3_top_left_to_p1_bot_left,
       this.p3_top_left_to_p3_bot_left,
+      this.p3_top_left_to_p1_bot_left,
     ]);
   }
   createP2TopLeftDiagonals() {
@@ -577,12 +635,12 @@ class SmallSelatedDodecahedron {
 
     this.pushTrianglePrism([
       this.p1_bot_right,
-      this.p1_bot_right_to_p3_bot_left, //4
       this.p1_bot_right_to_p3_top_left, //3
+      this.p1_bot_right_to_p3_bot_left, //4
 
       this.p1_bot_left,
-      this.p1_bot_left_to_p3_bot_left,
       this.p1_bot_left_to_p3_top_left,
+      this.p1_bot_left_to_p3_bot_left,
     ]);
 
     this.pushTrianglePrism([
@@ -597,12 +655,12 @@ class SmallSelatedDodecahedron {
 
     this.pushTrianglePrism([
       this.p2_bot_right,
-      this.p2_bot_right_to_p1_bot_left, //4
       this.p2_bot_right_to_p1_top_left, //3
+      this.p2_bot_right_to_p1_bot_left, //4
 
       this.p2_bot_left,
-      this.p2_bot_left_to_p1_bot_left,
       this.p2_bot_left_to_p1_top_left,
+      this.p2_bot_left_to_p1_bot_left,
     ]);
 
     this.pushTrianglePrism([
@@ -617,12 +675,12 @@ class SmallSelatedDodecahedron {
 
     this.pushTrianglePrism([
       this.p3_bot_right,
-      this.p3_bot_right_to_p2_bot_left,
       this.p3_bot_right_to_p2_top_left,
+      this.p3_bot_right_to_p2_bot_left,
 
       this.p3_bot_left,
-      this.p3_bot_left_to_p2_bot_left,
       this.p3_bot_left_to_p2_top_left,
+      this.p3_bot_left_to_p2_bot_left,
     ]);
   }
   createFrames() {
@@ -654,7 +712,10 @@ class SmallSelatedDodecahedron {
           batang[i][3],
           batang[i][4],
           batang[i][5],
-          batang[i][6]
+          batang[i][6],
+          batang[i][7],
+          batang[i][8],
+          batang[i][9]
         );
       }
       gl.bufferData(

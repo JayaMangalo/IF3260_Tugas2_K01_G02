@@ -331,7 +331,7 @@ function loadSSDodecahedron(){
     gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     
-    ssdodecahedron = new SmallSelatedDodecahedron(drawFromPoints=false,radius=5,offset=0.8,batang=[]);
+    ssdodecahedron = new SmallSelatedDodecahedron(drawFromPoints=false,radius=10,offset=2,batang=[]);
     shapes.push(ssdodecahedron)
     
     let json = {type: "model", data:[]}
@@ -376,7 +376,7 @@ function redraw(usingShape = false) {
   var loop = () => {
     if (isUsingAnimation) {
       // create rotAngle based on time in range of [-360, 360]
-      rotAngle += (performance.now() / 10000) * 360;
+      rotAngle = (performance.now() / 10000) * 360;
       if (rotAngle > 360) {
         rotAngle = -360 + (rotAngle % 360);
       }
