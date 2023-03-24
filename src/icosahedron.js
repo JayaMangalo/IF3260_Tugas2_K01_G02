@@ -15,12 +15,9 @@ class Icosahedron {
       this.offsetratio = offset / dist_between_two_points;
 
       // let color = [[1,0,0,1],[1,1,0,1],[0,0.5,0.5,1]]
-      let color1 = [1, 0, 0, 1];
-      let color2 = [1, 0, 0, 1];
-      let color3 = [1, 0, 0, 1];
-      // let color2 = [1, 1, 0, 1];
-      // let color3 = [0.3, 0.3, 0.9, 1];
-
+      let color1 = [1, 0.3, 0.3, 1];
+      let color2 = [1, 0.3, 0.3, 1];
+      let color3 = [1, 0.3, 0.3, 1];
       //PersegiPanjang 1 Outer (±phi, ±1, 0)
       this.p1_tr = [prr_outer, one_outer, 0].concat(color1);
       this.p1_br = [prr_outer, -one_outer, 0].concat(color1);
@@ -392,7 +389,7 @@ class Icosahedron {
   pushTrianglePrism(v_arr) {
     this.batang.push([
       v_arr[0].concat(this.calcNormalVector(v_arr[0],v_arr[2],v_arr[1])), 
-      v_arr[1].concat(this.calcNormalVector(v_arr[0],v_arr[1],v_arr[1])),
+      v_arr[1].concat(this.calcNormalVector(v_arr[0],v_arr[2],v_arr[1])),
       v_arr[2].concat(this.calcNormalVector(v_arr[0],v_arr[2],v_arr[1])),
 
       v_arr[1].concat(this.calcNormalVector(v_arr[1],v_arr[2],v_arr[5])),
