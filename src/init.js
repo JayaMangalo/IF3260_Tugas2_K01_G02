@@ -192,7 +192,6 @@ function view() {
     );
   }
 
-  console.log(projMatrix);
   cameraMatrix = yRotation(cameraAngle);
   cameraMatrix = translate(cameraMatrix, 0, 0, cameraRadius * 1.5);
   viewMatrix = inverse(cameraMatrix);

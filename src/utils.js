@@ -454,3 +454,41 @@ function oblique(left, right, bottom, top, near, far) {
     tx + stz, ty + stz, stz, 1
   ]
 }
+
+function crossProduct(vector1, vector2) {
+  // Ensure both vectors have 3 components
+  if (vector1.length !== 3 || vector2.length !== 3) {
+    return [0,0,0]
+  }
+
+  const x1 = vector1[0];
+  const y1 = vector1[1];
+  const z1 = vector1[2];
+  const x2 = vector2[0];
+  const y2 = vector2[1];
+  const z2 = vector2[2];
+
+  const x3 = y1 * z2 - y2 * z1;
+  const y3 = z1 * x2 - z2 * x1;
+  const z3 = x1 * y2 - x2 * y1;
+
+  return [x3, y3, z3];
+}
+
+function normalize(vector) {
+  // Ensure the vector has 3 components
+  if (vector.length !== 3) {
+    return [0,0,0]
+  }
+
+  const [x, y, z] = vector;
+  const magnitude = Math.sqrt(x * x + y * y + z * z);
+
+  return [x / magnitude, y / magnitude, z / magnitude];
+}
+
+function calcNormalVector(v1,v2,v3){
+  let v2_minus_v1 = [v2[0]-v1[0],v2[1]-v1[1],v2[2]-v1[2]];
+  let v3_minus_v1 = [v3[0]-v1[0],v3[1]-v1[1],v3[2]-v1[2]];
+  return normalize(crossProduct(v2_minus_v1,v3_minus_v1))
+}

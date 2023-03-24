@@ -17,7 +17,7 @@ function onLoad() {
   // loadShapes()
   // loadTesseract();
   // loadChain();
-  loadIcosahedron();
+  // loadIcosahedron();
   // loadSSDodecahedron()
 }
 
@@ -395,7 +395,7 @@ function redraw(usingShape = false) {
     gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
     gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    if (usingShape) {
+    if (false) {
       shapes.forEach((shape) => {
         shape.draw();
       });
@@ -403,11 +403,11 @@ function redraw(usingShape = false) {
       for (model of models) {
         for (shape of model) {
           if (shape.type == "Tesseract") {
-            drawTesseractFromPoints(
-              shape.vertices,
-              shape.innerSquare.vertices[0][0][3],
-              shape.outerSquare.vertices[0][0][3]
-            );
+            // drawTesseractFromPoints(
+            //   shape.vertices,
+            //   shape.innerSquare.vertices[0][0][3],
+            //   shape.outerSquare.vertices[0][0][3]
+            // );
             drawCubeFromPoints(shape.outerSquare.vertices);
             drawCubeFromPoints(shape.innerSquare.vertices);
           }
@@ -491,9 +491,11 @@ function drawTesseractFromPoints(data, innerColor, outerColor) {
 }
 
 function drawCubeFromPoints(data) {
+  console.log(data);
   for (let batang of data) {
+    console.log(batang);
     let vertices = [];
-    if (isUsingShadder) {
+    if (true) {
       for (let i = 0; i < batang.length; i++) {
         vertices.push(
           batang[i][0],
@@ -502,7 +504,10 @@ function drawCubeFromPoints(data) {
           batang[i][3][0],
           batang[i][3][1],
           batang[i][3][2],
-          batang[i][3][3]
+          batang[i][3][3],
+          batang[i][4],
+          batang[i][5],
+          batang[i][6]
         );
       }
     } else {
@@ -515,12 +520,15 @@ function drawCubeFromPoints(data) {
           tempColor[0],
           tempColor[1],
           tempColor[2],
-          tempColor[3]
+          tempColor[3],
+          batang[i][4],
+          batang[i][5],
+          batang[i][6]
         );
       }
     }
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, batang.length);
+    gl.drawArrays(gl.TRIANGLES, 0, batang.length);
   }
 }
 
