@@ -141,7 +141,7 @@ function init() {
   cameraAngle = toRadian(0);
   cameraRadius = 50;
   fieldOfView = toRadian(45);
-  projectionMode = "oblique";
+  projectionMode = "orthographic";
   view();
 }
 
