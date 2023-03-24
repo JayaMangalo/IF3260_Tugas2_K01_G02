@@ -4,6 +4,12 @@ modelsCenterPoint = [];
 var isUsingShadder = true;
 var isUsingAnimation = false;
 var animationAngle = 0;
+var xTranslateValue = 0;
+var yTranslateValue = 0;
+var zTranslateValue = 0;
+var xScaleValue = 1;
+var yScaleValue = 1;
+var zScaleValue = 1;
 
 function onLoad() {
   //Initialize the WebGL
@@ -538,6 +544,30 @@ function drawChainFromPoints(data) {
 
 //Draw From Points=======================================================================================================
 
+function changeXTranslate() {
+  xTranslateValue = document.getElementById("x-translate").value;
+}
+
+function changeYTranslate() {
+  yTranslateValue = document.getElementById("y-translate").value;
+}
+
+function changeZTranslate() {
+  zTranslateValue = document.getElementById("z-translate").value;
+}
+
+function changeXScales() {
+  xScaleValue = document.getElementById("x-scale").value;
+}
+
+function changeYScales() {
+  yScaleValue = document.getElementById("y-scale").value;
+}
+
+function changeZScales() {
+  zScaleValue = document.getElementById("z-scale").value;
+}
+
 function Transform(method, axis) {
   //method, axis, value in integer
 
@@ -566,23 +596,29 @@ function Transform(method, axis) {
     if (axis == 0) {
       value = document.getElementById("x-translate").value;
       document.getElementById("x-distance").innerHTML = value;
+      value -= xTranslateValue;
     } else if (axis == 1) {
       value = document.getElementById("y-translate").value;
       document.getElementById("y-distance").innerHTML = value;
+      value -= yTranslateValue;
     } else if (axis == 2) {
       value = document.getElementById("z-translate").value;
       document.getElementById("z-distance").innerHTML = value;
+      value -= zTranslateValue;
     }
   } else if (method == 2) {
     if (axis == 0) {
       value = document.getElementById("x-scale").value;
       document.getElementById("x-ratio").innerHTML = value;
+      value /= xScaleValue;
     } else if (axis == 1) {
       value = document.getElementById("y-scale").value;
       document.getElementById("y-ratio").innerHTML = value;
+      value /= yScaleValue;
     } else if (axis == 2) {
       value = document.getElementById("z-scale").value;
       document.getElementById("z-ratio").innerHTML = value;
+      value /= zScaleValue;
     }
   }
 
