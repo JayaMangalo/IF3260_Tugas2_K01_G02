@@ -173,7 +173,7 @@ function redraw(usingShape = false){
             for (model of models) {
                 for (shape of model) {
                     if (shape.type == "Tesseract") {
-                        drawTesseractFromPoints(shape.vertices, isUsingShadder);
+                        drawTesseractFromPoints(shape.vertices, shape.innerSquare.vertices[0][0][3],shape.outerSquare.vertices[0][0][3]);
                         drawCubeFromPoints(shape.outerSquare.vertices);
                         drawCubeFromPoints(shape.innerSquare.vertices);
                     }
@@ -222,27 +222,19 @@ function toggleShadder(){
 }
 
 //Draw From Points=======================================================================================================
-function drawTesseractFromPoints(data, isUsingShadder = true){
+function drawTesseractFromPoints(data, innerColor, outerColor){
     for(let batang of data){
         let vertices = [];
         if(isUsingShadder){
             for (let i = 0; i < batang.length; i++) {
-                if(i%2 == 0){
-                    vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3][0], batang[i][3][1], batang[i][3][2], batang[i][3][3]);
-                }else{
-                    if(i == 3 || i == 5){
-                        vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3][0], batang[i][3][1], batang[i][3][2], batang[i][3][3]);
-                    }else{
-                        vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3][0], batang[i][3][1], batang[i][3][2], batang[i][3][3]);
-                    }
-                }
+                vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3][0], batang[i][3][1], batang[i][3][2], batang[i][3][3]);
             }
         }else{
             for (let i = 0; i < batang.length; i++) {
-                if(i%2 == 0){
-                    vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3][0], batang[i][3][1], batang[i][3][2], batang[i][3][3]);
+                if(i%2!=0){
+                    vertices.push(batang[i][0], batang[i][1], batang[i][2], innerColor[0], innerColor[1], innerColor[2], innerColor[3]);
                 }else{
-                    vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3][0], batang[i][3][1], batang[i][3][2], batang[i][3][3]);
+                    vertices.push(batang[i][0], batang[i][1], batang[i][2], outerColor[0], outerColor[1], outerColor[2], outerColor[3]);
                 }
             }
         }
@@ -254,8 +246,15 @@ function drawTesseractFromPoints(data, isUsingShadder = true){
 function drawCubeFromPoints(data){
     for(let batang of data){
         let vertices = [];
-        for (let i = 0; i < batang.length; i++) {
-            vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3][0], batang[i][3][1], batang[i][3][2], batang[i][3][3]);
+        if(isUsingShadder){
+            for (let i = 0; i < batang.length; i++) {
+                vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3][0], batang[i][3][1], batang[i][3][2], batang[i][3][3]);
+            }
+        }else{
+            let tempColor = batang[0][3];
+            for (let i = 0; i < batang.length; i++) {
+                vertices.push(batang[i][0], batang[i][1], batang[i][2], tempColor[0], tempColor[1], tempColor[2], tempColor[3]);
+            }
         }
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, batang.length); 
