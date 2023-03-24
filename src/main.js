@@ -1,6 +1,8 @@
 shapes = []
 models = []
 var isUsingShadder = true;
+var isUsingAnimation = false;
+var animationAngle = 0;
 
 function onLoad(){
     //Initialize the WebGL
@@ -159,9 +161,10 @@ function redraw(usingShape = false){
     var id = new Float32Array(16);
     convertToIdentityMatrix(id);
     var loop = () => {
-        rotAngle = performance.now() / 10000 * Math.PI;
-        // rotAngle = 8000 / 10000 * Math.PI;
-        rotate(worldMatrix, id, rotAngle, [0,1,0]);
+        if(isUsingAnimation){
+            animationAngle = animationAngle + 1 / 100 * Math.PI;
+            rotate(worldMatrix, id, animationAngle, [0,1,0]);
+        }
         gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
         gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -185,8 +188,9 @@ function redraw(usingShape = false){
                     }
                 }
             }
+        }if(isUsingAnimation){
+                requestAnimationFrame(loop);
         }
-        requestAnimationFrame(loop);
     }
     requestAnimationFrame(loop);
 }
@@ -219,6 +223,13 @@ function toggleShadder(){
         shape.changeShadder(isShadder);
     }
     isUsingShadder = isShadder;
+    redraw();
+}
+
+function toggleAnimation(){
+    let isAnimate = document.getElementById("toggleAnimation").checked;
+    isUsingAnimation = isAnimate;
+    redraw();
 }
 
 //Draw From Points=======================================================================================================
@@ -337,7 +348,9 @@ function Transform(method,axis,value){
             }
         }
     }
-    redraw(usingShape=false);
+    if(!isUsingAnimation){
+        redraw();
+    }
 }
 
 // function RotateXAxis(degree=0){
