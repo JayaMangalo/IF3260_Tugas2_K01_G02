@@ -10,8 +10,8 @@ function onLoad() {
   init();
   // loadShapes()
   // loadTesseract();
-  loadChain();
-  // loadIcosahedron();
+  // loadChain();
+  loadIcosahedron();
   // loadSSDodecahedron()
 }
 
@@ -321,6 +321,8 @@ function loadIcosahedron(){
     }
     json = JSON.stringify(json);
     let parseResult = JSON.parse(json);
+
+    console.log("ass")
     loadModel(parseResult.data);
     redraw()
 }
@@ -412,43 +414,6 @@ function redraw(usingShape = false) {
     }
   };
   requestAnimationFrame(loop);
-}
-
-function loadIcosahedron(data = null) {
-  gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
-  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-  if (data == null) {
-    icosahedron = new Icosahedron(
-      (drawFromPoints = false),
-      (radius = 5),
-      (offset = 0.5),
-      (batang = [])
-    );
-    shapes.push(icosahedron);
-  }
-  redraw();
-}
-
-function loadSSDodecahedron(data = null) {
-  gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
-  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-  if (data == null) {
-    ssdodecahedron = new SmallSelatedDodecahedron(
-      (drawFromPoints = false),
-      (radius = 15),
-      (offset = 3),
-      (batang = [])
-    );
-    shapes.push(ssdodecahedron);
-  }
-  ssdodecahedron = new SmallSelatedDodecahedron(
-    (drawFromPoints = false),
-    (radius = 15),
-    (offset = 3),
-    (batang = [])
-  );
-  ssdodecahedron.draw();
-  redraw();
 }
 
 function toggleShadder() {
@@ -583,7 +548,7 @@ function Transform(method, axis, value) {
     } else if (axis == 1) {
       func = RotatePointYAxis;
     } else if (axis == 2) {
-      func = RotatePointYAxis;
+      func = RotatePointZAxis;
     }
   } else if (method == 1) {
     params = [axis, value];
@@ -731,7 +696,6 @@ function Transform(method, axis, value) {
 // }
 
 function RotatePointXAxis(point, params) {
-  console.log(params);
   let degree = params[0];
   let centerOfRotation = modelsCenterPoint[params[1]];
   let y = point[1] - centerOfRotation[1];

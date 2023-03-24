@@ -666,26 +666,12 @@ class SmallSelatedDodecahedron {
     }
   }
 
-  // changeShadder(value){
-  //     console.log(value)
-  //     this.isUsingShadder = value;
-  //     if(this.isUsingShadder){
-  //        for(let i of this.middleColoredVertices){
-  //             i[3] = this.middleColor;
-  //        }
-  //        for(let i of this.innerColoredVertices){
-  //             i[3] = this.innerColor;
-  //        }
-  //     }
-  //     else{
-  //         for(let i of this.middleColoredVertices){
-  //             i[3] = this.outerColor;
-  //         }
-  //         for(let i of this.innerColoredVertices){
-  //             i[3] = this.outerColor;
-  //         }
-  //     }
-  // }
+  changeShadder(){
+    console.log(this.isUsingShadder)
+    console.log("bruhhahdfuahsdf")
+      this.isUsingShadder = !this.UsingShadder;
+      console.log(this.isUsingShadder)
+  }
 
   toString() {
     if (this.batang == null) {

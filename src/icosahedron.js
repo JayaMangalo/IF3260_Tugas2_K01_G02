@@ -3,6 +3,8 @@ class Icosahedron {
     if (drawFromPoints) {
       this.batang = batang;
     } else {
+      // this.isUsingShadder = true;
+
       let phi_ratio = (1 + Math.sqrt(5)) / 2; //φ
       let prr_outer = phi_ratio * radius; //φ for out
 
@@ -741,14 +743,14 @@ class Icosahedron {
       this.p3_tr_to_p1_tl_and_p3_br,
 
       this.p3_br,
-      this.p3_br_to_p1_tl_and_p3_tr,
       this.p3_br_to_p3_tr_and_p1_tr,
+      this.p3_br_to_p1_tl_and_p3_tr,
     ]);
 
     this.pushTrianglePrism([
       this.p3_tl,
-      this.p3_tl_to_p3_bl_and_p1_br,
       this.p3_tl_to_p1_bl_and_p3_bl,
+      this.p3_tl_to_p3_bl_and_p1_br,
 
       this.p3_bl,
       this.p3_bl_to_p1_bl_and_p3_tl,
@@ -784,43 +786,27 @@ class Icosahedron {
           batang[i][4],
           batang[i][5],
           batang[i][6],
-          0.1,
-          0.1,
-          0.1,
+          batang[i][7],
+          batang[i][8],
+          batang[i][9],
         );
       }
-      gl.bindbuffer()
       gl.bufferData(
         gl.ARRAY_BUFFER,
         new Float32Array(vertices),
         gl.STATIC_DRAW
       );
 
-      
       gl.drawArrays(gl.TRIANGLES, 0, batang.length);
     }
   }
 
-  // changeShadder(value){
-  //     console.log(value)
-  //     this.isUsingShadder = value;
-  //     if(this.isUsingShadder){
-  //        for(let i of this.middleColoredVertices){
-  //             i[3] = this.middleColor;
-  //        }
-  //        for(let i of this.innerColoredVertices){
-  //             i[3] = this.innerColor;
-  //        }
-  //     }
-  //     else{
-  //         for(let i of this.middleColoredVertices){
-  //             i[3] = this.outerColor;
-  //         }
-  //         for(let i of this.innerColoredVertices){
-  //             i[3] = this.outerColor;
-  //         }
-  //     }
-  // }
+//   changeShadder(){
+//     console.log(this.isUsingShadder)
+//     console.log("bruhhahdfuahsdf")
+//       this.isUsingShadder = !this.UsingShadder;
+//       console.log(this.isUsingShadder)
+// }
 
   toString() {
     if (this.batang == null) {
