@@ -1,5 +1,6 @@
 shapes = []
 models = []
+modelsCenterPoint = []
 var isUsingShadder = true;
 var isUsingAnimation = false;
 var animationAngle = 0;
@@ -52,6 +53,7 @@ function saveShapes(){
 
 function loadModel(data){
     models.push(data);
+    modelsCenterPoint.push([0,0,0]);
     redraw(usingShape=false)
 }
 
@@ -304,7 +306,7 @@ function Transform(method,axis,value){
     //Axis 2 -> Z
     var func;
     if (method == 0){
-        params = value
+        params = [value,0]
         if(axis == 0){
             func = RotatePointXAxis;
         }else if(axis==1){
@@ -315,6 +317,9 @@ function Transform(method,axis,value){
     }else if(method == 1){
         params = [axis,value]
         func = Translate;
+        for(centerPoint of modelsCenterPoint){
+            centerPoint = func(centerPoint, params);
+        }
     }else if(method == 2){
         params = [axis,value]
         func = Scale;
@@ -346,6 +351,9 @@ function Transform(method,axis,value){
                     point = func(point, params);
                 }
             }
+        }
+        if(method == 0){
+            params[1] = params[1]+1;
         }
     }
     if(!isUsingAnimation){
@@ -451,42 +459,49 @@ function Transform(method,axis,value){
 //     redraw(usingShape=false);
 // }
 
-function RotatePointXAxis(point, degree=0){
-    let y = point[1];
-    let z = point[2];
+function RotatePointXAxis(point, params){
+    console.log(params);
+    let degree = params[0];
+    let centerOfRotation = modelsCenterPoint[params[1]];
+    let y = point[1] - centerOfRotation[1];
+    let z = point[2] - centerOfRotation[2];
     let rad = degree * Math.PI / 180;
     let cos = Math.cos(rad);
     let sin = Math.sin(rad);
     let newY = y * cos - z * sin;
     let newZ = y * sin + z * cos;
-    point[1] = newY;
-    point[2] = newZ;
+    point[1] = newY + centerOfRotation[1];
+    point[2] = newZ + centerOfRotation[2];
     return point;
 }
 
-function RotatePointYAxis(point, degree=0){
-    let x = point[0];
-    let z = point[2];
+function RotatePointYAxis(point, params){
+    let degree = params[0];
+    let centerOfRotation = modelsCenterPoint[params[1]];
+    let x = point[0] - centerOfRotation[0];
+    let z = point[2] - centerOfRotation[2];
     let rad = degree * Math.PI / 180;
     let cos = Math.cos(rad);
     let sin = Math.sin(rad);
     let newX = x * cos - z * sin;
     let newZ = x * sin + z * cos;
-    point[0] = newX;
-    point[2] = newZ;
+    point[0] = newX + centerOfRotation[0];
+    point[2] = newZ + centerOfRotation[2];
     return point;
 }
 
-function RotatePointZAxis(point, degree=0){
-    let x = point[0];
-    let y = point[1];
+function RotatePointZAxis(point, params){
+    let degree = params[0];
+    let centerOfRotation = modelsCenterPoint[params[1]];
+    let x = point[0] - centerOfRotation[0];
+    let y = point[1] - centerOfRotation[1];
     let rad = degree * Math.PI / 180;
     let cos = Math.cos(rad);
     let sin = Math.sin(rad);
     let newX = x * cos - y * sin;
     let newY = x * sin + y * cos;
-    point[0] = newX;
-    point[1] = newY;
+    point[0] = newX + centerOfRotation[0];
+    point[1] = newY + centerOfRotation[1];
     return point;
 }
 
