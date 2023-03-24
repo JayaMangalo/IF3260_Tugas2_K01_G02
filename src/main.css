@@ -77,5 +77,19 @@ h4 {
 }
 
 .view-config-container {
-  padding-top: 36px;
+  padding-top: 8px;
+}
+
+.slider-label {
+  display: block;
+}
+
+#reset-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #0c8ce9;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
