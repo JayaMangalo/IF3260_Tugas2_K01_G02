@@ -2,17 +2,6 @@ shapes = [];
 models = [];
 modelsCenterPoint = [];
 var isUsingShadder = true;
-<<<<<<< HEAD
-
-function onLoad(){
-    //Initialize the WebGL
-    init();
-    // loadShapes()
-    // loadTesseract();
-    // loadChain();
-    loadIcosahedron();
-    // loadSSDodecahedron()
-=======
 var isUsingAnimation = false;
 var animationAngle = 0;
 
@@ -24,7 +13,6 @@ function onLoad() {
   loadChain();
   // loadIcosahedron();
   // loadSSDodecahedron()
->>>>>>> 7bde081c7387654a9c91309f161e40d5de1d7726
 }
 
 async function loadShapes() {
