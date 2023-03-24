@@ -555,6 +555,7 @@ function drawIcosahedroOrSSDodecahedronFromPoints(data, isUsingShadder = true){
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
         gl.drawArrays(gl.TRIANGLES, 0, batang.length);
     }
+  }
 
 function drawChainFromPoints(data) {
   for (let cube of data) {
