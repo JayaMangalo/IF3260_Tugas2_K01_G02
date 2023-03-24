@@ -12,6 +12,14 @@
       <div class="left-side-bar">
         <div class="left-menu">
           <h1>3D Hollow Object</h1>
+
+          <button
+            id="help-button"
+            onclick="window.open('./help.html','_blank')"
+          >
+            Help
+          </button>
+
           <h2>Save & Load</h2>
           <div class="save-container">
             <button onclick="saveShapes()" id="save-button">Save</button>
@@ -64,6 +72,10 @@
                 <option value="perspective">Perspective</option>
               </select>
 
+              <button id="reset-button" onclick="resetCamera()">
+                Reset Camera Settings
+              </button>
+
               <div class="checkboxes-container">
                 <input
                   type="checkbox"
@@ -81,10 +93,6 @@
                 />
                 <label for="toggleShadder">Toggle Shadder</label>
               </div>
-
-              <button id="reset-button" onclick="resetCamera()">
-                Reset Camera Settings
-              </button>
             </div>
           </div>
 
@@ -104,7 +112,9 @@
         <h2>Transform</h2>
         <h3>Rotate</h3>
         <div>
-          <label for="x-rotate" class="slider-label">X: <span id="x-angle">0</span></label>
+          <label for="x-rotate" class="slider-label"
+            >X: <span id="x-angle">0</span></label
+          >
           <input
             type="range"
             id="x-rotate"
@@ -116,7 +126,9 @@
           />
         </div>
         <div>
-          <label for="y-rotate" class="slider-label">Y: <span id="y-angle">0</span></label>
+          <label for="y-rotate" class="slider-label"
+            >Y: <span id="y-angle">0</span></label
+          >
           <input
             type="range"
             id="y-rotate"
@@ -128,7 +140,9 @@
           />
         </div>
         <div>
-          <label for="z-rotate" class="slider-label">Z: <span id="z-angle">0</span></label>
+          <label for="z-rotate" class="slider-label"
+            >Z: <span id="z-angle">0</span></label
+          >
           <input
             type="range"
             id="z-rotate"
@@ -141,7 +155,9 @@
         </div>
         <h3>Translate</h3>
         <div>
-          <label for="x-translate" class="slider-label">X: <span id="x-distance">0</span></label>
+          <label for="x-translate" class="slider-label"
+            >X: <span id="x-distance">0</span></label
+          >
           <input
             type="range"
             id="x-translate"
@@ -153,7 +169,9 @@
           />
         </div>
         <div>
-          <label for="y-translate" class="slider-label">Y: <span id="y-distance">0</span></label>
+          <label for="y-translate" class="slider-label"
+            >Y: <span id="y-distance">0</span></label
+          >
           <input
             type="range"
             id="y-translate"
@@ -165,7 +183,9 @@
           />
         </div>
         <div>
-          <label for="z-translate" class="slider-label">Z: <span id="z-distance">0</span></label>
+          <label for="z-translate" class="slider-label"
+            >Z: <span id="z-distance">0</span></label
+          >
           <input
             type="range"
             id="z-translate"
@@ -178,7 +198,9 @@
         </div>
         <h3>Scale</h3>
         <div>
-          <label for="x-scale" class="slider-label">X: <span id="x-ratio">1</span></label>
+          <label for="x-scale" class="slider-label"
+            >X: <span id="x-ratio">1</span></label
+          >
           <input
             type="range"
             id="x-scale"
@@ -190,7 +212,9 @@
           />
         </div>
         <div>
-          <label for="y-scale" class="slider-label">Y: <span id="y-ratio">1</span></label>
+          <label for="y-scale" class="slider-label"
+            >Y: <span id="y-ratio">1</span></label
+          >
           <input
             type="range"
             id="y-scale"
@@ -202,7 +226,9 @@
           />
         </div>
         <div>
-          <label for="z-scale" class="slider-label">Z: <span id="z-ratio">1</span></label>
+          <label for="z-scale" class="slider-label"
+            >Z: <span id="z-ratio">1</span></label
+          >
           <input
             type="range"
             id="z-scale"
