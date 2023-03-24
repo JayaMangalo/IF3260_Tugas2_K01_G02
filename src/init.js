@@ -8,6 +8,7 @@ var vertexBuffer = gl.createBuffer();
 var indexBuffer = gl.createBuffer();
 var positionAttribLocation;
 var colorAttribLocation;
+var normalAttribLocation;
 var shadderSource;
 
 var matWorldLocation;
@@ -34,7 +35,12 @@ function init() {
     vertexShaderSource: `#version 300 es
         in vec3 vertPosition;
         in vec4 vertColor;
+        in vec3 a_normal;
+
         out vec4 fragColor;
+        out vec3 v_normal;
+       
+        uniform mat4 u_worldInverseTranspose;
 
         uniform mat4 mWorld;
         uniform mat4 mView;
@@ -43,15 +49,23 @@ function init() {
         void main() {
             fragColor = vertColor;
             gl_Position = mProj * mView * mWorld * vec4(vertPosition, 1);
+            // v_normal = (u_worldInverseTranspose * vec4(a_normal, 0)).xyz;
+            v_normal = a_normal;
         }`,
 
     fragmentShaderSource: `#version 300 es
         precision mediump float;
         in vec4 fragColor;
+        in vec3 v_normal;
+
         out vec4 outColor;
-    
+        
         void main() {
-            outColor = fragColor;
+          vec3 normal = normalize(v_normal);
+          float light = dot(normal, normalize(vec3(1,0,0)));
+
+          outColor = fragColor;
+          outColor.rgb *= light;
         }`,
   };
   //Create Shadder
@@ -95,7 +109,7 @@ function init() {
     3, //3 float per vertex (XYZ)
     gl.FLOAT,
     gl.FALSE,
-    7 * Float32Array.BYTES_PER_ELEMENT, //1 vertex = 7 float (XYZRGBA)
+    10 * Float32Array.BYTES_PER_ELEMENT, //1 vertex = 7 float (XYZRGBA)
     0 //Position start from the first element
   );
 
@@ -106,13 +120,25 @@ function init() {
     4, //4 float per vertex (RGBA)
     gl.FLOAT,
     gl.FALSE,
-    7 * Float32Array.BYTES_PER_ELEMENT, //1 vertex = 7 float (XYZRGBA)
+    10 * Float32Array.BYTES_PER_ELEMENT, //1 vertex = 7 float (XYZRGBA)
     3 * Float32Array.BYTES_PER_ELEMENT //Color start from the fourth element
+  );
+  
+  // Create Normal Attribute
+  normalAttribLocation = gl.getAttribLocation(program, "a_normal");
+  gl.vertexAttribPointer(
+    normalAttribLocation,
+    3, //3 float per vertex (XYZ)
+    gl.FLOAT,
+    gl.FALSE,
+    10 * Float32Array.BYTES_PER_ELEMENT, //1 vertex = 7 float (XYZRGBAXYZ)
+    7 * Float32Array.BYTES_PER_ELEMENT //Color start from the seventh element
   );
 
   //Enable the attribute
   gl.enableVertexAttribArray(positionAttribLocation);
   gl.enableVertexAttribArray(colorAttribLocation);
+  gl.enableVertexAttribArray(normalAttribLocation);
 
   //Enable transparency
   gl.enable(gl.BLEND);

@@ -7,8 +7,8 @@ function onLoad(){
     init();
     // loadShapes()
     // loadTesseract();
-    loadChain();
-    // loadIcosahedron();
+    // loadChain();
+    loadIcosahedron();
     // loadSSDodecahedron()
 }
 
@@ -191,25 +191,38 @@ function redraw(usingShape = false){
     requestAnimationFrame(loop);
 }
 
-function loadIcosahedron(data=null){
+function loadIcosahedron(){
     gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    if(data==null){
-        icosahedron = new Icosahedron(drawFromPoints=false,radius=5,offset=0.5,batang=[]);
-        shapes.push(icosahedron)
+
+    icosahedron = new Icosahedron(drawFromPoints=false,radius=10,offset=3,batang=[]);
+    shapes.push(icosahedron)
+    
+    //Convert to points
+    let json = {type: "model", data:[]}
+    for(shape of shapes) {
+        json.data.push(shape.toString());
     }
+    json = JSON.stringify(json);
+    let parseResult = JSON.parse(json);
+    loadModel(parseResult.data);
     redraw()
 }
 
-function loadSSDodecahedron(data=null){
+function loadSSDodecahedron(){
     gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    if(data==null){
-        ssdodecahedron = new SmallSelatedDodecahedron(drawFromPoints=false,radius=15,offset=3,batang=[]);
-        shapes.push(ssdodecahedron)
+    
+    ssdodecahedron = new SmallSelatedDodecahedron(drawFromPoints=false,radius=5,offset=0.8,batang=[]);
+    shapes.push(ssdodecahedron)
+    
+    let json = {type: "model", data:[]}
+    for(shape of shapes) {
+        json.data.push(shape.toString());
     }
-    ssdodecahedron = new SmallSelatedDodecahedron(drawFromPoints=false,radius=15,offset=3,batang=[]);
-    ssdodecahedron.draw();
+    json = JSON.stringify(json);
+    let parseResult = JSON.parse(json);
+    loadModel(parseResult.data);
     redraw()
 }
 
@@ -266,10 +279,11 @@ function drawIcosahedroOrSSDodecahedronFromPoints(data, isUsingShadder = true){
     for(let batang of data){
         let vertices = [];
         for (let i = 0; i < batang.length; i++) {
-            vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3], batang[i][4], batang[i][5],batang[i][6]);
+            // vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3], batang[i][4], batang[i][5],batang[i][6],1.0,1.0,1.0);
+            vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3], batang[i][4], batang[i][5],batang[i][6],batang[i][7],batang[i][8],batang[i][9]);
         }
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, batang.length);
+        gl.drawArrays(gl.TRIANGLES, 0, batang.length);
     }
 }
 

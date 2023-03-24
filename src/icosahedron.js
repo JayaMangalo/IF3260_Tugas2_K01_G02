@@ -14,8 +14,10 @@ class Icosahedron {
 
       // let color = [[1,0,0,1],[1,1,0,1],[0,0.5,0.5,1]]
       let color1 = [1, 0, 0, 1];
-      let color2 = [1, 1, 0, 1];
-      let color3 = [0, 0.5, 0.5, 1];
+      let color2 = [1, 0, 0, 1];
+      let color3 = [1, 0, 0, 1];
+      // let color2 = [1, 1, 0, 1];
+      // let color3 = [0.3, 0.3, 0.9, 1];
 
       //PersegiPanjang 1 Outer (±phi, ±1, 0)
       this.p1_tr = [prr_outer, one_outer, 0].concat(color1);
@@ -385,57 +387,114 @@ class Icosahedron {
     return newpoint;
   }
 
-  pushTrianglePrism(vertex_arr) {
+  pushTrianglePrism(v_arr) {
     this.batang.push([
-      vertex_arr[0],
-      vertex_arr[1],
-      vertex_arr[2],
-      vertex_arr[5],
-      vertex_arr[0],
-      vertex_arr[3],
-      vertex_arr[1],
-      vertex_arr[4],
-      vertex_arr[5],
-      vertex_arr[3],
+      v_arr[0].concat(this.calcNormalVector(v_arr[0],v_arr[2],v_arr[1])), 
+      v_arr[1].concat(this.calcNormalVector(v_arr[0],v_arr[1],v_arr[1])),
+      v_arr[2].concat(this.calcNormalVector(v_arr[0],v_arr[2],v_arr[1])),
+
+      v_arr[1].concat(this.calcNormalVector(v_arr[1],v_arr[2],v_arr[5])),
+      v_arr[2].concat(this.calcNormalVector(v_arr[1],v_arr[2],v_arr[5])),
+      v_arr[5].concat(this.calcNormalVector(v_arr[1],v_arr[2],v_arr[5])),
+
+      v_arr[2].concat(this.calcNormalVector(v_arr[2],v_arr[0],v_arr[5])),
+      v_arr[5].concat(this.calcNormalVector(v_arr[2],v_arr[0],v_arr[5])),
+      v_arr[0].concat(this.calcNormalVector(v_arr[2],v_arr[0],v_arr[5])),
+
+      v_arr[5].concat(this.calcNormalVector(v_arr[5],v_arr[0],v_arr[3])),
+      v_arr[0].concat(this.calcNormalVector(v_arr[5],v_arr[0],v_arr[3])),
+      v_arr[3].concat(this.calcNormalVector(v_arr[5],v_arr[0],v_arr[3])),
+
+      v_arr[0].concat(this.calcNormalVector(v_arr[0],v_arr[1],v_arr[3])),
+      v_arr[3].concat(this.calcNormalVector(v_arr[0],v_arr[1],v_arr[3])),
+      v_arr[1].concat(this.calcNormalVector(v_arr[0],v_arr[1],v_arr[3])),//reverse hits
+
+      v_arr[3].concat(this.calcNormalVector(v_arr[3],v_arr[1],v_arr[4])),
+      v_arr[1].concat(this.calcNormalVector(v_arr[3],v_arr[1],v_arr[4])),
+      v_arr[4].concat(this.calcNormalVector(v_arr[3],v_arr[1],v_arr[4])),//reverse this
+
+      v_arr[1].concat(this.calcNormalVector(v_arr[1],v_arr[5],v_arr[4])),
+      v_arr[4].concat(this.calcNormalVector(v_arr[1],v_arr[5],v_arr[4])),
+      v_arr[5].concat(this.calcNormalVector(v_arr[1],v_arr[5],v_arr[4])),
+
+      v_arr[4].concat(this.calcNormalVector(v_arr[4],v_arr[5],v_arr[3])),
+      v_arr[5].concat(this.calcNormalVector(v_arr[4],v_arr[5],v_arr[3])),
+      v_arr[3].concat(this.calcNormalVector(v_arr[4],v_arr[5],v_arr[3])),
     ]);
   }
+  crossProduct(vector1, vector2) {
+    // Ensure both vectors have 3 components
+    if (vector1.length !== 3 || vector2.length !== 3) {
+      return [0,0,0]
+    }
+  
+    const x1 = vector1[0];
+    const y1 = vector1[1];
+    const z1 = vector1[2];
+    const x2 = vector2[0];
+    const y2 = vector2[1];
+    const z2 = vector2[2];
+  
+    const x3 = y1 * z2 - y2 * z1;
+    const y3 = z1 * x2 - z2 * x1;
+    const z3 = x1 * y2 - x2 * y1;
+  
+    return [x3, y3, z3];
+  }
+  normalize(vector) {
+    // Ensure the vector has 3 components
+    if (vector.length !== 3) {
+      return [0,0,0]
+    }
+  
+    const [x, y, z] = vector;
+    const magnitude = Math.sqrt(x * x + y * y + z * z);
+  
+    return [x / magnitude, y / magnitude, z / magnitude];
+  }
+  calcNormalVector(v1,v2,v3){
+    let v2_minus_v1 = [v2[0]-v1[0],v2[1]-v1[1],v2[2]-v1[2]];
+    let v3_minus_v1 = [v3[0]-v1[0],v3[1]-v1[1],v3[2]-v1[2]];
+    return this.normalize(this.crossProduct(v2_minus_v1,v3_minus_v1))
+  }
+
   createP1TopRightDiagonals() {
     this.pushTrianglePrism([
       this.p1_tr,
-      this.p1_tr_to_p1_br_and_p2_tr,
       this.p1_tr_to_p2_tr_and_p3_tr,
+      this.p1_tr_to_p1_br_and_p2_tr,
 
       this.p2_tr,
-      this.p2_tr_to_p1_tr_and_p1_br,
       this.p2_tr_to_p3_tr_and_p1_tr,
+      this.p2_tr_to_p1_tr_and_p1_br,
     ]);
     this.pushTrianglePrism([
       this.p1_tr,
-      this.p1_tr_to_p2_tr_and_p3_tr,
       this.p1_tr_to_p3_tr_and_p3_br,
+      this.p1_tr_to_p2_tr_and_p3_tr,
 
       this.p3_tr,
-      this.p3_tr_to_p1_tr_and_p2_tr,
       this.p3_tr_to_p3_br_and_p1_tr,
+      this.p3_tr_to_p1_tr_and_p2_tr,
     ]);
     this.pushTrianglePrism([
       this.p1_tr,
-      this.p1_tr_to_p3_tr_and_p3_br,
       this.p1_tr_to_p3_br_and_p2_tl,
+      this.p1_tr_to_p3_tr_and_p3_br,
 
       this.p3_br,
-      this.p3_br_to_p3_tr_and_p1_tr,
       this.p3_br_to_p1_tr_and_p2_tl,
+      this.p3_br_to_p3_tr_and_p1_tr,
     ]);
 
     this.pushTrianglePrism([
       this.p1_tr,
-      this.p1_tr_to_p3_br_and_p2_tl,
       this.p1_tr_to_p2_tl_and_p1_br,
+      this.p1_tr_to_p3_br_and_p2_tl,
 
       this.p2_tl,
-      this.p2_tl_to_p3_br_and_p1_tr,
       this.p2_tl_to_p1_tr_and_p1_br,
+      this.p2_tl_to_p3_br_and_p1_tr,
     ]);
   }
   createP1BotRightDiagonals() {
@@ -480,40 +539,40 @@ class Icosahedron {
   createP1BotLeftDiagonals() {
     this.pushTrianglePrism([
       this.p1_bl,
-      this.p1_bl_to_p1_tl_and_p2_br,
       this.p1_bl_to_p2_br_and_p3_tl,
+      this.p1_bl_to_p1_tl_and_p2_br,
 
       this.p2_br,
-      this.p2_br_to_p1_tl_and_p1_bl,
       this.p2_br_to_p1_bl_and_p3_tl,
+      this.p2_br_to_p1_tl_and_p1_bl,
     ]);
     this.pushTrianglePrism([
       this.p1_bl,
-      this.p1_bl_to_p2_br_and_p3_tl,
       this.p1_bl_to_p3_tl_and_p3_bl,
+      this.p1_bl_to_p2_br_and_p3_tl,
 
       this.p3_tl,
-      this.p3_tl_to_p2_br_and_p1_bl,
       this.p3_tl_to_p1_bl_and_p3_bl,
+      this.p3_tl_to_p2_br_and_p1_bl,
     ]);
     this.pushTrianglePrism([
       this.p1_bl,
-      this.p1_bl_to_p3_tl_and_p3_bl,
       this.p1_bl_to_p3_bl_and_p2_bl,
+      this.p1_bl_to_p3_tl_and_p3_bl,
 
       this.p3_bl,
-      this.p3_bl_to_p1_bl_and_p3_tl,
       this.p3_bl_to_p2_bl_and_p1_bl,
+      this.p3_bl_to_p1_bl_and_p3_tl,
     ]);
 
     this.pushTrianglePrism([
       this.p1_bl,
-      this.p1_bl_to_p3_bl_and_p2_bl,
       this.p1_bl_to_p2_bl_and_p1_tl,
+      this.p1_bl_to_p3_bl_and_p2_bl,
 
       this.p2_bl,
-      this.p2_bl_to_p1_bl_and_p3_bl,
       this.p2_bl_to_p1_tl_and_p1_bl,
+      this.p2_bl_to_p1_bl_and_p3_bl,
     ]);
   }
   createP1TopLeftDiagonals() {
@@ -558,21 +617,21 @@ class Icosahedron {
   createP2TopRightDiagonals() {
     this.pushTrianglePrism([
       this.p2_tr,
-      this.p2_tr_to_p2_br_and_p3_tr,
       this.p2_tr_to_p3_tr_and_p1_tr,
+      this.p2_tr_to_p2_br_and_p3_tr,
 
       this.p3_tr,
-      this.p3_tr_to_p2_tr_and_p2_br,
       this.p3_tr_to_p1_tr_and_p2_tr,
+      this.p3_tr_to_p2_tr_and_p2_br,
     ]);
     this.pushTrianglePrism([
       this.p2_tr,
-      this.p2_tr_to_p1_br_and_p3_tl,
       this.p2_tr_to_p3_tl_and_p2_br,
+      this.p2_tr_to_p1_br_and_p3_tl,
 
       this.p3_tl,
-      this.p3_tl_to_p1_br_and_p2_tr,
       this.p3_tl_to_p2_tr_and_p2_br,
+      this.p3_tl_to_p1_br_and_p2_tr,
     ]);
   }
   createP2BotRightDiagonals() {
@@ -598,21 +657,21 @@ class Icosahedron {
   createP2BotLefttDiagonals() {
     this.pushTrianglePrism([
       this.p2_bl,
-      this.p2_bl_to_p2_tl_and_p3_br,
       this.p2_bl_to_p3_br_and_p1_tl,
+      this.p2_bl_to_p2_tl_and_p3_br,
 
       this.p3_br,
-      this.p3_br_to_p2_tl_and_p2_bl,
       this.p3_br_to_p2_bl_and_p1_tl,
+      this.p3_br_to_p2_tl_and_p2_bl,
     ]);
     this.pushTrianglePrism([
       this.p2_bl,
-      this.p2_bl_to_p1_bl_and_p3_bl,
       this.p2_bl_to_p3_bl_and_p2_tl,
+      this.p2_bl_to_p1_bl_and_p3_bl,
 
       this.p3_bl,
-      this.p3_bl_to_p2_bl_and_p1_bl,
       this.p3_bl_to_p2_tl_and_p2_bl,
+      this.p3_bl_to_p2_bl_and_p1_bl,
     ]);
   }
   createP2TopLeftDiagonals() {
@@ -638,12 +697,12 @@ class Icosahedron {
   createAllStraightEdges() {
     this.pushTrianglePrism([
       this.p1_tr,
-      this.p1_tr_to_p2_tl_and_p1_br,
       this.p1_tr_to_p1_br_and_p2_tr,
+      this.p1_tr_to_p2_tl_and_p1_br,
 
       this.p1_br,
-      this.p1_br_to_p2_tl_and_p1_tr,
       this.p1_br_to_p1_tr_and_p2_tr,
+      this.p1_br_to_p2_tl_and_p1_tr,
     ]);
 
     this.pushTrianglePrism([
@@ -658,12 +717,12 @@ class Icosahedron {
 
     this.pushTrianglePrism([
       this.p2_tr,
-      this.p2_tr_to_p3_tl_and_p2_br,
       this.p2_tr_to_p2_br_and_p3_tr,
+      this.p2_tr_to_p3_tl_and_p2_br,
 
       this.p2_br,
-      this.p2_br_to_p3_tl_and_p2_tr,
       this.p2_br_to_p2_tr_and_p3_tr,
+      this.p2_br_to_p3_tl_and_p2_tr,
     ]);
 
     this.pushTrianglePrism([
@@ -678,8 +737,8 @@ class Icosahedron {
 
     this.pushTrianglePrism([
       this.p3_tr,
-      this.p3_tr_to_p1_tl_and_p3_br,
       this.p3_tr_to_p3_br_and_p1_tr,
+      this.p3_tr_to_p1_tl_and_p3_br,
 
       this.p3_br,
       this.p3_br_to_p1_tl_and_p3_tr,
@@ -688,8 +747,8 @@ class Icosahedron {
 
     this.pushTrianglePrism([
       this.p3_tl,
-      this.p3_tl_to_p1_bl_and_p3_bl,
       this.p3_tl_to_p3_bl_and_p1_br,
+      this.p3_tl_to_p1_bl_and_p3_bl,
 
       this.p3_bl,
       this.p3_bl_to_p1_bl_and_p3_tl,
@@ -724,15 +783,21 @@ class Icosahedron {
           batang[i][3],
           batang[i][4],
           batang[i][5],
-          batang[i][6]
+          batang[i][6],
+          0.1,
+          0.1,
+          0.1,
         );
       }
+      gl.bindbuffer()
       gl.bufferData(
         gl.ARRAY_BUFFER,
         new Float32Array(vertices),
         gl.STATIC_DRAW
       );
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, batang.length);
+
+      
+      gl.drawArrays(gl.TRIANGLES, 0, batang.length);
     }
   }
 
