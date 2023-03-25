@@ -176,7 +176,9 @@ function init() {
 function view() {
   let m = xRotation(cameraAngleX);
   let n = yRotation(cameraAngleY);
+  let p = zRotation(cameraAngleZ);
   cameraMatrix = multiply(m, n);
+  cameraMatrix = multiply(cameraMatrix, p);
   cameraMatrix = translate(cameraMatrix, 0, 0, cameraRadius * 1.5);
   
   let left = -canvas.width / (1000 / cameraRadius);

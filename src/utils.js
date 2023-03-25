@@ -279,6 +279,13 @@ function yRotation(radian) {
   return [c, 0, -s, 0, 0, 1, 0, 0, s, 0, c, 0, 0, 0, 0, 1];
 }
 
+function zRotation(radian) {
+  var c = Math.cos(radian);
+  var s = Math.sin(radian);
+
+  return [c, s, 0, 0, -s, c, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
+}
+
 function translation(tx, ty, tz) {
   return [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, tx, ty, tz, 1];
 }

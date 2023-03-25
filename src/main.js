@@ -21,7 +21,7 @@ function onLoad() {
   // loadTesseract();
   // loadChain();
   // loadIcosahedron();
-  // loadSSDodecahedron()
+  loadSSDodecahedron()
 }
 
 async function loadShapes() {
@@ -373,6 +373,14 @@ function changeAngleY() {
   cameraAngleY = toRadian(document.getElementById("camera-angle-y").value);
   document.getElementById("angle-value-y").innerHTML = Math.round(
     toDegree(cameraAngleY)
+  );
+  redraw((usingShape = true));
+}
+
+function changeAngleZ() {
+  cameraAngleZ = toRadian(document.getElementById("camera-angle-z").value);
+  document.getElementById("angle-value-z").innerHTML = Math.round(
+    toDegree(cameraAngleZ)
   );
   redraw((usingShape = true));
 }
