@@ -1166,7 +1166,7 @@ class HollowSquare {
   createTambalanBelakangKananAtasHadapDepan() {
     return this.createSisi(
       this.permukaan_atas_luar_kanan_belakang,
-      this.permukaan_belakang_dalam_kanan_atas,
+      this.permukaan_kanan_dalam_atas_belakang,
       this.permukaan_atas_dalam_kanan_belakang,
       this.inner_atas_kanan_belakang
     );
@@ -1197,7 +1197,7 @@ class HollowSquare {
     return this.createSisi(
       this.permukaan_atas_luar_kanan_depan,
       this.permukaan_atas_dalam_kanan_depan,
-      this.permukaan_depan_dalam_kanan_atas,
+      this.permukaan_kanan_dalam_atas_depan,
       this.inner_atas_kanan_depan
     );
     // [
@@ -1211,8 +1211,8 @@ class HollowSquare {
   createTambalanDepanKananBawahHadapAtas() {
     return this.createSisi(
       this.permukaan_bawah_luar_kanan_depan,
-      this.permukaan_kanan_dalam_bawah_depan,
       this.permukaan_depan_dalam_kanan_bawah,
+      this.permukaan_kanan_dalam_bawah_depan,
       this.inner_bawah_kanan_depan
     );
     // [
@@ -1226,8 +1226,8 @@ class HollowSquare {
   createTambalanDepanKananBawahHadapKiri() {
     return this.createSisi(
       this.permukaan_bawah_luar_kanan_depan,
-      this.permukaan_depan_dalam_kanan_bawah,
       this.permukaan_bawah_dalam_kanan_depan,
+      this.permukaan_depan_dalam_kanan_bawah,
       this.inner_bawah_kanan_depan
     );
     // [
