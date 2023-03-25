@@ -21,7 +21,7 @@ function onLoad() {
   // loadTesseract();
   // loadChain();
   // loadIcosahedron();
-  loadSSDodecahedron()
+  // loadSSDodecahedron()
 }
 
 async function loadShapes() {
@@ -328,7 +328,7 @@ function loadIcosahedron(){
     gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    icosahedron = new Icosahedron(radius=10,offset=3);
+    icosahedron = new Icosahedron(radius=10,offset=2); //Change offset to 8.15 to make non-hollow
     shapes.push(icosahedron)
     
     //Convert to points
@@ -347,7 +347,7 @@ function loadSSDodecahedron(){
     gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     
-    ssdodecahedron = new SmallSelatedDodecahedron(radius=10,offset=2);
+    ssdodecahedron = new SmallSelatedDodecahedron(radius=10,offset=2); //Change offset to 8.1 to make non-hollow
     shapes.push(ssdodecahedron)
     
     let json = {type: "model", data:[]}
