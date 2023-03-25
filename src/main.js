@@ -16,7 +16,7 @@ function onLoad() {
   init();
   // loadShapes()
   // loadTesseract();
-  // loadChain();
+  loadChain();
   // loadIcosahedron();
   // loadSSDodecahedron()
 }
@@ -34,9 +34,17 @@ async function loadShapes() {
 }
 
 function loadChain() {
-  let chain = new Chain((squareNo = 1));
+  let chain = new Chain((squareNo = 7));
   shapes.push(chain);
-  redraw((usingShape = true));
+  //Convert to points
+  let json = { type: "model", data: [] };
+  for (shape of shapes) {
+    json.data.push(shape.toString());
+  }
+  json = JSON.stringify(json);
+  let parseResult = JSON.parse(json);
+  loadModel(parseResult.data);
+  // redraw((usingShape = true));
 }
 
 function saveShapes() {
