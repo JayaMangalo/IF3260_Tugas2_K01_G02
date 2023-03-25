@@ -446,38 +446,24 @@ function oblique(left, right, bottom, top, near, far, theta, phi) {
   let cotT = 1 / Math.tan(theta);
   let cotP = 1 / Math.tan(phi);
 
-  let m = [
-    1, 0, 0, 0,
-    0, 1, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 1,
+  return [
+    2 / (right - left), // 0
+    0, // 1
+    0, // 2
+    0, // 3
+    0, // 4
+    2 / (top - bottom), // 5
+    0, // 6
+    0, // 7
+    cotT, // 8
+    cotP, // 9
+    2 / (near - far), // 10
+    0, // 11
+    (left + right) / (left - right), // 12
+    (bottom + top) / (bottom - top), // 13
+    (near + far) / (near - far), // 14
+    1, // 15
   ]
-
-  let h = [
-    1, 0, cotT, 0,
-    0, 1, cotP, 0,
-    0, 0, 1, 0,
-    0, 0, 0, 1,
-  ]
-
-  let a = 2 / (right - left);
-  let b = 2 / (top - bottom);
-  let c = - 2 / (near - far);
-  let d = - (right + left) / (right - left);
-  let e = - (top + bottom) / (top - bottom);
-  let f = - (near + far) / (near - far);
-
-  let st = [
-    a, 0, 0, d,
-    0, b, 0, e,
-    0, 0, c, f,
-    0, 0, 0, 1,
-  ]
-
-  let sth = multiply(st, h);
-  let msth = multiply(m, sth);
-
-  return msth;
 }
 
 function crossProduct(vector1, vector2) {

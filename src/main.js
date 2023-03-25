@@ -20,7 +20,7 @@ function onLoad() {
   // loadShapes()
   // loadTesseract();
   // loadChain();
-  // loadIcosah/edron();
+  // loadIcosahedron();
   // loadSSDodecahedron()
 }
 
@@ -37,7 +37,7 @@ async function loadShapes() {
 }
 
 function loadChain() {
-  let chain = new Chain((squareNo = 1));
+  let chain = new Chain((squareNo = 7));
   shapes.push(chain);
   //Convert to points
   let json = { type: "model", data: [] };

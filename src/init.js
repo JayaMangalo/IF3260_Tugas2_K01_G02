@@ -19,7 +19,7 @@ var viewMatrix;
 var projMatrix;
 var cameraMatrix;
 var eyeX, eyeY, eyeZ;
-var cameraAngleX, cameraAngleY;
+var cameraAngleX, cameraAngleY, cameraAngleZ;
 var cameraRadius;
 var fieldOfView;
 var projectionMode;
@@ -174,6 +174,11 @@ function init() {
 
 // Initialize the View
 function view() {
+  let m = xRotation(cameraAngleX);
+  let n = yRotation(cameraAngleY);
+  cameraMatrix = multiply(m, n);
+  cameraMatrix = translate(cameraMatrix, 0, 0, cameraRadius * 1.5);
+  
   let left = -canvas.width / (1000 / cameraRadius);
   let right = canvas.width / (1000 / cameraRadius);
   let bottom = -canvas.height / (1000 / cameraRadius);
@@ -183,20 +188,17 @@ function view() {
   if (projectionMode == "orthographic") {
     projMatrix = ortographic(left, right, bottom, top, near, far);
   } else if (projectionMode == "oblique") {
-    projMatrix = oblique(-4, 4, -4, 4, near, far, toRadian(-85), toRadian(-85));
+    projMatrix = oblique(left, right, bottom, top, -far, far, toRadian(-89), toRadian(-89));
+    cameraMatrix = translate(cameraMatrix, 0, 0, -50 * 1.5);
   } else if (projectionMode == "perspective") {
     projMatrix = perspective(
       fieldOfView,
       canvas.width / canvas.height,
       near,
       far
-    );
-  }
-
-  let m = xRotation(cameraAngleX);
-  let n = yRotation(cameraAngleY);
-  cameraMatrix = multiply(m, n);
-  cameraMatrix = translate(cameraMatrix, 0, 0, cameraRadius * 1.5);
+      );
+    }
+    
   viewMatrix = inverse(cameraMatrix);
 
   gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);
