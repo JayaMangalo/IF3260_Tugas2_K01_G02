@@ -20,7 +20,7 @@ function onLoad() {
   // loadShapes()
   // loadTesseract();
   // loadChain();
-  // loadIcosahedron();
+  loadIcosahedron();
   // loadSSDodecahedron()
 }
 
@@ -394,6 +394,10 @@ function resetCamera() {
   cameraRadius = 50;
   cameraAngleX = toRadian(0);
   cameraAngleY = toRadian(0);
+  cameraAngleZ = toRadian(0);
+  projectionMode = "orthographic";
+  isUsingAnimation = false;
+  
   document.getElementById("camera-radius").value = cameraRadius;
   document.getElementById("radius-value").innerHTML = cameraRadius;
   document.getElementById("camera-angle-x").value = toDegree(cameraAngleX);
@@ -404,7 +408,11 @@ function resetCamera() {
   document.getElementById("angle-value-y").innerHTML = Math.round(
     toDegree(cameraAngleY)
   );
-  projectionMode = "orthographic";
+  document.getElementById("camera-angle-z").value = toDegree(cameraAngleZ);
+  document.getElementById("angle-value-z").innerHTML = Math.round(
+    toDegree(cameraAngleZ)
+  );
+  document.getElementById("toggleAnimation").checked = false;
   redraw((usingShape = true));
 }
 
