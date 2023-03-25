@@ -1,9 +1,6 @@
 class Icosahedron {
-  constructor(drawFromPoints, radius, offset, batang) {
-    if (drawFromPoints) {
-      this.batang = batang;
-    } else {
-      // this.isUsingShadder = true;
+  constructor(radius, offset) {
+        // this.isUsingShadder = true;
 
       let phi_ratio = (1 + Math.sqrt(5)) / 2; //φ
       let prr_outer = phi_ratio * radius; //φ for out
@@ -366,7 +363,6 @@ class Icosahedron {
           this.p3_bl
         ).concat(color3);
       }
-    }
   }
 
   inbetween_point(originpoint, targetpoint1, targetpoint2) {
@@ -768,35 +764,35 @@ class Icosahedron {
 
     this.createAllStraightEdges();
   }
-  draw() {
-    if (this.batang == null) {
-      this.createFrames();
-    }
-    for (let batang of this.batang) {
-      let vertices = [];
-      for (let i = 0; i < batang.length; i++) {
-        vertices.push(
-          batang[i][0],
-          batang[i][1],
-          batang[i][2],
-          batang[i][3],
-          batang[i][4],
-          batang[i][5],
-          batang[i][6],
-          batang[i][7],
-          batang[i][8],
-          batang[i][9],
-        );
-      }
-      gl.bufferData(
-        gl.ARRAY_BUFFER,
-        new Float32Array(vertices),
-        gl.STATIC_DRAW
-      );
+  // draw() {
+  //   if (this.batang == null) {
+  //     this.createFrames();
+  //   }
+  //   for (let batang of this.batang) {
+  //     let vertices = [];
+  //     for (let i = 0; i < batang.length; i++) {
+  //       vertices.push(
+  //         batang[i][0],
+  //         batang[i][1],
+  //         batang[i][2],
+  //         batang[i][3],
+  //         batang[i][4],
+  //         batang[i][5],
+  //         batang[i][6],
+  //         batang[i][7],
+  //         batang[i][8],
+  //         batang[i][9],
+  //       );
+  //     }
+  //     gl.bufferData(
+  //       gl.ARRAY_BUFFER,
+  //       new Float32Array(vertices),
+  //       gl.STATIC_DRAW
+  //     );
 
-      gl.drawArrays(gl.TRIANGLES, 0, batang.length);
-    }
-  }
+  //     gl.drawArrays(gl.TRIANGLES, 0, batang.length);
+  //   }
+  // }
 
 //   changeShadder(){
 //     console.log(this.isUsingShadder)

@@ -11,6 +11,7 @@ var colorAttribLocation;
 var normalAttribLocation;
 var shadderSource;
 
+var light_source = [1,1,0]
 var matWorldLocation;
 var matViewLocation;
 var matProjLocation;
@@ -45,8 +46,6 @@ function init() {
 
         out vec4 fragColor;
         out vec3 v_normal;
-       
-        uniform mat4 u_worldInverseTranspose;
 
         uniform mat4 mWorld;
         uniform mat4 mView;
@@ -55,7 +54,6 @@ function init() {
         void main() {
             fragColor = vertColor;
             gl_Position = mProj * mView * mWorld * vec4(vertPosition, 1);
-            // v_normal = (u_worldInverseTranspose * vec4(a_normal, 0)).xyz;
             v_normal = a_normal;
         }`,
 
@@ -155,10 +153,12 @@ function init() {
 
   //Start the program
   gl.useProgram(program);
+  // lightSourceLocation = gl.getUniformLocation(program, "a_lightsource");
   matWorldLocation = gl.getUniformLocation(program, "mWorld");
   matViewLocation = gl.getUniformLocation(program, "mView");
   matProjLocation = gl.getUniformLocation(program, "mProj");
 
+  // lightSourceVector = new Float32Array(light_source)
   worldMatrix = new Float32Array(16);
   viewMatrix = new Float32Array(16);
   projMatrix = new Float32Array(16);

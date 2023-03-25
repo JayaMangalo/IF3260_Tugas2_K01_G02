@@ -20,8 +20,8 @@ function onLoad() {
   // loadShapes()
   // loadTesseract();
   // loadChain();
-  loadIcosahedron();
-  // loadSSDodecahedron()
+  // loadIcosahedron();
+  loadSSDodecahedron()
 }
 
 async function loadShapes() {
@@ -328,7 +328,7 @@ function loadIcosahedron(){
     gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    icosahedron = new Icosahedron(drawFromPoints=false,radius=10,offset=3,batang=[]);
+    icosahedron = new Icosahedron(radius=10,offset=3);
     shapes.push(icosahedron)
     
     //Convert to points
@@ -339,7 +339,6 @@ function loadIcosahedron(){
     json = JSON.stringify(json);
     let parseResult = JSON.parse(json);
 
-    console.log("ass")
     loadModel(parseResult.data);
     redraw()
 }
@@ -348,7 +347,7 @@ function loadSSDodecahedron(){
     gl.clearColor(0.9296875, 0.91015625, 0.8515625, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     
-    ssdodecahedron = new SmallSelatedDodecahedron(drawFromPoints=false,radius=10,offset=2,batang=[]);
+    ssdodecahedron = new SmallSelatedDodecahedron(radius=10,offset=2);
     shapes.push(ssdodecahedron)
     
     let json = {type: "model", data:[]}
@@ -474,9 +473,6 @@ function redraw(usingShape = false) {
 
 function toggleShadder() {
   let isShadder = document.getElementById("toggleShadder").checked;
-  for (shape of shapes) {
-    shape.changeShadder(isShadder);
-  }
   isUsingShadder = isShadder;
   redraw((usingShape = true));
 }
@@ -487,6 +483,59 @@ function toggleAnimation() {
 }
 
 //Draw From Points=======================================================================================================
+// function drawTesseractFromPoints(data, innerColor, outerColor) {
+//   for (let batang of data) {
+//     let vertices = [];
+//     if (isUsingShadder) {
+//       for (let i = 0; i < batang.length; i++) {
+//         vertices.push(
+//           batang[i][0],
+//           batang[i][1],
+//           batang[i][2],
+//           batang[i][3][0],
+//           batang[i][3][1],
+//           batang[i][3][2],
+//           batang[i][3][3],
+//           batang[i][4],
+//           batang[i][5],
+//           batang[i][6],
+//         );
+//       }
+//     } else {
+//       for (let i = 0; i < batang.length; i++) {
+//         if (i % 2 != 0) {
+//           vertices.push(
+//             batang[i][0],
+//             batang[i][1],
+//             batang[i][2],
+//             innerColor[0],
+//             innerColor[1],
+//             innerColor[2],
+//             innerColor[3],
+//             batang[i][4],
+//             batang[i][5],
+//             batang[i][6]
+//           );
+//         } else {
+//           vertices.push(
+//             batang[i][0],
+//             batang[i][1],
+//             batang[i][2],
+//             outerColor[0],
+//             outerColor[1],
+//             outerColor[2],
+//             outerColor[3],
+//             batang[i][4],
+//             batang[i][5],
+//             batang[i][6]
+//           );
+//         }
+//       }
+//     }
+//     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+//     gl.drawArrays(gl.TRIANGLES, 0, batang.length);
+//   }
+// }
 function drawTesseractFromPoints(data, innerColor, outerColor) {
   for (let batang of data) {
     let vertices = [];
@@ -507,7 +556,6 @@ function drawTesseractFromPoints(data, innerColor, outerColor) {
       }
     } else {
       for (let i = 0; i < batang.length; i++) {
-        if (i % 2 != 0) {
           vertices.push(
             batang[i][0],
             batang[i][1],
@@ -516,24 +564,10 @@ function drawTesseractFromPoints(data, innerColor, outerColor) {
             innerColor[1],
             innerColor[2],
             innerColor[3],
-            batang[i][4],
-            batang[i][5],
-            batang[i][6]
+            light_source[0],
+            light_source[1],
+            light_source[2],
           );
-        } else {
-          vertices.push(
-            batang[i][0],
-            batang[i][1],
-            batang[i][2],
-            outerColor[0],
-            outerColor[1],
-            outerColor[2],
-            outerColor[3],
-            batang[i][4],
-            batang[i][5],
-            batang[i][6]
-          );
-        }
       }
     }
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
@@ -544,7 +578,7 @@ function drawTesseractFromPoints(data, innerColor, outerColor) {
 function drawCubeFromPoints(data) {
   for (let batang of data) {
     let vertices = [];
-    if (true) {
+    if (isUsingShadder) {
       for (let i = 0; i < batang.length; i++) {
         vertices.push(
           batang[i][0],
@@ -581,15 +615,44 @@ function drawCubeFromPoints(data) {
   }
 }
 
-function drawIcosahedroOrSSDodecahedronFromPoints(data, isUsingShadder = true){
+function drawIcosahedroOrSSDodecahedronFromPoints(data){
     for(let batang of data){
         let vertices = [];
-        for (let i = 0; i < batang.length; i++) {
-            // vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3], batang[i][4], batang[i][5],batang[i][6],1.0,1.0,1.0);
-            vertices.push(batang[i][0], batang[i][1], batang[i][2], batang[i][3], batang[i][4], batang[i][5],batang[i][6],batang[i][7],batang[i][8],batang[i][9]);
-        }
+        if (isUsingShadder) {
+          for (let i = 0; i < batang.length; i++) {
+            vertices.push(
+              batang[i][0],
+              batang[i][1],
+              batang[i][2],
+              batang[i][3],
+              batang[i][4],
+              batang[i][5],
+              batang[i][6],
+              batang[i][7],
+              batang[i][8],
+              batang[i][9],
+            );
+          }
+        } else {
+          for (let i = 0; i < batang.length; i++) {
+              vertices.push(
+                batang[i][0],
+                batang[i][1],
+                batang[i][2],
+                batang[i][3],
+                batang[i][4],
+                batang[i][5],
+                batang[i][6],
+                light_source[0],
+                light_source[1],
+                light_source[2],
+              );
+            }
+          }
+
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
         gl.drawArrays(gl.TRIANGLES, 0, batang.length);
+        
     }
   }
 
@@ -659,7 +722,7 @@ function Transform(method, axis) {
   }
 
   if (method == 0) {
-    params = [value, 0];
+    params = [value, 0,0];
     if (axis == 0) {
       func = RotatePointXAxis;
     } else if (axis == 1) {
@@ -681,6 +744,7 @@ function Transform(method, axis) {
   for (model of models) {
     for (shape of model) {
       if (shape.type == "Tesseract") {
+        params[2] = 0;
         for (batang of shape.outerSquare.vertices) {
           for (point of batang) {
             point = func(point, params);
@@ -698,6 +762,7 @@ function Transform(method, axis) {
         }
       }
       if (shape.type == "Icosahedron" || shape.type == "SSDodecahedron") {
+        params[2] = 3;
         for (batang of shape.vertices) {
           for (point of batang) {
             point = func(point, params);
@@ -705,6 +770,7 @@ function Transform(method, axis) {
         }
       }
       if(shape.type=="Chain"){
+        params[2] = 3;
         for(square of shape.squares){
           for (batang of square.vertices) {
             for (point of batang) {
@@ -752,10 +818,11 @@ function Transform(method, axis) {
 function RotatePointXAxis(point, params) {
   let degree = params[0];
   let centerOfRotation = modelsCenterPoint[params[1]];
+  let offsetIcoIndex = params[2]
   let y = point[1] - centerOfRotation[1];
   let z = point[2] - centerOfRotation[2];
-  let yNormal = point[5] - centerOfRotation[1];
-  let zNormal = point[6] - centerOfRotation[2];
+  let yNormal = point[5+offsetIcoIndex] - centerOfRotation[1];
+  let zNormal = point[6+offsetIcoIndex] - centerOfRotation[2];
   let rad = (degree * Math.PI) / 180;
   let cos = Math.cos(rad);
   let sin = Math.sin(rad);
@@ -765,18 +832,19 @@ function RotatePointXAxis(point, params) {
   let newZNormal = yNormal * sin + zNormal * cos;
   point[1] = newY + centerOfRotation[1];
   point[2] = newZ + centerOfRotation[2];
-  point[5] = newYNormal + centerOfRotation[1];
-  point[6] = newZNormal + centerOfRotation[2];
+  point[5+offsetIcoIndex] = newYNormal + centerOfRotation[1];
+  point[6+offsetIcoIndex] = newZNormal + centerOfRotation[2];
   return point;
 }
 
 function RotatePointYAxis(point, params) {
   let degree = params[0];
   let centerOfRotation = modelsCenterPoint[params[1]];
+  let offsetIcoIndex = params[2]
   let x = point[0] - centerOfRotation[0];
   let z = point[2] - centerOfRotation[2];
-  let xNormal = point[4] - centerOfRotation[0];
-  let zNormal = point[6] - centerOfRotation[2];
+  let xNormal = point[4+offsetIcoIndex] - centerOfRotation[0];
+  let zNormal = point[6+offsetIcoIndex] - centerOfRotation[2];
   let rad = (degree * Math.PI) / 180;
   let cos = Math.cos(rad);
   let sin = Math.sin(rad);
@@ -786,18 +854,19 @@ function RotatePointYAxis(point, params) {
   let newZNormal = xNormal * sin + zNormal * cos;
   point[0] = newX + centerOfRotation[0];
   point[2] = newZ + centerOfRotation[2];
-  point[4] = newXNormal + centerOfRotation[0];
-  point[6] = newZNormal + centerOfRotation[2];
+  point[4+offsetIcoIndex] = newXNormal + centerOfRotation[0];
+  point[6+offsetIcoIndex] = newZNormal + centerOfRotation[2];
   return point;
 }
 
 function RotatePointZAxis(point, params) {
   let degree = params[0];
   let centerOfRotation = modelsCenterPoint[params[1]];
+  let offsetIcoIndex = params[2]
   let x = point[0] - centerOfRotation[0];
   let y = point[1] - centerOfRotation[1];
-  let xNormal = point[4] - centerOfRotation[0];
-  let yNormal = point[5] - centerOfRotation[1];
+  let xNormal = point[4+offsetIcoIndex] - centerOfRotation[0];
+  let yNormal = point[5+offsetIcoIndex] - centerOfRotation[1];
   let rad = (degree * Math.PI) / 180;
   let cos = Math.cos(rad);
   let sin = Math.sin(rad);
@@ -807,8 +876,8 @@ function RotatePointZAxis(point, params) {
   let newYNormal = xNormal * sin + yNormal * cos;
   point[0] = newX + centerOfRotation[0];
   point[1] = newY + centerOfRotation[1];
-  point[4] = newXNormal + centerOfRotation[0];
-  point[5] = newYNormal + centerOfRotation[1];
+  point[4+offsetIcoIndex] = newXNormal + centerOfRotation[0];
+  point[5+offsetIcoIndex] = newYNormal + centerOfRotation[1];
   return point;
 }
 
