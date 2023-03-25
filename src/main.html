@@ -47,16 +47,32 @@
                 <label for="camera-angle" class="slider-label"
                   >Camera Angle</label
                 >
-                <input
-                  type="range"
-                  id="camera-angle"
-                  name="camera-angle"
-                  min="-360"
-                  max="360"
-                  value="0"
-                  oninput="changeAngle()"
-                />
-                <span id="angle-value">0</span>
+                <div>
+                  <span>X-axis</span>
+                  <input
+                    type="range"
+                    id="camera-angle-x"
+                    name="camera-angle-x"
+                    min="-90"
+                    max="90"
+                    value="0"
+                    oninput="changeAngleX()"
+                  />
+                  <span id="angle-value-x">0</span>
+                </div>
+                <div>
+                  <span>Y-axis</span>
+                  <input
+                    type="range"
+                    id="camera-angle-y"
+                    name="camera-angle-y"
+                    min="-360"
+                    max="360"
+                    value="0"
+                    oninput="changeAngleY()"
+                  />
+                  <span id="angle-value-y">0</span>
+                </div>
               </div>
 
               <label for="projection-mode" class="slider-label"

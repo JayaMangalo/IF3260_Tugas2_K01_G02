@@ -357,10 +357,19 @@ function loadSSDodecahedron(){
     loadModel(parseResult.data);
     redraw()
 }
-function changeAngle() {
-  cameraAngle = toRadian(document.getElementById("camera-angle").value);
-  document.getElementById("angle-value").innerHTML = Math.round(
-    toDegree(cameraAngle)
+
+function changeAngleX() {
+  cameraAngleX = toRadian(document.getElementById("camera-angle-x").value);
+  document.getElementById("angle-value-x").innerHTML = Math.round(
+    toDegree(cameraAngleX)
+  );
+  redraw((usingShape = true));
+}
+
+function changeAngleY() {
+  cameraAngleY = toRadian(document.getElementById("camera-angle-y").value);
+  document.getElementById("angle-value-y").innerHTML = Math.round(
+    toDegree(cameraAngleY)
   );
   redraw((usingShape = true));
 }
