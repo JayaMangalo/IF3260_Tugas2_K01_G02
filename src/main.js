@@ -420,8 +420,8 @@ function redraw(usingShape = false) {
         rotAngle = -360 + (rotAngle % 360);
       }
       
-      document.getElementById("camera-angle").value = Math.round(rotAngle);
-      document.getElementById("angle-value").innerHTML = Math.round(rotAngle);
+      document.getElementById("camera-angle-y").value = Math.round(rotAngle);
+      document.getElementById("angle-value-y").innerHTML = Math.round(rotAngle);
       rotAngle = toRadian(rotAngle);
       rotate(worldMatrix, id, rotAngle, [0, 1, 0]);
     }
