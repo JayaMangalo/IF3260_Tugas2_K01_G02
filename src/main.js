@@ -674,6 +674,11 @@ function Transform(method, axis) {
             point = func(point, params);
           }
         }
+        for (batang of shape.vertices) {
+          for (point of batang) {
+            point = func(point, params);
+          }
+        }
       }
       if (shape.type == "Icosahedron" || shape.type == "SSDodecahedron") {
         for (batang of shape.vertices) {
@@ -682,9 +687,13 @@ function Transform(method, axis) {
           }
         }
       }
-      for (batang of shape.vertices) {
-        for (point of batang) {
-          point = func(point, params);
+      if(shape.type=="Chain"){
+        for(square of shape.squares){
+          for (batang of square.vertices) {
+            for (point of batang) {
+              point = func(point, params);
+            }
+          }
         }
       }
     }
@@ -728,13 +737,19 @@ function RotatePointXAxis(point, params) {
   let centerOfRotation = modelsCenterPoint[params[1]];
   let y = point[1] - centerOfRotation[1];
   let z = point[2] - centerOfRotation[2];
+  let yNormal = point[5] - centerOfRotation[1];
+  let zNormal = point[6] - centerOfRotation[2];
   let rad = (degree * Math.PI) / 180;
   let cos = Math.cos(rad);
   let sin = Math.sin(rad);
   let newY = y * cos - z * sin;
   let newZ = y * sin + z * cos;
+  let newYNormal = yNormal * cos - zNormal * sin;
+  let newZNormal = yNormal * sin + zNormal * cos;
   point[1] = newY + centerOfRotation[1];
   point[2] = newZ + centerOfRotation[2];
+  point[5] = newYNormal + centerOfRotation[1];
+  point[6] = newZNormal + centerOfRotation[2];
   return point;
 }
 
@@ -743,13 +758,19 @@ function RotatePointYAxis(point, params) {
   let centerOfRotation = modelsCenterPoint[params[1]];
   let x = point[0] - centerOfRotation[0];
   let z = point[2] - centerOfRotation[2];
+  let xNormal = point[4] - centerOfRotation[0];
+  let zNormal = point[6] - centerOfRotation[2];
   let rad = (degree * Math.PI) / 180;
   let cos = Math.cos(rad);
   let sin = Math.sin(rad);
   let newX = x * cos - z * sin;
   let newZ = x * sin + z * cos;
+  let newXNormal = xNormal * cos - zNormal * sin;
+  let newZNormal = xNormal * sin + zNormal * cos;
   point[0] = newX + centerOfRotation[0];
   point[2] = newZ + centerOfRotation[2];
+  point[4] = newXNormal + centerOfRotation[0];
+  point[6] = newZNormal + centerOfRotation[2];
   return point;
 }
 
@@ -758,13 +779,19 @@ function RotatePointZAxis(point, params) {
   let centerOfRotation = modelsCenterPoint[params[1]];
   let x = point[0] - centerOfRotation[0];
   let y = point[1] - centerOfRotation[1];
+  let xNormal = point[4] - centerOfRotation[0];
+  let yNormal = point[5] - centerOfRotation[1];
   let rad = (degree * Math.PI) / 180;
   let cos = Math.cos(rad);
   let sin = Math.sin(rad);
   let newX = x * cos - y * sin;
   let newY = x * sin + y * cos;
+  let newXNormal = xNormal * cos - yNormal * sin;
+  let newYNormal = xNormal * sin + yNormal * cos;
   point[0] = newX + centerOfRotation[0];
   point[1] = newY + centerOfRotation[1];
+  point[4] = newXNormal + centerOfRotation[0];
+  point[5] = newYNormal + centerOfRotation[1];
   return point;
 }
 
