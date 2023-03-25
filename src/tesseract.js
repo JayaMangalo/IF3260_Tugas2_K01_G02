@@ -61,33 +61,33 @@ class NormalTesseract extends Tesseract {
 
   createBatangMiringKiriAtasDepan() {
     return this.createSisi(
-      this.outerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
       this.innerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
-      this.outerSquare.miring_kiri_atas_depan_bagian_kanan_bawah,
+      this.outerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
       this.innerSquare.miring_kiri_atas_depan_bagian_kanan_bawah,
+      this.outerSquare.miring_kiri_atas_depan_bagian_kanan_bawah,
     )
       .concat(
         this.createSisi(
-          this.outerSquare.miring_kiri_atas_depan_bagian_kanan_bawah,
           this.innerSquare.miring_kiri_atas_depan_bagian_kanan_bawah,
-          this.outerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
+          this.outerSquare.miring_kiri_atas_depan_bagian_kanan_bawah,
           this.innerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
+          this.outerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
         )
       )
       .concat(
         this.createSisi(
-          this.outerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
           this.innerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
-          this.outerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
+          this.outerSquare.miring_kiri_atas_depan_bagian_kiri_bawah,
           this.innerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
+          this.outerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
         )
       )
       .concat(
         this.createSisi(
-          this.outerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
           this.innerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
-          this.outerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
+          this.outerSquare.miring_kiri_atas_depan_bagian_kiri_atas,
           this.innerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
+          this.outerSquare.miring_kiri_atas_depan_bagian_kanan_atas,
         )
       );
     // [
@@ -286,30 +286,30 @@ class NormalTesseract extends Tesseract {
 
   createBatangMiringKananBawahBelakang() {
     return this.createSisi(
-      this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
       this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
+      this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
+      this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_bawah,
       this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_bawah,
-      this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_bawah
     ).concat(
       this.createSisi(
-        this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_bawah,
         this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_bawah,
-        this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah,
-        this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah
-      )
-    ).concat(
-      this.createSisi(
-        this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah,
+        this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_bawah,
         this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah,
-        this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas,
-        this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas
+        this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah,
       )
     ).concat(
       this.createSisi(
-        this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas,
+        this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah,
+        this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_bawah,
         this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas,
+        this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas,
+      )
+    ).concat(
+      this.createSisi(
+        this.innerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas,
+        this.outerSquare.miring_kanan_bawah_belakang_bagian_kiri_atas,
+        this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
         this.outerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas,
-        this.innerSquare.miring_kanan_bawah_belakang_bagian_kanan_atas
       )
     );
 
