@@ -1,4 +1,4 @@
-class SmallSelatedDodecahedron {
+class SmallStellatedDodecahedron {
   constructor( radius, offset) {
       let phi_ratio = (1 + Math.sqrt(5)) / 2; //φ
       let prr_outer = phi_ratio * radius; //φ for out
