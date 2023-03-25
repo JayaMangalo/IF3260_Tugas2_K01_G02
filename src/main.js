@@ -10,9 +10,9 @@ var zRotateValue = 0;
 var xTranslateValue = 0;
 var yTranslateValue = 0;
 var zTranslateValue = 0;
-var xScaleValue = 1;
-var yScaleValue = 1;
-var zScaleValue = 1;
+var xScaleValue = 10;
+var yScaleValue = 10;
+var zScaleValue = 10;
 
 function onLoad() {
   //Initialize the WebGL
