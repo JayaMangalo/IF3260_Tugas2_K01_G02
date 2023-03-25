@@ -610,25 +610,28 @@ class HollowSquare {
 
   createBatangKiriatas() {
     return this.createSisi(
-        this.permukaan_atas_luar_kiri_depan,
-        this.permukaan_atas_luar_kiri_belakang,
-        this.permukaan_atas_dalam_kiri_depan,
-        this.permukaan_atas_dalam_kiri_belakang
-      ).concat(
+      this.permukaan_atas_luar_kiri_depan,
+      this.permukaan_atas_luar_kiri_belakang,
+      this.permukaan_atas_dalam_kiri_depan,
+      this.permukaan_atas_dalam_kiri_belakang
+    )
+      .concat(
         this.createSisi(
           this.permukaan_atas_dalam_kiri_depan,
           this.permukaan_atas_dalam_kiri_belakang,
           this.inner_kiri_atas_depan,
           this.inner_kiri_atas_belakang
         )
-      ).concat(
+      )
+      .concat(
         this.createSisi(
           this.inner_kiri_atas_depan,
           this.inner_kiri_atas_belakang,
           this.permukaan_kiri_dalam_atas_depan,
           this.permukaan_kiri_dalam_atas_belakang
         )
-      ).concat(
+      )
+      .concat(
         this.createSisi(
           this.permukaan_kiri_dalam_atas_depan,
           this.permukaan_kiri_dalam_atas_belakang,
@@ -701,28 +704,31 @@ class HollowSquare {
       this.permukaan_atas_luar_kiri_belakang,
       this.permukaan_atas_dalam_kanan_belakang,
       this.permukaan_atas_dalam_kiri_belakang
-    ).concat(
-      this.createSisi(
-        this.permukaan_atas_dalam_kanan_belakang,
-        this.permukaan_atas_dalam_kiri_belakang, 
-        this.inner_kanan_atas_belakang,
-        this.inner_kiri_atas_belakang
+    )
+      .concat(
+        this.createSisi(
+          this.permukaan_atas_dalam_kanan_belakang,
+          this.permukaan_atas_dalam_kiri_belakang,
+          this.inner_kanan_atas_belakang,
+          this.inner_kiri_atas_belakang
+        )
       )
-    ).concat(
-      this.createSisi(
-        this.inner_kanan_atas_belakang,
-        this.inner_kiri_atas_belakang,
-        this.permukaan_belakang_dalam_kanan_atas,
-        this.permukaan_belakang_dalam_kiri_atas
+      .concat(
+        this.createSisi(
+          this.inner_kanan_atas_belakang,
+          this.inner_kiri_atas_belakang,
+          this.permukaan_belakang_dalam_kanan_atas,
+          this.permukaan_belakang_dalam_kiri_atas
+        )
       )
-    ).concat(
-      this.createSisi(
-        this.permukaan_belakang_dalam_kanan_atas,
-        this.permukaan_belakang_dalam_kiri_atas,
-        this.permukaan_atas_luar_kanan_belakang,
-        this.permukaan_atas_luar_kiri_belakang
-      )
-    );
+      .concat(
+        this.createSisi(
+          this.permukaan_belakang_dalam_kanan_atas,
+          this.permukaan_belakang_dalam_kiri_atas,
+          this.permukaan_atas_luar_kanan_belakang,
+          this.permukaan_atas_luar_kiri_belakang
+        )
+      );
     // [
     //   this.permukaan_atas_luar_kanan_belakang,
     //   this.permukaan_atas_luar_kiri_belakang,
@@ -743,28 +749,31 @@ class HollowSquare {
       this.permukaan_depan_luar_kiri_atas,
       this.permukaan_depan_dalam_kiri_bawah,
       this.permukaan_depan_dalam_kiri_atas
-    ).concat(
-      this.createSisi(
-        this.permukaan_depan_dalam_kiri_bawah,
-        this.permukaan_depan_dalam_kiri_atas,
-        this.inner_depan_kiri_bawah,
-        this.inner_depan_kiri_atas
+    )
+      .concat(
+        this.createSisi(
+          this.permukaan_depan_dalam_kiri_bawah,
+          this.permukaan_depan_dalam_kiri_atas,
+          this.inner_depan_kiri_bawah,
+          this.inner_depan_kiri_atas
+        )
       )
-    ).concat(
-      this.createSisi(
-        this.inner_depan_kiri_bawah,
-        this.inner_depan_kiri_atas,
-        this.permukaan_kiri_dalam_bawah_depan,
-        this.permukaan_kiri_dalam_atas_depan
+      .concat(
+        this.createSisi(
+          this.inner_depan_kiri_bawah,
+          this.inner_depan_kiri_atas,
+          this.permukaan_kiri_dalam_bawah_depan,
+          this.permukaan_kiri_dalam_atas_depan
+        )
       )
-    ).concat(
-      this.createSisi(
-        this.permukaan_kiri_dalam_bawah_depan,
-        this.permukaan_kiri_dalam_atas_depan,
-        this.permukaan_depan_luar_kiri_bawah,
-        this.permukaan_depan_luar_kiri_atas
-      )
-    );
+      .concat(
+        this.createSisi(
+          this.permukaan_kiri_dalam_bawah_depan,
+          this.permukaan_kiri_dalam_atas_depan,
+          this.permukaan_depan_luar_kiri_bawah,
+          this.permukaan_depan_luar_kiri_atas
+        )
+      );
     // [
     //   this.permukaan_depan_luar_kiri_atas,
     //   this.permukaan_depan_luar_kiri_bawah,
@@ -919,29 +928,32 @@ class HollowSquare {
       this.permukaan_depan_luar_kanan_bawah,
       this.permukaan_depan_luar_kiri_bawah,
       this.permukaan_depan_dalam_kanan_bawah,
-      this.permukaan_depan_dalam_kiri_bawah,
-    ).concat(
-      this.createSisi(
-        this.permukaan_depan_dalam_kanan_bawah,
-        this.permukaan_depan_dalam_kiri_bawah,
-        this.inner_depan_kanan_bawah,
-        this.inner_depan_kiri_bawah
+      this.permukaan_depan_dalam_kiri_bawah
+    )
+      .concat(
+        this.createSisi(
+          this.permukaan_depan_dalam_kanan_bawah,
+          this.permukaan_depan_dalam_kiri_bawah,
+          this.inner_depan_kanan_bawah,
+          this.inner_depan_kiri_bawah
+        )
       )
-    ).concat(
-      this.createSisi(
-        this.inner_depan_kanan_bawah,
-        this.inner_depan_kiri_bawah,
-        this.permukaan_bawah_dalam_kanan_depan,
-        this.permukaan_bawah_dalam_kiri_depan
+      .concat(
+        this.createSisi(
+          this.inner_depan_kanan_bawah,
+          this.inner_depan_kiri_bawah,
+          this.permukaan_bawah_dalam_kanan_depan,
+          this.permukaan_bawah_dalam_kiri_depan
+        )
       )
-    ).concat(
-      this.createSisi(
-        this.permukaan_bawah_dalam_kanan_depan,
-        this.permukaan_bawah_dalam_kiri_depan,
-        this.permukaan_depan_luar_kanan_bawah,
-        this.permukaan_depan_luar_kiri_bawah
-      )
-    );
+      .concat(
+        this.createSisi(
+          this.permukaan_bawah_dalam_kanan_depan,
+          this.permukaan_bawah_dalam_kiri_depan,
+          this.permukaan_depan_luar_kanan_bawah,
+          this.permukaan_depan_luar_kiri_bawah
+        )
+      );
     // [
     //   this.permukaan_depan_luar_kanan_bawah,
     //   this.permukaan_depan_luar_kiri_bawah,
@@ -961,29 +973,32 @@ class HollowSquare {
       this.permukaan_belakang_luar_kanan_bawah,
       this.permukaan_belakang_luar_kiri_bawah,
       this.permukaan_belakang_dalam_kanan_bawah,
-      this.permukaan_belakang_dalam_kiri_bawah,
-    ).concat(
-      this.createSisi(
-        this.permukaan_belakang_dalam_kanan_bawah,
-        this.permukaan_belakang_dalam_kiri_bawah,
-        this.inner_belakang_kanan_bawah,
-        this.inner_belakang_kiri_bawah
+      this.permukaan_belakang_dalam_kiri_bawah
+    )
+      .concat(
+        this.createSisi(
+          this.permukaan_belakang_dalam_kanan_bawah,
+          this.permukaan_belakang_dalam_kiri_bawah,
+          this.inner_belakang_kanan_bawah,
+          this.inner_belakang_kiri_bawah
+        )
       )
-    ).concat(
-      this.createSisi(
-        this.inner_belakang_kanan_bawah,
-        this.inner_belakang_kiri_bawah,
-        this.permukaan_bawah_dalam_kanan_belakang,
-        this.permukaan_bawah_dalam_kiri_belakang
+      .concat(
+        this.createSisi(
+          this.inner_belakang_kanan_bawah,
+          this.inner_belakang_kiri_bawah,
+          this.permukaan_bawah_dalam_kanan_belakang,
+          this.permukaan_bawah_dalam_kiri_belakang
+        )
       )
-    ).concat(
-      this.createSisi(
-        this.permukaan_bawah_dalam_kanan_belakang,
-        this.permukaan_bawah_dalam_kiri_belakang,
-        this.permukaan_belakang_luar_kanan_bawah,
-        this.permukaan_belakang_luar_kiri_bawah
-      )
-    );
+      .concat(
+        this.createSisi(
+          this.permukaan_bawah_dalam_kanan_belakang,
+          this.permukaan_bawah_dalam_kiri_belakang,
+          this.permukaan_belakang_luar_kanan_bawah,
+          this.permukaan_belakang_luar_kiri_bawah
+        )
+      );
     // [
     //   this.permukaan_belakang_luar_kanan_bawah,
     //   this.permukaan_belakang_luar_kiri_bawah,
@@ -1004,28 +1019,31 @@ class HollowSquare {
       this.permukaan_bawah_luar_kiri_depan,
       this.permukaan_bawah_dalam_kiri_belakang,
       this.permukaan_bawah_dalam_kiri_depan
-    ).concat(
-      this.createSisi(
-        this.permukaan_bawah_dalam_kiri_belakang,
-        this.permukaan_bawah_dalam_kiri_depan,
-        this.inner_bawah_kiri_belakang,
-        this.inner_bawah_kiri_depan
+    )
+      .concat(
+        this.createSisi(
+          this.permukaan_bawah_dalam_kiri_belakang,
+          this.permukaan_bawah_dalam_kiri_depan,
+          this.inner_bawah_kiri_belakang,
+          this.inner_bawah_kiri_depan
+        )
       )
-    ).concat(
-      this.createSisi(
-        this.inner_bawah_kiri_belakang,
-        this.inner_bawah_kiri_depan,
-        this.permukaan_kiri_dalam_bawah_belakang,
-        this.permukaan_kiri_dalam_bawah_depan
+      .concat(
+        this.createSisi(
+          this.inner_bawah_kiri_belakang,
+          this.inner_bawah_kiri_depan,
+          this.permukaan_kiri_dalam_bawah_belakang,
+          this.permukaan_kiri_dalam_bawah_depan
+        )
       )
-    ).concat(
-      this.createSisi(
-        this.permukaan_kiri_dalam_bawah_belakang,
-        this.permukaan_kiri_dalam_bawah_depan,
-        this.permukaan_bawah_luar_kiri_belakang,
-        this.permukaan_bawah_luar_kiri_depan
-      )
-    );
+      .concat(
+        this.createSisi(
+          this.permukaan_kiri_dalam_bawah_belakang,
+          this.permukaan_kiri_dalam_bawah_depan,
+          this.permukaan_bawah_luar_kiri_belakang,
+          this.permukaan_bawah_luar_kiri_depan
+        )
+      );
     // [
     //   this.permukaan_bawah_luar_kiri_depan,
     //   this.permukaan_bawah_luar_kiri_belakang,
@@ -1045,29 +1063,32 @@ class HollowSquare {
       this.permukaan_bawah_luar_kanan_depan,
       this.permukaan_bawah_luar_kanan_belakang,
       this.permukaan_bawah_dalam_kanan_depan,
-      this.permukaan_bawah_dalam_kanan_belakang,
-    ).concat(
-      this.createSisi(
-        this.permukaan_bawah_dalam_kanan_depan,
-        this.permukaan_bawah_dalam_kanan_belakang,
-        this.inner_bawah_kanan_depan,
-        this.inner_bawah_kanan_belakang
+      this.permukaan_bawah_dalam_kanan_belakang
+    )
+      .concat(
+        this.createSisi(
+          this.permukaan_bawah_dalam_kanan_depan,
+          this.permukaan_bawah_dalam_kanan_belakang,
+          this.inner_bawah_kanan_depan,
+          this.inner_bawah_kanan_belakang
+        )
       )
-    ).concat(
-      this.createSisi(
-        this.inner_bawah_kanan_depan,
-        this.inner_bawah_kanan_belakang,
-        this.permukaan_kanan_dalam_bawah_depan,
-        this.permukaan_kanan_dalam_bawah_belakang
+      .concat(
+        this.createSisi(
+          this.inner_bawah_kanan_depan,
+          this.inner_bawah_kanan_belakang,
+          this.permukaan_kanan_dalam_bawah_depan,
+          this.permukaan_kanan_dalam_bawah_belakang
+        )
       )
-    ).concat(
-      this.createSisi(
-        this.permukaan_kanan_dalam_bawah_depan,
-        this.permukaan_kanan_dalam_bawah_belakang,
-        this.permukaan_bawah_luar_kanan_depan,
-        this.permukaan_bawah_luar_kanan_belakang
-      )
-    );
+      .concat(
+        this.createSisi(
+          this.permukaan_kanan_dalam_bawah_depan,
+          this.permukaan_kanan_dalam_bawah_belakang,
+          this.permukaan_bawah_luar_kanan_depan,
+          this.permukaan_bawah_luar_kanan_belakang
+        )
+      );
     // [
     //   this.permukaan_bawah_luar_kanan_depan,
     //   this.permukaan_bawah_luar_kanan_belakang,
@@ -1083,93 +1104,153 @@ class HollowSquare {
   }
 
   createTambalanBelakangKiriAtasHadapKanan() {
-    return [
+    return this.createSisi(
       this.permukaan_atas_luar_kiri_belakang,
       this.permukaan_belakang_dalam_kiri_atas,
       this.permukaan_atas_dalam_kiri_belakang,
-      this.inner_atas_kiri_belakang,
-    ];
+      this.inner_atas_kiri_belakang
+    );
+    // [
+    //   this.permukaan_atas_luar_kiri_belakang,
+    //   this.permukaan_belakang_dalam_kiri_atas,
+    //   this.permukaan_atas_dalam_kiri_belakang,
+    //   this.inner_atas_kiri_belakang,
+    // ];
   }
 
   createTambalanBelakangKiriAtasHadapBawah() {
-    return [
+    return this.createSisi(
       this.permukaan_atas_luar_kiri_belakang,
-      this.permukaan_belakang_dalam_kiri_atas,
       this.permukaan_kiri_dalam_atas_belakang,
-      this.inner_atas_kiri_belakang,
-    ];
+      this.permukaan_belakang_dalam_kiri_atas,
+      this.inner_atas_kiri_belakang
+    );
+    // [
+    //   this.permukaan_atas_luar_kiri_belakang,
+    //   this.permukaan_belakang_dalam_kiri_atas,
+    //   this.permukaan_kiri_dalam_atas_belakang,
+    //   this.inner_atas_kiri_belakang,
+    // ];
   }
 
   createTambalanBelakangKiriBawahHadapAtas() {
-    return [
+    return this.createSisi(
       this.permukaan_bawah_luar_kiri_belakang,
       this.permukaan_belakang_dalam_kiri_bawah,
       this.permukaan_kiri_dalam_bawah_belakang,
-      this.inner_bawah_kiri_belakang,
-    ];
+      this.inner_bawah_kiri_belakang
+    );
+    // [
+    //   this.permukaan_bawah_luar_kiri_belakang,
+    //   this.permukaan_belakang_dalam_kiri_bawah,
+    //   this.permukaan_kiri_dalam_bawah_belakang,
+    //   this.inner_bawah_kiri_belakang,
+    // ];
   }
 
   createTambalanBelakangKananAtasHadapKiri() {
-    return [
+    return this.createSisi(
       this.permukaan_atas_luar_kanan_belakang,
-      this.permukaan_belakang_dalam_kanan_atas,
       this.permukaan_atas_dalam_kanan_belakang,
-      this.inner_atas_kanan_belakang,
-    ];
+      this.permukaan_belakang_dalam_kanan_atas,
+      this.inner_atas_kanan_belakang
+    );
+    // [
+    //   this.permukaan_atas_luar_kanan_belakang,
+    //   this.permukaan_belakang_dalam_kanan_atas,
+    //   this.permukaan_atas_dalam_kanan_belakang,
+    //   this.inner_atas_kanan_belakang,
+    // ];
   }
 
   createTambalanBelakangKananAtasHadapDepan() {
-    return [
+    return this.createSisi(
       this.permukaan_atas_luar_kanan_belakang,
+      this.permukaan_belakang_dalam_kanan_atas,
       this.permukaan_atas_dalam_kanan_belakang,
-      this.permukaan_kanan_dalam_atas_belakang,
-      this.inner_atas_kanan_belakang,
-    ];
+      this.inner_atas_kanan_belakang
+    );
+    // [
+    //   this.permukaan_atas_luar_kanan_belakang,
+    //   this.permukaan_atas_dalam_kanan_belakang,
+    //   this.permukaan_kanan_dalam_atas_belakang,
+    //   this.inner_atas_kanan_belakang,
+    // ];
   }
 
   createTambalanDepanKananAtasHadapBawah() {
-    return [
+    return this.createSisi(
       this.permukaan_atas_luar_kanan_depan,
-      this.permukaan_depan_dalam_kanan_atas,
       this.permukaan_kanan_dalam_atas_depan,
-      this.inner_atas_kanan_depan,
-    ];
+      this.permukaan_depan_dalam_kanan_atas,
+      this.inner_atas_kanan_depan
+    );
+    // [
+    //   this.permukaan_atas_luar_kanan_depan,
+    //   this.permukaan_depan_dalam_kanan_atas,
+    //   this.permukaan_kanan_dalam_atas_depan,
+    //   this.inner_atas_kanan_depan,
+    // ];
   }
 
   createTambalanDepanKananAtasHadapBelakang() {
-    return [
+    return this.createSisi(
       this.permukaan_atas_luar_kanan_depan,
       this.permukaan_atas_dalam_kanan_depan,
-      this.permukaan_kanan_dalam_atas_depan,
-      this.inner_atas_kanan_depan,
-    ];
+      this.permukaan_depan_dalam_kanan_atas,
+      this.inner_atas_kanan_depan
+    );
+    // [
+    //   this.permukaan_atas_luar_kanan_depan,
+    //   this.permukaan_atas_dalam_kanan_depan,
+    //   this.permukaan_kanan_dalam_atas_depan,
+    //   this.inner_atas_kanan_depan,
+    // ];
   }
 
   createTambalanDepanKananBawahHadapAtas() {
-    return [
+    return this.createSisi(
       this.permukaan_bawah_luar_kanan_depan,
-      this.permukaan_depan_dalam_kanan_bawah,
       this.permukaan_kanan_dalam_bawah_depan,
-      this.inner_bawah_kanan_depan,
-    ];
+      this.permukaan_depan_dalam_kanan_bawah,
+      this.inner_bawah_kanan_depan
+    );
+    // [
+    //   this.permukaan_bawah_luar_kanan_depan,
+    //   this.permukaan_depan_dalam_kanan_bawah,
+    //   this.permukaan_kanan_dalam_bawah_depan,
+    //   this.inner_bawah_kanan_depan,
+    // ];
   }
 
   createTambalanDepanKananBawahHadapKiri() {
-    return [
+    return this.createSisi(
       this.permukaan_bawah_luar_kanan_depan,
       this.permukaan_depan_dalam_kanan_bawah,
       this.permukaan_bawah_dalam_kanan_depan,
-      this.inner_bawah_kanan_depan,
-    ];
+      this.inner_bawah_kanan_depan
+    );
+    // [
+    // this.permukaan_bawah_luar_kanan_depan,
+    // this.permukaan_depan_dalam_kanan_bawah,
+    // this.permukaan_bawah_dalam_kanan_depan,
+    // this.inner_bawah_kanan_depan,
+    // ];
   }
 
   createTambalanDepanKiriBawahHadapKiri() {
-    return [
+    return this.createSisi(
       this.permukaan_bawah_luar_kiri_depan,
       this.permukaan_depan_dalam_kiri_bawah,
       this.permukaan_bawah_dalam_kiri_depan,
-      this.inner_bawah_kiri_depan,
-    ];
+      this.inner_bawah_kiri_depan
+    );
+    // [
+    //   this.permukaan_bawah_luar_kiri_depan,
+    //   this.permukaan_depan_dalam_kiri_bawah,
+    //   this.permukaan_bawah_dalam_kiri_depan,
+    //   this.inner_bawah_kiri_depan,
+    // ];
   }
 
   createSisi(p1, p2, p3, p4) {
