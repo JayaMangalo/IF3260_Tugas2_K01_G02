@@ -674,6 +674,11 @@ function Transform(method, axis) {
             point = func(point, params);
           }
         }
+        for (batang of shape.vertices) {
+          for (point of batang) {
+            point = func(point, params);
+          }
+        }
       }
       if (shape.type == "Icosahedron" || shape.type == "SSDodecahedron") {
         for (batang of shape.vertices) {
@@ -682,9 +687,13 @@ function Transform(method, axis) {
           }
         }
       }
-      for (batang of shape.vertices) {
-        for (point of batang) {
-          point = func(point, params);
+      if(shape.type=="Chain"){
+        for(square of shape.squares){
+          for (batang of square.vertices) {
+            for (point of batang) {
+              point = func(point, params);
+            }
+          }
         }
       }
     }
