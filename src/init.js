@@ -11,7 +11,7 @@ var colorAttribLocation;
 var normalAttribLocation;
 var shadderSource;
 
-var light_source = [1,1,0]
+var light_source = [1, 1, 0];
 var matWorldLocation;
 var matViewLocation;
 var matProjLocation;
@@ -127,7 +127,7 @@ function init() {
     10 * Float32Array.BYTES_PER_ELEMENT, //1 vertex = 7 float (XYZRGBA)
     3 * Float32Array.BYTES_PER_ELEMENT //Color start from the fourth element
   );
-  
+
   // Create Normal Attribute
   normalAttribLocation = gl.getAttribLocation(program, "a_normal");
   gl.vertexAttribPointer(
@@ -181,7 +181,7 @@ function view() {
   cameraMatrix = multiply(m, n);
   cameraMatrix = multiply(cameraMatrix, p);
   cameraMatrix = translate(cameraMatrix, 0, 0, cameraRadius * 1.5);
-  
+
   let left = -canvas.width / (1000 / cameraRadius);
   let right = canvas.width / (1000 / cameraRadius);
   let bottom = -canvas.height / (1000 / cameraRadius);
@@ -191,17 +191,26 @@ function view() {
   if (projectionMode == "orthographic") {
     projMatrix = ortographic(left, right, bottom, top, near, far);
   } else if (projectionMode == "oblique") {
-    projMatrix = oblique(left, right, bottom, top, -far, 2*far, toRadian(-89.2), toRadian(-89.2));
-    cameraMatrix = translate(cameraMatrix, 0, 0, (cameraRadius-100) * 1.5);
+    projMatrix = oblique(
+      left,
+      right,
+      bottom,
+      top,
+      -far,
+      2 * far,
+      toRadian(-89.2),
+      toRadian(-89.2)
+    );
+    cameraMatrix = translate(cameraMatrix, 0, 0, (cameraRadius - 100) * 1.5);
   } else if (projectionMode == "perspective") {
     projMatrix = perspective(
       fieldOfView,
       canvas.width / canvas.height,
       near,
       far
-      );
-    }
-    
+    );
+  }
+
   viewMatrix = inverse(cameraMatrix);
 
   gl.uniformMatrix4fv(matWorldLocation, gl.FALSE, worldMatrix);

@@ -703,14 +703,14 @@ class HollowSquare {
       this.permukaan_atas_luar_kiri_belakang,
       this.permukaan_atas_luar_kanan_belakang,
       this.permukaan_atas_dalam_kiri_belakang,
-      this.permukaan_atas_dalam_kanan_belakang,
+      this.permukaan_atas_dalam_kanan_belakang
     )
       .concat(
         this.createSisi(
           this.permukaan_atas_dalam_kiri_belakang,
           this.permukaan_atas_dalam_kanan_belakang,
           this.inner_kiri_atas_belakang,
-          this.inner_kanan_atas_belakang,
+          this.inner_kanan_atas_belakang
         )
       )
       .concat(
@@ -718,7 +718,7 @@ class HollowSquare {
           this.inner_kiri_atas_belakang,
           this.inner_kanan_atas_belakang,
           this.permukaan_belakang_dalam_kiri_atas,
-          this.permukaan_belakang_dalam_kanan_atas,
+          this.permukaan_belakang_dalam_kanan_atas
         )
       )
       .concat(
@@ -726,7 +726,7 @@ class HollowSquare {
           this.permukaan_belakang_dalam_kiri_atas,
           this.permukaan_belakang_dalam_kanan_atas,
           this.permukaan_atas_luar_kiri_belakang,
-          this.permukaan_atas_luar_kanan_belakang,
+          this.permukaan_atas_luar_kanan_belakang
         )
       );
     // [
@@ -973,14 +973,14 @@ class HollowSquare {
       this.permukaan_belakang_luar_kiri_bawah,
       this.permukaan_belakang_luar_kanan_bawah,
       this.permukaan_belakang_dalam_kiri_bawah,
-      this.permukaan_belakang_dalam_kanan_bawah,
+      this.permukaan_belakang_dalam_kanan_bawah
     )
       .concat(
         this.createSisi(
           this.permukaan_belakang_dalam_kiri_bawah,
           this.permukaan_belakang_dalam_kanan_bawah,
           this.inner_belakang_kiri_bawah,
-          this.inner_belakang_kanan_bawah,
+          this.inner_belakang_kanan_bawah
         )
       )
       .concat(
@@ -988,7 +988,7 @@ class HollowSquare {
           this.inner_belakang_kiri_bawah,
           this.inner_belakang_kanan_bawah,
           this.permukaan_bawah_dalam_kiri_belakang,
-          this.permukaan_bawah_dalam_kanan_belakang,
+          this.permukaan_bawah_dalam_kanan_belakang
         )
       )
       .concat(
@@ -996,7 +996,7 @@ class HollowSquare {
           this.permukaan_bawah_dalam_kiri_belakang,
           this.permukaan_bawah_dalam_kanan_belakang,
           this.permukaan_belakang_luar_kiri_bawah,
-          this.permukaan_belakang_luar_kanan_bawah,
+          this.permukaan_belakang_luar_kanan_bawah
         )
       );
     // [

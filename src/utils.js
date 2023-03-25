@@ -470,13 +470,13 @@ function oblique(left, right, bottom, top, near, far, theta, phi) {
     (bottom + top) / (bottom - top), // 13
     (near + far) / (near - far), // 14
     1, // 15
-  ]
+  ];
 }
 
 function crossProduct(vector1, vector2) {
   // Ensure both vectors have 3 components
   if (vector1.length !== 3 || vector2.length !== 3) {
-    return [0,0,0]
+    return [0, 0, 0];
   }
 
   const x1 = vector1[0];
@@ -496,7 +496,7 @@ function crossProduct(vector1, vector2) {
 function normalize(vector) {
   // Ensure the vector has 3 components
   if (vector.length !== 3) {
-    return [0,0,0]
+    return [0, 0, 0];
   }
 
   const [x, y, z] = vector;
@@ -505,8 +505,8 @@ function normalize(vector) {
   return [x / magnitude, y / magnitude, z / magnitude];
 }
 
-function calcNormalVector(v1,v2,v3){
-  let v2_minus_v1 = [v2[0]-v1[0],v2[1]-v1[1],v2[2]-v1[2]];
-  let v3_minus_v1 = [v3[0]-v1[0],v3[1]-v1[1],v3[2]-v1[2]];
-  return normalize(crossProduct(v2_minus_v1,v3_minus_v1))
+function calcNormalVector(v1, v2, v3) {
+  let v2_minus_v1 = [v2[0] - v1[0], v2[1] - v1[1], v2[2] - v1[2]];
+  let v3_minus_v1 = [v3[0] - v1[0], v3[1] - v1[1], v3[2] - v1[2]];
+  return normalize(crossProduct(v2_minus_v1, v3_minus_v1));
 }
