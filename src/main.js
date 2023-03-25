@@ -21,7 +21,7 @@ function onLoad() {
   // loadTesseract();
   // loadChain();
   // loadIcosahedron();
-  loadSSDodecahedron()
+  // loadSSDodecahedron()
 }
 
 async function loadShapes() {
@@ -71,7 +71,7 @@ function saveShapes() {
 function loadModel(data) {
   models.push(data);
   modelsCenterPoint.push([0, 0, 0]);
-  redraw((usingShape = false));
+  redraw();
 }
 
 function loadTesseract(data = null) {
@@ -409,6 +409,7 @@ function resetCamera() {
 }
 
 function redraw(usingShape = false) {
+  console.log("redraw");
   var id = new Float32Array(16);
   convertToIdentityMatrix(id);
   view();

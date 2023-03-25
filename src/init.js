@@ -166,6 +166,7 @@ function init() {
 
   cameraAngleX = toRadian(0);
   cameraAngleY = toRadian(0);
+  cameraAngleZ = toRadian(0);
   cameraRadius = 50;
   fieldOfView = toRadian(45);
   projectionMode = "orthographic";
