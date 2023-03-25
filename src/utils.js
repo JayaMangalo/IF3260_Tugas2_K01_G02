@@ -265,6 +265,13 @@ function multiply(a, b) {
   ];
 }
 
+function xRotation(radian) {
+  var c = Math.cos(radian);
+  var s = Math.sin(radian);
+
+  return [1, 0, 0, 0, 0, c, s, 0, 0, -s, c, 0, 0, 0, 0, 1];
+}
+
 function yRotation(radian) {
   var c = Math.cos(radian);
   var s = Math.sin(radian);

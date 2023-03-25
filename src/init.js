@@ -19,7 +19,7 @@ var viewMatrix;
 var projMatrix;
 var cameraMatrix;
 var eyeX, eyeY, eyeZ;
-var cameraAngle;
+var cameraAngleX, cameraAngleY;
 var cameraRadius;
 var fieldOfView;
 var projectionMode;
@@ -164,7 +164,8 @@ function init() {
   projMatrix = new Float32Array(16);
   convertToIdentityMatrix(worldMatrix);
 
-  cameraAngle = toRadian(0);
+  cameraAngleX = toRadian(0);
+  cameraAngleY = toRadian(0);
   cameraRadius = 50;
   fieldOfView = toRadian(45);
   projectionMode = "orthographic";
@@ -192,7 +193,9 @@ function view() {
     );
   }
 
-  cameraMatrix = yRotation(cameraAngle);
+  let m = xRotation(cameraAngleX);
+  let n = yRotation(cameraAngleY);
+  cameraMatrix = multiply(m, n);
   cameraMatrix = translate(cameraMatrix, 0, 0, cameraRadius * 1.5);
   viewMatrix = inverse(cameraMatrix);
 
