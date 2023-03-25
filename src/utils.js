@@ -442,24 +442,42 @@ function ortographic(left, right, bottom, top, near, far) {
   ];
 }
 
-function oblique(left, right, bottom, top, near, far) {
-  let a       = 2 / (right - left);
-  let b       = 2 / (top - bottom);
-  let c       = 2 / (near - far);
-  let tx      = -(right + left) / (right - left);
-  let ty      = -(top + bottom) / (top - bottom);
-  let tz      = -(far + near) / (far - near);
+function oblique(left, right, bottom, top, near, far, theta, phi) {
+  let cotT = 1 / Math.tan(theta);
+  let cotP = 1 / Math.tan(phi);
 
-  let s       = 1 / Math.tan(toRadian(45));
-  let cs      = c * s;
-  let stz     = tz * s;
-
-  return [
-    a, 0, 0, 0, 
-    0, b, 0, 0,
-    cs, cs, c, 0,
-    tx + stz, ty + stz, stz, 1
+  let m = [
+    1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 1,
   ]
+
+  let h = [
+    1, 0, cotT, 0,
+    0, 1, cotP, 0,
+    0, 0, 1, 0,
+    0, 0, 0, 1,
+  ]
+
+  let a = 2 / (right - left);
+  let b = 2 / (top - bottom);
+  let c = - 2 / (near - far);
+  let d = - (right + left) / (right - left);
+  let e = - (top + bottom) / (top - bottom);
+  let f = - (near + far) / (near - far);
+
+  let st = [
+    a, 0, 0, d,
+    0, b, 0, e,
+    0, 0, c, f,
+    0, 0, 0, 1,
+  ]
+
+  let sth = multiply(st, h);
+  let msth = multiply(m, sth);
+
+  return msth;
 }
 
 function crossProduct(vector1, vector2) {

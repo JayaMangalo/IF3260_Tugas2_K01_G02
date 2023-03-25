@@ -183,7 +183,7 @@ function view() {
   if (projectionMode == "orthographic") {
     projMatrix = ortographic(left, right, bottom, top, near, far);
   } else if (projectionMode == "oblique") {
-    projMatrix = oblique(left, right, bottom, top, near, far);
+    projMatrix = oblique(-4, 4, -4, 4, near, far, toRadian(-85), toRadian(-85));
   } else if (projectionMode == "perspective") {
     projMatrix = perspective(
       fieldOfView,

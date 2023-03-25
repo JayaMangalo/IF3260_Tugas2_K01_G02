@@ -4,6 +4,9 @@ modelsCenterPoint = [];
 var isUsingShadder = true;
 var isUsingAnimation = false;
 var animationAngle = 0;
+var xRotateValue = 0;
+var yRotateValue = 0;
+var zRotateValue = 0;
 var xTranslateValue = 0;
 var yTranslateValue = 0;
 var zTranslateValue = 0;
@@ -16,8 +19,8 @@ function onLoad() {
   init();
   // loadShapes()
   // loadTesseract();
-  loadChain();
-  // loadIcosahedron();
+  // loadChain();
+  // loadIcosah/edron();
   // loadSSDodecahedron()
 }
 
@@ -34,7 +37,7 @@ async function loadShapes() {
 }
 
 function loadChain() {
-  let chain = new Chain((squareNo = 7));
+  let chain = new Chain((squareNo = 1));
   shapes.push(chain);
   //Convert to points
   let json = { type: "model", data: [] };
@@ -381,12 +384,17 @@ function changeProjection() {
 
 function resetCamera() {
   cameraRadius = 50;
-  cameraAngle = toRadian(0);
+  cameraAngleX = toRadian(0);
+  cameraAngleY = toRadian(0);
   document.getElementById("camera-radius").value = cameraRadius;
   document.getElementById("radius-value").innerHTML = cameraRadius;
-  document.getElementById("camera-angle").value = toDegree(cameraAngle);
-  document.getElementById("angle-value").innerHTML = Math.round(
-    toDegree(cameraAngle)
+  document.getElementById("camera-angle-x").value = toDegree(cameraAngleX);
+  document.getElementById("angle-value-x").innerHTML = Math.round(
+    toDegree(cameraAngleX)
+  );
+  document.getElementById("camera-angle-y").value = toDegree(cameraAngleY);
+  document.getElementById("angle-value-y").innerHTML = Math.round(
+    toDegree(cameraAngleY)
   );
   projectionMode = "orthographic";
   redraw((usingShape = true));
@@ -576,30 +584,6 @@ function drawChainFromPoints(data) {
 
 //Draw From Points=======================================================================================================
 
-function changeXTranslate() {
-  xTranslateValue = document.getElementById("x-translate").value;
-}
-
-function changeYTranslate() {
-  yTranslateValue = document.getElementById("y-translate").value;
-}
-
-function changeZTranslate() {
-  zTranslateValue = document.getElementById("z-translate").value;
-}
-
-function changeXScales() {
-  xScaleValue = document.getElementById("x-scale").value;
-}
-
-function changeYScales() {
-  yScaleValue = document.getElementById("y-scale").value;
-}
-
-function changeZScales() {
-  zScaleValue = document.getElementById("z-scale").value;
-}
-
 function Transform(method, axis) {
   //method, axis, value in integer
 
@@ -617,12 +601,15 @@ function Transform(method, axis) {
     if (axis == 0) {
       value = document.getElementById("x-rotate").value;
       document.getElementById("x-angle").innerHTML = value;
+      value -= xRotateValue;
     } else if (axis == 1) {
       value = document.getElementById("y-rotate").value;
       document.getElementById("y-angle").innerHTML = value;
+      value -= yRotateValue;
     } else if (axis == 2) {
       value = document.getElementById("z-rotate").value;
       document.getElementById("z-angle").innerHTML = value;
+      value -= zRotateValue;
     }
   } else if (method == 1) {
     if (axis == 0) {
@@ -708,105 +695,33 @@ function Transform(method, axis) {
   if (!isUsingAnimation) {
     redraw();
   }
+
+  if (method == 0) {
+    if (axis == 0) {
+      xRotateValue = document.getElementById("x-rotate").value;
+    } else if (axis == 1) {
+      yRotateValue = document.getElementById("y-rotate").value;
+    } else if (axis == 2) {
+      zRotateValue = document.getElementById("z-rotate").value;
+    }
+  } else if (method == 1) {
+    if (axis == 0) {
+      xTranslateValue = document.getElementById("x-translate").value;
+    } else if (axis == 1) {
+      yTranslateValue = document.getElementById("y-translate").value;
+    } else if (axis == 2) {
+      zTranslateValue = document.getElementById("z-translate").value;
+    }
+  } else if (method == 2) {
+    if (axis == 0) {
+      xScaleValue = document.getElementById("x-scale").value;
+    } else if (axis == 1) {
+      yScaleValue = document.getElementById("y-scale").value;
+    } else if (axis == 2) {
+      zScaleValue = document.getElementById("z-scale").value;
+    }
+  }
 }
-
-// function RotateXAxis(degree=0){
-//     for(model of models){
-//         for(shape of model){
-//             if(shape.type == "Tesseract"){
-//                 for(batang of shape.outerSquare.vertices){
-//                     for(point of batang){
-//                         point = RotatePointXAxis(point, degree);
-//                     }
-//                 }
-//                 for(batang of shape.innerSquare.vertices){
-//                     for(point of batang){
-//                         point = RotatePointXAxis(point, degree);
-//                     }
-//                 }
-//             }
-//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
-//                 for(batang of shape.vertices){
-//                     for(point of batang){
-//                         point = RotatePointXAxis(point, degree);
-//                     }
-//                 }
-//             }
-//             for(batang of shape.vertices){
-//                 for(point of batang){
-//                     point = RotatePointXAxis(point, degree);
-//                 }
-//             }
-//         }
-//     }
-//     redraw(usingShape=false);
-// }
-
-// function RotateYAxis(degree=0){
-//     for(model of models){
-//         for(shape of model){
-//             if(shape.type == "Tesseract"){
-//                 for(batang of shape.outerSquare.vertices){
-//                     for(point of batang){
-//                         point = RotatePointYAxis(point, degree);
-//                     }
-//                 }
-//                 for(batang of shape.innerSquare.vertices){
-//                     for(point of batang){
-//                         point = RotatePointYAxis(point, degree);
-//                     }
-//                 }
-//             }
-//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
-//                 for(batang of shape.vertices){
-//                     for(point of batang){
-//                         point = RotatePointYAxis(point, degree);
-//                     }
-//                 }
-//             }
-//             for(batang of shape.vertices){
-//                 for(point of batang){
-//                     // Rotate point on X axis
-//                     point = RotatePointYAxis(point, degree);
-//                 }
-//             }
-//         }
-//     }
-//     redraw(usingShape=false);
-// }
-
-// function RotateZAxis(degree=0){
-//     for(model of models){
-//         for(shape of model){
-//             if(shape.type == "Tesseract"){
-//                 for(batang of shape.outerSquare.vertices){
-//                     for(point of batang){
-//                         point = RotatePointZAxis(point, degree);
-//                     }
-//                 }
-//                 for(batang of shape.innerSquare.vertices){
-//                     for(point of batang){
-//                         point = RotatePointZAxis(point, degree);
-//                     }
-//                 }
-//             }
-//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
-//                 for(batang of shape.vertices){
-//                     for(point of batang){
-//                         point = RotatePointZAxis(point, degree);
-//                     }
-//                 }
-//             }
-//             for(batang of shape.vertices){
-//                 for(point of batang){
-//                     // Rotate point on X axis
-//                     point = RotatePointZAxis(point, degree);
-//                 }
-//             }
-//         }
-//     }
-//     redraw(usingShape=false);
-// }
 
 function RotatePointXAxis(point, params) {
   let degree = params[0];
@@ -865,194 +780,5 @@ function Scale(point, params) {
   point[axis] *= value;
   return point;
 }
-
-// function ScaleXAxis(value){
-//     for(model of models){
-//         for(shape of model){
-//             if(shape.type == "Tesseract"){
-//                 for(batang of shape.outerSquare.vertices){
-//                     for(point of batang){
-//                         point[0] = point[0] * value
-//                     }
-//                 }
-//                 for(batang of shape.innerSquare.vertices){
-//                     for(point of batang){
-//                         point[0] = point[0] * value
-//                     }
-//                 }
-//             }
-//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
-//                 for(batang of shape.vertices){
-//                     for(point of batang){
-//                         point[0] = point[0] * value
-//                     }
-//                 }
-//             }
-//             for(batang of shape.vertices){
-//                 for(point of batang){
-//                     point[0] = point[0] * value
-//                 }
-//             }
-//         }
-//     }
-// }
-
-// function ScaleYAxis(value){
-//     for(model of models){
-//         for(shape of model){
-//             if(shape.type == "Tesseract"){
-//                 for(batang of shape.outerSquare.vertices){
-//                     for(point of batang){
-//                         point[1] = point[1] * value
-//                     }
-//                 }
-//                 for(batang of shape.innerSquare.vertices){
-//                     for(point of batang){
-//                         point[1] = point[1] * value
-//                     }
-//                 }
-//             }
-//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
-//                 for(batang of shape.vertices){
-//                     for(point of batang){
-//                         point[1] = point[1] * value
-//                     }
-//                 }
-//             }
-//             for(batang of shape.vertices){
-//                 for(point of batang){
-//                     point[1] = point[1] * value
-//                 }
-//             }
-//         }
-//     }
-// }
-
-// function ScaleZAxis(value){
-//     for(model of models){
-//         for(shape of model){
-//             if(shape.type == "Tesseract"){
-//                 for(batang of shape.outerSquare.vertices){
-//                     for(point of batang){
-//                         point[2] = point[2] * value
-//                     }
-//                 }
-//                 for(batang of shape.innerSquare.vertices){
-//                     for(point of batang){
-//                         point[2] = point[2] * value
-//                     }
-//                 }
-//             }
-//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
-//                 for(batang of shape.vertices){
-//                     for(point of batang){
-//                         point[2] = point[2] * value
-//                     }
-//                 }
-//             }
-//             for(batang of shape.vertices){
-//                 for(point of batang){
-//                     point[2] = point[2] * value
-//                 }
-//             }
-//         }
-//     }
-// }
-
-// function TranslateXAxis(value){
-//     for(model of models){
-//         for(shape of model){
-//             if(shape.type == "Tesseract"){
-//                 for(batang of shape.outerSquare.vertices){
-//                     for(point of batang){
-//                         point[0] += value
-//                     }
-//                 }
-//                 for(batang of shape.innerSquare.vertices){
-//                     for(point of batang){
-//                         point[0] += value
-//                     }
-//                 }
-//             }
-//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
-//                 for(batang of shape.vertices){
-//                     for(point of batang){
-//                         point[0] += value
-//                     }
-//                 }
-//             }
-//             for(batang of shape.vertices){
-//                 for(point of batang){
-//                     point[0] += value
-//                 }
-//             }
-//         }
-//     }
-//     redraw(usingShape=false);
-// }
-
-// function TranslateYAxis(value){
-//     for(model of models){
-//         for(shape of model){
-//             if(shape.type == "Tesseract"){
-//                 for(batang of shape.outerSquare.vertices){
-//                     for(point of batang){
-//                         point[1] += value
-//                     }
-//                 }
-//                 for(batang of shape.innerSquare.vertices){
-//                     for(point of batang){
-//                         point[1] += value
-//                     }
-//                 }
-//             }
-//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
-//                 for(batang of shape.vertices){
-//                     for(point of batang){
-//                         point[1] += value
-//                     }
-//                 }
-//             }
-//             for(batang of shape.vertices){
-//                 for(point of batang){
-//                     point[1] += value
-//                 }
-//             }
-//         }
-//     }
-//     redraw(usingShape=false);
-// }
-
-// function TranslateZAxis(value){
-//     for(model of models){
-//         for(shape of model){
-//             if(shape.type == "Tesseract"){
-//                 for(batang of shape.outerSquare.vertices){
-//                     for(point of batang){
-//                         point[2] += value
-//                     }
-//                 }
-//                 for(batang of shape.innerSquare.vertices){
-//                     for(point of batang){
-//                         point[2] += value
-//                     }
-//                 }
-//             }
-//             if(shape.type == "Icosahedron" || shape.type == "SSDodecahedron"){
-//                 for(batang of shape.vertices){
-//                     for(point of batang){
-//                         point[2] += value
-//                     }
-//                 }
-//             }
-//             for(batang of shape.vertices){
-//                 for(point of batang){
-//                     point[2] += value
-//                 }
-//             }
-//         }
-//     }
-//     redraw(usingShape=false);
-// }
 
 onLoad();
